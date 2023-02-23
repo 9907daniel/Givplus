@@ -1,5 +1,5 @@
 # Exchange Rate Scraping and Forex Score Calculation
-Run to the Jupyter Notebook. 
+Run the Jupyter Notebook. 
 
 ``` python
 def iter_currency(currency, day, currency_list)
