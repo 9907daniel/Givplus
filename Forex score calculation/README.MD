@@ -11,5 +11,8 @@ def iter_currency(currency, day, currency_list)
 #Example: iter_currency("KRW", 200, ["USD", "EUR", "SGD", "JPY"]) 
 ```
 
+Try out different currency using different .csv files uploaded in this repository. 
+
+
 Ask questions: 
 seungjun001@e.ntu.edu.sg
