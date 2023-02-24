@@ -1,2 +1,11 @@
 # GDSC-Solutions
-Repository for GDSC Solutions project
+
+
+
+### Installation
+1. Create Virtual Environment
+```
+virtualenv .venv
+
+source .venv/bin.activate
+```
