@@ -2,7 +2,7 @@ from django.db import models
 from random import choices
 from django.utils import timezone
 
-# Create your models here.
+# Create your models here. 
 
 # class Listings(models.Model):
 #     title = models.CharField(max_length=100)

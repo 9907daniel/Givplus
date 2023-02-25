@@ -38,14 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
+    
     # django allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     
+    # Applications
+    'base.apps.BaseConfig',
     'listings.apps.ListingsConfig',
+    
+    # DRF
+    'rest_framework'
 
 ]
 
