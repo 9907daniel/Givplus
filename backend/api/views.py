@@ -26,8 +26,6 @@ def get_csv(request):
     
 @api_view(['POST'])
 def import_csv(request):
-    # csv_file = request.FILES['file']
-    # data = csv_file.read().decode('utf-8').splitlines()
     with open('./files/Score.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
 
