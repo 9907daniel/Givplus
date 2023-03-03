@@ -1,11 +1,9 @@
-from django.shortcuts import render
-# from rest_framework.views import APIview
-from rest_framework.decorators import api_view, permission_classes
-# from rest_framework.parsers import MultiPartParser
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
-from .models import Table, Results
-from .serializers import TableSerializer, ResultsSerializer
+from rest_framework import status
+from .models import Table, Results, Country, Platforms
+from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, PlatformSerializer
 from django.http import JsonResponse
 import csv
 import json
@@ -41,3 +39,30 @@ def import_csv(request):
     return Response(serializer.data)
     
     
+@api_view(['GET', 'POST'])
+def platforms_list(request):
+    if request.method == 'GET':
+        platforms = Platforms.objects.all()
+        serializer = PlatformSerializer(platforms, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = PlatformSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'POST'])
+def country_list(request):
+    if request.method == 'GET':
+        countries = Country.objects.all()
+        serializer = CountrySerializer(countries, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = CountrySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
