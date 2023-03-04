@@ -7,6 +7,7 @@ from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, 
 from django.http import JsonResponse
 import csv
 import json
+from django.db import connection
 
 # Create your views here.
 
@@ -24,6 +25,13 @@ def get_csv(request):
     
 @api_view(['POST'])
 def import_csv(request):
+    # Clear existing data
+    Results.objects.all().delete()
+    
+    # Reset id to 1 for every new update
+    with connection.cursor() as cursor:
+        cursor.execute("ALTER SEQUENCE api_results_id_seq RESTART WITH 1")
+    
     with open('./files/Score.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
 
@@ -33,6 +41,7 @@ def import_csv(request):
                             forex_score=row['Forex_score'], final_score=row['Final_score'])
             mydata.save()
 
+    # Return the new data as a response
     queryset = Results.objects.all()
     serializer = ResultsSerializer(queryset, many=True)
 
@@ -54,7 +63,7 @@ def platforms_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
-def country_list(request):
+def country_list(request):    
     if request.method == 'GET':
         countries = Country.objects.all()
         serializer = CountrySerializer(countries, many=True)
@@ -66,3 +75,14 @@ def country_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET'])
+def country_detail(request, name):
+    try:
+        country = Country.objects.get(name__iexact=name)
+    except Country.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = CountrySerializer(country)
+        return Response(serializer.data)
