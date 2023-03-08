@@ -11,9 +11,10 @@ urlpatterns = [
     path('scores/upload/', views.import_csv, name='import_csv'),
     
     # platforms api
-    path('platforms/', views.platforms_list, name='get_csv'),
+    path('platforms/', views.platforms_list, name='platforms_list'),
     
     # countries api
-    path('countries/', views.country_list, name='get_csv'),
+    path('countries/', views.country_list, name='country_list'),
+    path('countries/<str:name>/', views.country_detail, name='country_list'),
 
 ]
