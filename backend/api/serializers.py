@@ -23,7 +23,26 @@ class PlatformSerializer(serializers.ModelSerializer):
     
 class CountrySerializer(serializers.ModelSerializer):
     platforms = PlatformSerializer(many=True, read_only=True)
-   
+    location = serializers.SerializerMethodField()
+
     class Meta:
         model = Country
         fields = '__all__'
+
+
+    def to_representation(self, instance):
+        # Override the default to_representation method to include GDP field
+        ret = super().to_representation(instance)
+        ret['gdp'] = instance.gdp
+        ret['population'] = instance.population
+        ret['language'] = instance.language
+        ret['religion'] = instance.religion
+        ret['need_help_in'] = instance.need_help_in
+        return ret
+    
+    
+    def get_location(self, obj):
+        return {
+            'lat': obj.location_lat,
+            'lng': obj.location_lng,
+        }

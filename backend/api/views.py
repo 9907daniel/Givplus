@@ -7,6 +7,7 @@ from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, 
 from django.http import JsonResponse
 import csv
 import json
+import os
 from django.db import connection
 
 # Create your views here.
@@ -60,21 +61,42 @@ def platforms_list(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+    
 @api_view(['GET', 'POST'])
-def country_list(request):    
+def country_list(request):
     if request.method == 'GET':
         countries = Country.objects.all()
         serializer = CountrySerializer(countries, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = CountrySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        csv_dir = './files/nation'
+        for filename in os.listdir(csv_dir):
+            if filename.endswith('.csv'):
+                csv_path = os.path.join(csv_dir, filename)
+                with open(csv_path, 'r') as csvfile:
+                    reader = csv.DictReader(csvfile)
+                    for row in reader:
+                        description_dict = {}
+                        for key in row.keys():
+                            if key.startswith('Description'):
+                                field_name = key.split('_', 1)[1]  # extract field name from key
+                                description_dict[field_name] = row[key]
+
+                        mydata = Country(name=row['Official Name'], 
+                                         continent=row['Continent'],
+                                         gdp=row['GDP'],
+                                         language=row['Language'], population=row['Population'],
+                                         religion=row['National Religion'], need_help_in=row['NEED HELP in'],
+                                        #  description=description_dict, platforms=row['Platforms'],
+                                         location_lat=row['Latitude'], location_lng=row['Longitude'])
+                        mydata.save()
+
+        # Return the new data as a response
+        queryset = Country.objects.all()
+        serializer = CountrySerializer(queryset, many=True)
+        return Response(serializer.data)
     
 @api_view(['GET'])
 def country_detail(request, name):
