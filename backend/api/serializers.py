@@ -24,6 +24,7 @@ class PlatformSerializer(serializers.ModelSerializer):
 class CountrySerializer(serializers.ModelSerializer):
     platforms = PlatformSerializer(many=True, read_only=True)
    
+   
     class Meta:
         model = Country
         fields = '__all__'
