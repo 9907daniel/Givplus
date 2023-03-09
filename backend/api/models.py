@@ -47,7 +47,24 @@ class Platforms(models.Model):
     
     
 class Country(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    image = models.ImageField(upload_to='countries')
-    platforms = models.ManyToManyField(Platforms)
+    gdp = models.DecimalField(("GDP"),  max_digits=40, decimal_places=0, default = 0)
+    name = models.CharField(("Name"), max_length=200, default='')
+    location = models.CharField(("Location"), max_length=200, default='')
+    continent = models.CharField(("Continent"), max_length=200, default= '')
+    language = models.CharField(("Language"), max_length=200, default="English")
+    population = models.IntegerField(("Population"), default=0)
+    religion = models.CharField(("National_religion"), max_length=200, default = '')
+    need_help_in = models.CharField(("Need_help_in"), max_length= 100, default ='')
+    # description = models.JSONField()
+    # currency = models.CharField(("Currency"), max_length=20, default='')
+    # # image = models.ImageField(upload_to='countries')
+    # # platforms = models.ManyToManyField(Platforms)
+    location_lat = models.DecimalField(("Latitude"), max_digits=14, decimal_places=9, default=0.0)
+    location_lng = models.DecimalField(("Longitude"), max_digits=14, decimal_places=9, default=0.0)
+
+    @property
+    def location(self):
+        return {'lat': self.location_lat, 'lng': self.location_lng}
+
+    def __str__(self):
+        return self.names
