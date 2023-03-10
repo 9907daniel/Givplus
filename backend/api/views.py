@@ -5,6 +5,7 @@ from rest_framework import status
 from .models import Table, Results, Country, Platforms
 from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, PlatformSerializer
 from django.http import JsonResponse
+
 import csv
 import json
 import os
@@ -64,19 +65,17 @@ def platforms_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
     
     
-@api_view(['GET', 'POST'])
-def country_list(request):
-    
-    # Clear existing data
-    Country.objects.all().delete()
-    
-    # Reset id to 1 for every new update
-    with connection.cursor() as cursor:
-        cursor.execute("ALTER SEQUENCE api_country_id_seq RESTART WITH 1")
+@api_view(['GET', 'POST', 'DELETE'])
+def country_list(request, country_id=None):
         
     if request.method == 'GET':
-        countries = Country.objects.all()
-        serializer = CountrySerializer(countries, many=True)
+        if country_id:
+            # Get a single country by id
+            country = Country.objects.get(id=country_id)
+            serializer = CountrySerializer(country) 
+        else:
+            countries = Country.objects.all()
+            serializer = CountrySerializer(countries, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -113,7 +112,22 @@ def country_list(request):
         queryset = Country.objects.all()
         serializer = CountrySerializer(queryset, many=True)
         return Response(serializer.data)
-    
+     
+    elif request.method == 'DELETE':
+        # Delete a single country by id
+        if not country_id:
+            return Response({'error': 'Country ID is required for DELETE requests'}, status=400)
+        try:
+            country = Country.objects.get(id=country_id)
+            country.delete()
+            return Response({'success': f'Country with ID {country_id} deleted successfully'}, status=204)
+        except Country.DoesNotExist:
+            return Response({'error': f'Country with ID {country_id} not found'}, status=404)
+
+class CountryDeleteView(generics.DestroyAPIView):
+    queryset = Country.objects.all()
+    serializer_class = CountrySerializer
+
 @api_view(['GET'])
 def country_detail(request, name):
     try:
