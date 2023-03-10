@@ -55,10 +55,10 @@ class Country(models.Model):
     population = models.IntegerField(("Population"), default=0)
     religion = models.CharField(("National_religion"), max_length=200, default = '')
     need_help_in = models.CharField(("Need_help_in"), max_length= 100, default ='')
-    # description = models.JSONField()
-    # currency = models.CharField(("Currency"), max_length=20, default='')
-    # # image = models.ImageField(upload_to='countries')
-    # # platforms = models.ManyToManyField(Platforms)
+    description = models.JSONField(null=True, blank=True)
+    currency = models.CharField(("Currency"), max_length=20, default='')
+    # image = models.ImageField(upload_to='countries')
+    # platforms = models.ManyToManyField(Platforms)
     location_lat = models.DecimalField(("Latitude"), max_digits=14, decimal_places=9, default=0.0)
     location_lng = models.DecimalField(("Longitude"), max_digits=14, decimal_places=9, default=0.0)
 
@@ -67,4 +67,4 @@ class Country(models.Model):
         return {'lat': self.location_lat, 'lng': self.location_lng}
 
     def __str__(self):
-        return self.names
+        return self.name

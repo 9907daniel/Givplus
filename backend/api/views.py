@@ -63,8 +63,17 @@ def platforms_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
     
+    
 @api_view(['GET', 'POST'])
 def country_list(request):
+    
+    # Clear existing data
+    Country.objects.all().delete()
+    
+    # Reset id to 1 for every new update
+    with connection.cursor() as cursor:
+        cursor.execute("ALTER SEQUENCE api_country_id_seq RESTART WITH 1")
+        
     if request.method == 'GET':
         countries = Country.objects.all()
         serializer = CountrySerializer(countries, many=True)
@@ -84,13 +93,20 @@ def country_list(request):
                                 field_name = key.split('_', 1)[1]  # extract field name from key
                                 description_dict[field_name] = row[key]
 
-                        mydata = Country(name=row['Official Name'], 
-                                         continent=row['Continent'],
-                                         gdp=row['GDP'],
-                                         language=row['Language'], population=row['Population'],
-                                         religion=row['National Religion'], need_help_in=row['NEED HELP in'],
-                                        #  description=description_dict, platforms=row['Platforms'],
-                                         location_lat=row['Latitude'], location_lng=row['Longitude'])
+                        mydata = Country(
+                            name=row['Official Name'], 
+                            continent=row['Continent'],
+                            gdp=row['GDP'],
+                            language=row['Language'], 
+                            population=row['Population'],
+                            currency=row['Currency'],
+                            religion=row['National Religion'], 
+                            need_help_in=row['NEED HELP in'],
+                            description=description_dict, 
+                            # platforms=row['Platforms'],
+                            location_lat=row['Latitude'], 
+                            location_lng=row['Longitude']
+                        )
                         mydata.save()
 
         # Return the new data as a response
