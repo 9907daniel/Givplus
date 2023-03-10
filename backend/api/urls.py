@@ -16,5 +16,6 @@ urlpatterns = [
     # countries api
     path('countries/', views.country_list, name='country_list'),
     path('countries/<str:name>/', views.country_detail, name='country_list'),
+    path('countries/delete/<int:pk>/', views.CountryDeleteView.as_view(), name='country_delete'),
 
 ]
