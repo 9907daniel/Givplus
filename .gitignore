@@ -2,3 +2,8 @@
 /venv/
 /.venv/
 *.pyc
+.env
+/.env
+
+*.env
+/frontend/.env
