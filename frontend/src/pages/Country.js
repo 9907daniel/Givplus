@@ -9,25 +9,32 @@ import { createTheme } from '@mui/material/styles';
 //Components
 //import Header from './Header';
 
-//Assets
-import map from '../images/home.jpg'
 
 
-function Home() {
+
+function Country() {
     const navigate = useNavigate();
-
+    const [countries, setCountries] = useState([]);
+    
+    useEffect(() => {
+        async function fetchCountries() {
+            const response = await Axios.get('http://localhost:8000/api/scores/');
+            setCountries(response.countries);
+        }
+        fetchCountries();
+      }, []);
   return (
     <>
       <Box 
         sx={{
 
         }}>
-        <Box component="img" src={map} 
+        {/* <Box component="img" src={map} 
         sx={{
             width:"100%",
             height:"92vh",
         }}
-        />
+        /> */}
         <Box
             sx={{
                 position: "absolute",
@@ -86,4 +93,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Country
