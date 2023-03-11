@@ -73,7 +73,7 @@ function Map() {
     //     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     //     })
 
-    const {isLoaded} = useLoadScript({googleMapsApiKey: })
+    const {isLoaded} = useLoadScript({googleMapsApiKey: 'AIzaSyBICgu65nRFMQzP6qibRfwBX5c6m1IvJfc'})
     
     useEffect(() => {
     async function fetchData() {
