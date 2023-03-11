@@ -12,17 +12,18 @@
 ### Installation
 1. Create Virtual Environment (May differ depending on OS)
 ```
-pip3 install virtualenv
+pip install virtualenv
 # if virtualenv not installed
 
-
 virtualenv .venv
-source .venv/bin.activate
+cd .venv
+cd script
+activate
 ```
 
 2. Backend
 ```
-pip / pip3 install -r requirements.txt
+pip install -r requirements.txt
 cd backend
 python3 manage.py makemigrations
 python3 manage.py migrate
