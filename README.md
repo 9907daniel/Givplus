@@ -10,8 +10,12 @@
 
 
 ### Installation
-1. Create Virtual Environment
+1. Create Virtual Environment (May differ depending on OS)
 ```
+pip3 install virtualenv
+# if virtualenv not installed
+
+
 virtualenv .venv
 source .venv/bin.activate
 ```
