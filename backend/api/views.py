@@ -2,8 +2,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import status
-from .models import Table, Results, Country, Platforms
-from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, PlatformSerializer
+from .models import Table, Results, Country, Platforms, Percentile
+from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, PlatformSerializer, PercentileSerializer
 from django.http import JsonResponse
 
 import csv
@@ -40,7 +40,7 @@ def import_csv(request):
         for row in reader:
             mydata = Results(country=row['Country'], currency=row['Currency'],
                             currency_abbreviation=row['Currency_abbreviation'], ppp_log=row['PPP_log'],
-                            forex_score=row['Forex_score'], final_score=row['Final_score'])
+                            forex_score=row['Forex_score'], final_score=row['Final_score'],)
             mydata.save()
 
     # Return the new data as a response
@@ -49,6 +49,35 @@ def import_csv(request):
 
     return Response(serializer.data)
     
+    
+@api_view(['GET'])
+def get_percentile(request):
+    mydata = Percentile.objects.all()
+    serializer = PercentileSerializer(mydata, many=True)
+    return Response(serializer.data)
+
+    
+@api_view(['POST'])
+def import_percentile(request):
+    # Clear existing data
+    Percentile.objects.all().delete()
+    
+    # Reset id to 1 for every new update
+    # with connection.cursor() as cursor:
+    #     cursor.execute("ALTER SEQUENCE api_results_id_seq RESTART WITH 1")
+    
+    with open('./files/forex_score.csv', 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+            mydata = Percentile(percentile=row['Forex score'],)
+            mydata.save()
+
+    # Return the new data as a response
+    queryset = Percentile.objects.all()
+    serializer = PercentileSerializer(queryset, many=True)
+
+    return Response(serializer.data)
     
 @api_view(['GET', 'POST'])
 def platforms_list(request):

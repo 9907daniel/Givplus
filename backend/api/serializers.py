@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Table, Results, Platforms, Country
+from .models import Table, Results, Platforms, Country, Percentile
 
 class TableSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,8 +16,19 @@ class ResultsSerializer(serializers.ModelSerializer):
                  'currency_abbreviation', 'ppp_log', 'forex_score',
                  'final_score','createdAt', 
                  )
+
+class PercentileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Percentile
+        fields = '__all__'
         
+    def create(self, validated_data):
+        # use the objects manager to create a new Percentile instance
+        percentile = Percentile.objects.create(**validated_data)
+        return percentile
         
+
+
 class PlatformSerializer(serializers.ModelSerializer):
     class Meta:
         model = Platforms

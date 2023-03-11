@@ -17,7 +17,9 @@ class Results(models.Model):
     forex_score = models.DecimalField(("Forex_score"), decimal_places=15, max_digits=18)
     final_score = models.DecimalField(("Final_score"), decimal_places=15, max_digits=18) 
     createdAt = models.DateTimeField(auto_now_add=True)
-        
+
+class Percentile(models.Model):
+    percentile = models.DecimalField(("Percentile"), decimal_places=2, max_digits=5) 
 
 class Platforms(models.Model):
     GOALS_CHOICES = (

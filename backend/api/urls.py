@@ -10,6 +10,11 @@ urlpatterns = [
     path('scores/', views.get_csv, name='get_csv'),
     path('scores/upload/', views.import_csv, name='import_csv'),
     
+    
+    # percentile api
+    path('percentile/', views.get_percentile, name='get_percentile'),
+    path('percentile/upload/', views.import_percentile, name='import_percentile'),
+    
     # platforms api
     path('platforms/', views.platforms_list, name='platforms_list'),
     
