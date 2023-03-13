@@ -13,23 +13,28 @@ import { createTheme } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
 import { getToken } from '../services/LocalStorageService';
 
-
+//Assets
+import logo from '../images/logo.png'
+import './Navbar.css'
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { access_token } = getToken()
   return <>
+  <AppBar position="fixed">
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" 
       sx={{
         backgroundColor: 'white',
       }}>
         <Toolbar>
-          <Typography variant='h5' component="div" sx={{ flexGrow: 1 , color: "black"}}>GIVPLUS</Typography>
+        <Button component={NavLink} to='/'> 
+                <img src={logo} alt = "logo" className='logo'/>
+        </Button>
           <Box 
             sx={{
-              marginLeft:"auto",
-              marginRight:"18rem",
+              marginLeft:"8rem",
+              marginRight:"11rem",
             }}
             >
             <Button component={NavLink} to='/map' style={({ isActive }) => { 
@@ -37,12 +42,10 @@ const Navbar = () => {
               sx={{ 
                 color: 'inherit', 
                 textTransform: 'none',
-                marginRight: "4rem" 
-                }}
-                >
-                  <Typography  variant= "h6" color = "black">
-                    Navigate the World
-                  </Typography>
+                marginRight: "4rem",}}>
+              <Typography  variant= "h6" color = "black">
+                Navigate the World
+              </Typography>
             </Button>
 
             <Button component={NavLink} to='/' style={({ isActive }) => { 
@@ -56,12 +59,6 @@ const Navbar = () => {
               </Typography>
             </Button>
 
-            {/* <Button component={NavLink} to='/example' style={({ isActive }) => { 
-              return { backgroundColor: isActive ? 'white' : '' } }} 
-              sx={{ color: 'black', textTransform: 'none' }}>
-              Example
-            </Button> */}
-
             <Button component={NavLink} to='/contact' style={({ isActive }) => { 
               return { backgroundColor: isActive ? 'white' : '' } }} 
               sx={{ 
@@ -74,14 +71,24 @@ const Navbar = () => {
             </Button>
           </Box>
           <Box>
-            <Button component={NavLink} to='/' style={({ isActive }) => { 
+          <Button component={NavLink} to='/' style={({ isActive }) => { 
               return { backgroundColor: isActive ? 'white' : '' } }} 
               sx={{ 
                 color: 'black', 
                 textTransform: 'none',
-                marginRight: "2rem" }}>
+                marginRight: "1rem" }}>
               Cart
             </Button>
+
+          <Button component={NavLink} to='/login' 
+                style={({ isActive }) => { 
+                  return { backgroundColor: isActive ? 'white' : '' }}} 
+                  sx={{ 
+                    color: 'black', 
+                    textTransform: 'none',
+                    marginRight: "1rem" }}>
+                Sign in
+              </Button>  
 
             {access_token ? 
               <Button component={NavLink} to='/dashboard' 
@@ -96,14 +103,15 @@ const Navbar = () => {
                 style={({ isActive }) => { 
                   return { backgroundColor: isActive ? 'white' : '' } 
                   }} sx={{ color: 'black', textTransform: 'none' , borderColor : "black"}}>
-                Login
+                Sign up
               </Button>}
-
+              
             </Box>
 
         </Toolbar>
       </AppBar>
     </Box>
+  </AppBar>
   </>;
 };
 
