@@ -1,96 +1,94 @@
-import React, {useState} from 'react'
-import {Link, useNavigate} from "react-router-dom"
-
-//MUI imports
-import { Button, Typography, Grid, AppBar, Toolbar } from '@mui/material';
-import { Box, ThemeProvider} from '@mui/system';
-import { createTheme } from '@mui/material/styles';
-
-//Components
-//import Header from './Header';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { shades } from "../theme";
+import { addToCart } from "../state";
+import { useNavigate } from "react-router-dom";
 
 
+const Item = ({ item, width }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [count, setCount] = useState(1);
+  const [isHovered, setIsHovered] = useState(false);
+  const {
+    palette: { neutral },
+  } = useTheme();
 
+  const { category, price, name, image } = item.attributes;
+  const {
+    data: {
+      attributes: {
+        formats: {
+          medium: { url },
+        },
+      },
+    },
+  } = image;
 
-function Country() {
-    const navigate = useNavigate();
-    const [countries, setCountries] = useState([]);
-    
-    useEffect(() => {
-        async function fetchCountries() {
-            const response = await Axios.get('http://localhost:8000/api/scores/');
-            setCountries(response.countries);
-        }
-        fetchCountries();
-      }, []);
   return (
-    <>
-      <Box 
-        sx={{
-
-        }}>
-        {/* <Box component="img" src={map} 
-        sx={{
-            width:"100%",
-            height:"92vh",
-        }}
-        /> */}
-        <Box
-            sx={{
-                position: "absolute",
-                zIndex: "100",
-                top:"150px",
-                left:"40px",
-                textAlign:"left"
-            }}>
-            <Typography variant="h1" 
-                sx={{
-                    color:"white",
-                    fontWeight:"bolder",
-                }}>
-                Your Dollar is worth more somewhere
-            </Typography>
-            <Typography variant="h4" 
-                sx={{
-                    color:"white",
-                    //fontWeight:"bolder",
-                }}>
-                Empower your currency to help more in need.
-            </Typography>
-            {/* <Button variant='contained' 
-                sx={{
-                    fontSize:"1rem",
-                    borderRadius:"10px",
-                    backgroundColor:"#76b5c5",
-                    marginTop:"4rem",
-                    '&:hover': {
-                        backgroundColor: '#1e81b0',
-                        color: 'white',
-                    }
-                }}
-                onClick={()=>navigate('/listings')}
-                >
-                LOOK FOR COUNTRIES
-            </Button> */}
-        </Box>
-        
-      </Box>
+    <Box width={width}>
       <Box
-        sx={{
-          zIndex: "100",
-          marginLeft: "2rem",
-          textAlign:"left"
-      }}>
-        <Typography variant="h3" 
-          sx={{
-              color:"black",
-              fontWeight:"bolder",
-          }}>
-            So how does it work?
-        </Typography>
+        position="relative"
+        onMouseOver={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
+      >
+        <img
+          alt={item.name}
+          width="300px"
+          height="400px"
+          src={`http://localhost:2000${url}`}
+          onClick={() => navigate(`/item/${item.id}`)}
+          style={{ cursor: "pointer" }}
+        />
+        <Box
+          display={isHovered ? "block" : "none"}
+          position="absolute"
+          bottom="10%"
+          left="0"
+          width="100%"
+          padding="0 5%"
+        >
+          <Box display="flex" justifyContent="space-between">
+            <Box
+              display="flex"
+              alignItems="center"
+              backgroundColor={shades.neutral[100]}
+              borderRadius="3px"
+            >
+              <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
+                <RemoveIcon />
+              </IconButton>
+              <Typography color={shades.primary[300]}>{count}</Typography>
+              <IconButton onClick={() => setCount(count + 1)}>
+                <AddIcon />
+              </IconButton>
+            </Box>
+            <Button
+              onClick={() => {
+                dispatch(addToCart({ item: { ...item, count } }));
+              }}
+              sx={{ backgroundColor: shades.primary[300], color: "white" }}
+            >
+              Add to Cart
+            </Button>
+          </Box>
+        </Box>
       </Box>
-    </>
-    )
-}
 
-export default Country
+      <Box mt="3px">
+        <Typography variant="subtitle2" color={neutral.dark}>
+          {category
+            .replace(/([A-Z])/g, " $1")
+            .replace(/^./, (str) => str.toUpperCase())}
+        </Typography>
+        <Typography>{name}</Typography>
+        <Typography fontWeight="bold">${price}</Typography>
+      </Box>
+    </Box>
+  );
+};
+
+export default Item;

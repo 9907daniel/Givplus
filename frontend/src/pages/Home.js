@@ -42,7 +42,7 @@ function Home() {
         <Box
             sx={{
                 position: "absolute",
-                zIndex: "100",
+                // zIndex: "100",
                 top:"150px",
                 left:"40px",
                 textAlign:"left"
@@ -88,7 +88,7 @@ function Home() {
       </Box>
       <Box
         sx={{
-          zIndex: "100",
+        //   zIndex: "100",
           marginLeft: "2rem",
           textAlign:"left"
       }}>

@@ -73,7 +73,9 @@ function Map() {
     //     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     //     })
 
-    const {isLoaded} = useLoadScript({googleMapsApiKey: ''})
+    const {isLoaded} = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    });
     
     useEffect(() => {
     async function fetchData() {
@@ -82,9 +84,10 @@ function Map() {
     }
     fetchData();
   }, []);
+
     useEffect(() => {
     async function fetchCountries() {
-        const response = await Axios.get('http://localhost:8000/api/scores/');
+        const response = await Axios.get('http://localhost:8000/api/countries/');
         setCountries(response.countries);
     }
     fetchCountries();
@@ -208,7 +211,7 @@ function Map() {
                     return(
                         <div key = {item.id}>
                             <Marker
-                                position = {{lat: 35.6586, lng: 139.7454}}
+                                position = {item.location}
                                 icon = {tempMarker}
                                 onClick={() => {
                                     setCountries(item);

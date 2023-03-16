@@ -2,9 +2,12 @@
 
 import React, {useState, useContext} from 'react'
 import {Link, useNavigate} from "react-router-dom"
+import {useDispatch, useSelector} from "react-redux"
+
 import Axios from 'axios';
+
 //MUI imports
-import { Button, Typography, Grid, AppBar, Toolbar, Menu, MenuItem } from '@mui/material';
+import { Button, Typography, Grid, AppBar, Toolbar, Menu, MenuItem, Badge } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box, ThemeProvider} from '@mui/system';
 import { createTheme } from '@mui/material/styles';
@@ -13,6 +16,8 @@ import { createTheme } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
 import { getToken } from '../services/LocalStorageService';
 
+import { setIsCartOpen } from '../state';
+
 //Assets
 import logo from '../images/logo.png'
 import './Navbar.css'
@@ -20,6 +25,10 @@ import './Navbar.css'
 const Navbar = () => {
   const navigate = useNavigate();
   const { access_token } = getToken()
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.cart)
+
+
   return <>
   <AppBar position="fixed">
     <Box sx={{ flexGrow: 1 }}>
@@ -71,25 +80,32 @@ const Navbar = () => {
             </Button>
           </Box>
           <Box>
-          <Button component={NavLink} to='/' style={({ isActive }) => { 
+            <Badge
+              badgeContent = {cart.length}
+              color="secondary"
+              invisible={cart.length === 0}
+              sx = {{
+                "& .MuiBadge-badge": {
+                  right: 5,
+                  top: 5,
+                  padding: "0 4px",
+                  height: "14px",
+                  minWidth: "13px",
+                }
+              }}
+            >
+            <Button component={NavLink} to='/' style={({ isActive }) => { 
               return { backgroundColor: isActive ? 'white' : '' } }} 
               sx={{ 
                 color: 'black', 
                 textTransform: 'none',
-                marginRight: "1rem" }}>
+                marginRight: "2rem" }}
+              onClick={()=>
+                dispatch(setIsCartOpen({}))
+              }>
               Cart
             </Button>
-
-          <Button component={NavLink} to='/login' 
-                style={({ isActive }) => { 
-                  return { backgroundColor: isActive ? 'white' : '' }}} 
-                  sx={{ 
-                    color: 'black', 
-                    textTransform: 'none',
-                    marginRight: "1rem" }}>
-                Sign in
-              </Button>  
-
+            </Badge>
             {access_token ? 
               <Button component={NavLink} to='/dashboard' 
                 style={({ isActive }) => { 
