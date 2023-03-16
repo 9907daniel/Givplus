@@ -30,7 +30,7 @@ const Navbar = () => {
 
 
   return <>
-  <AppBar position="fixed">
+  <AppBar position="static">
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" 
       sx={{

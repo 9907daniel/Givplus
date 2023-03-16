@@ -30,7 +30,7 @@ function Home() {
   return (
     <>
       <Box 
-        sx={{marginTop: '64px'
+        sx={{marginTop: '0'
 
         }}>
         <Box component="img" src={map} 
