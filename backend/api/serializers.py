@@ -14,7 +14,7 @@ class ResultsSerializer(serializers.ModelSerializer):
         model = Results
         fields = ('id','country', 'currency', 
                  'currency_abbreviation', 'ppp_log', 'forex_score',
-                 'final_score','createdAt', 
+                 'final_score','createdAt', 'gdp', 'gdp_ppp', 
                  )
 
 class PercentileSerializer(serializers.ModelSerializer):
