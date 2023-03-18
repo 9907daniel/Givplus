@@ -39,8 +39,12 @@ def import_csv(request):
 
         for row in reader:
             mydata = Results(country=row['Country'], currency=row['Currency'],
-                            currency_abbreviation=row['Currency_abbreviation'], ppp_log=row['PPP_log'],
-                            forex_score=row['Forex_score'], final_score=row['Final_score'],)
+                            currency_abbreviation=row['Currency abbreviation'], ppp_log=row['PPP'],
+                            forex_score=row['Forex score'], final_score=row['Final score'],                        
+                            gdp=row['GDP per capita'], gdp_ppp=row['GDP per capita PPP'],
+                            
+                            
+                            )
             mydata.save()
 
     # Return the new data as a response

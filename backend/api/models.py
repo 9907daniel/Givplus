@@ -16,6 +16,10 @@ class Results(models.Model):
     ppp_log = models.DecimalField(("PPP_log"), decimal_places=15, max_digits=18)
     forex_score = models.DecimalField(("Forex_score"), decimal_places=15, max_digits=18)
     final_score = models.DecimalField(("Final_score"), decimal_places=15, max_digits=18) 
+    gdp = models.DecimalField(("GDP_per_capita"), decimal_places=20, max_digits=30, default = 0)
+    gdp_ppp = models.DecimalField(("GDP_per_capita_PPP"), decimal_places=20, max_digits=30, default = 0)
+    
+    
     createdAt = models.DateTimeField(auto_now_add=True)
 
 class Percentile(models.Model):
