@@ -126,6 +126,7 @@ def country_list(request, country_id=None):
                                 description_dict[field_name] = row[key]
 
                         mydata = Country(
+                            number=row['Number'],
                             name=row['Official Name'], 
                             continent=row['Continent'],
                             gdp=row['GDP'],
