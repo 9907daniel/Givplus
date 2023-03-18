@@ -53,6 +53,7 @@ class Platforms(models.Model):
     
     
 class Country(models.Model):
+    number = models.IntegerField(("Number"), default=0)
     gdp = models.DecimalField(("GDP"),  max_digits=40, decimal_places=0, default = 0)
     name = models.CharField(("Name"), max_length=200, default='')
     location = models.CharField(("Location"), max_length=200, default='')
