@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import CountryImage from "../images/countryImage/1.jpg";
 
+
 //MUI imports
 import {
     Grid, 
@@ -24,11 +25,13 @@ import tempMarker from '../images/tempMarker.png';
 
 function CallGoogleMap() {
     const [data, setData] = useState([]);
+    const navigate=useNavigate()
+
     const [selectedMarker, setSelectedMarker] = useState("");
     const center = useMemo(()=>({lat: 35.6586, lng: 139.7454}),[])
 
     const {isLoaded} = useLoadScript({
-        googleMapsApiKey: '' 
+        googleMapsApiKey: 'AIzaSyBICgu65nRFMQzP6qibRfwBX5c6m1IvJfc' 
     });
     useEffect(() => {
         async function fetchData() {
@@ -55,7 +58,10 @@ function CallGoogleMap() {
                 {data && data.map((item) => {
                     return(
                         <div key = {item.id}>
-                            <Marker
+                            <Marker style ={{
+                            width: 20,
+                            height: 20
+                        }}
                                 position = {item.location}
                                 icon = {tempMarker}
                                 onClick={() => {
@@ -79,7 +85,7 @@ function CallGoogleMap() {
                         <img style ={{
                             width: 250,
                             height: 200
-                        }}src={CountryImage} />
+                        }}src={CountryImage} onClick={() => navigate(`/countrydetails/${selectedMarker.id}`)}/>
                         <button onClick={() => setSelectedMarker("")}>close</button>
                     </div>
                     </InfoWindow>

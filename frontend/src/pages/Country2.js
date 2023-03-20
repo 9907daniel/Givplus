@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom"
 import Axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { addToCart } from "../state";
+import { addToCart } from "../components/state";
 
 
 //MUI imports

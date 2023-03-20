@@ -4,7 +4,7 @@ import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
-import { addToCart } from "../state";
+import { addToCart } from "../components/state";
 import { useNavigate } from "react-router-dom";
 import image from "../images/countryImage/1.jpg";
 
@@ -22,7 +22,7 @@ const Country= ({ item, width }) => {
 
 
   return (
-    <Box width="300px">
+    <Box width={width}>
       <Box
         position="relative"
         onMouseOver={() => setIsHovered(true)}
@@ -33,7 +33,7 @@ const Country= ({ item, width }) => {
           width="300px"
           height="400px"
           src={image}
-          onClick={() => navigate(`/platformdetails/${item.id}`)}
+          onClick={() => navigate(`/projectdetails/${item.id}`)}
           style={{ cursor: "pointer" }}
         />
         <Box

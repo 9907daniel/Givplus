@@ -11,7 +11,7 @@ import {
   increaseCount,
   removeFromCart,
   setIsCartOpen,
-} from "../state";
+} from "./state";
 import { useNavigate } from "react-router-dom";
 
 const FlexBox = styled(Box)`

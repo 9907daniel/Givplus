@@ -21,7 +21,7 @@ import CountryDetails from "./pages/CountryDetails";
 import Checkout from './pages/checkout/Checkout';
 import Confirmation from './pages/checkout/Confirmation';
 import CartMenu from './components/CartMenu';
-import PlatformDetails from './pages/PlatformDetails';
+import ProjectDetails from './pages/ProjectDetails';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation;
@@ -46,7 +46,7 @@ function App() {
               <Route path="example" element={<Example />} />
               <Route path="map" element={<Map />} />
               <Route path="countrydetails/:countryId" element={<CountryDetails />} />
-              <Route path="platformdetails/:platformId" element={<PlatformDetails />} />
+              <Route path="projectdetails/:projectId" element={<ProjectDetails />} />
               <Route path="checkout" element={<Checkout />} />
               <Route path="checkout/success" element={<Confirmation />} />
               <Route path="login" element={!access_token ? <LoginReg /> : <Navigate to="/dashboard" />} />

@@ -3,7 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 import { userAuthApi } from '../services/userAuthApi'
 import authReducer from '../features/authSlice'
 import userReducer from '../features/userSlice'
-import cartReducer from '../state'
+import cartReducer from '../components/state'
 
 export const store = configureStore({
   // reducer: {cart : cartReducer},

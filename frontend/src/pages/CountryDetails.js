@@ -7,7 +7,7 @@ import Country from "./Country";
 import { Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDispatch, useSelector } from "react-redux";
-import { setItems } from "../state"
+import { setItems } from "../components/state"
 
 import countryImage from "../images/countryImage/1.jpg";
 
@@ -128,19 +128,26 @@ const countrydetails =() =>{
             rowGap="20px"
             columnGap="1.33%"
             >
-            </Box>
             {value === "all" && data.map((item)=>(
-                // <Typography key = {item.id} variant="h5" textAlign="center">
-                //     {item.name}
-                //     </Typography>
                 <Country item={item} key={`${item.name}-${item.id}`}/>
             ))}
-            {/* {value === "Health" && projectonHealth.map((item)=>(
+            {value === "Health" && projectonHealth.map((item)=>(
+
                 <Country item={item} key={`${item.name}-${item.id}`}/>
             ))}
             {value === "Poverty" && projectonPoverty.map((item)=>(
+
+                <Country item={item} key={`${item.name}-${item.id}`}/>
+            ))}
+
+            {/* {value === "Health" && projectonHealth.map((item)=>(
+                <Country item={item} key={`${item.name}-${item.id}`}/>
+            ))}
+            
+            {value === "Poverty" && projectonPoverty.map((item)=>(
                 <Country item={item} key={`${item.name}-${item.id}`}/>
             ))} */}
+            </Box>
         </Box>
     </div>
   )

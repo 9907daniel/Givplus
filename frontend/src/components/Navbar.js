@@ -16,7 +16,7 @@ import { createTheme } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
 import { getToken } from '../services/LocalStorageService';
 
-import { setIsCartOpen } from '../state';
+import { setIsCartOpen } from './state';
 
 //Assets
 import logo from '../images/logo.png'

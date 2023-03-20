@@ -9,42 +9,39 @@
 // import AddIcon from "@mui/icons-material/Add";
 // import RemoveIcon from "@mui/icons-material/Remove";
 // import { shades } from "../theme";
-// import { addToCart } from "../state";
+// import { addToCart } from "../components/state";
 // import { useDispatch } from "react-redux";
 
-// const PlatformDetails = () => {
+// const ProjectDetails = () => {
 //   const dispatch = useDispatch();
-//   const { platformId } = useParams();
+//   const { projectId } = useParams();
 //   const [value, setValue] = useState("description");
 //   const [count, setCount] = useState(1);
 //   const [item, setItem] = useState(null);
 //   const [items, setItems] = useState([]);
-
+//   const [data, setData] = useState([]);
 //   const handleChange = (event, newValue) => {
 //     setValue(newValue);
 //   };
 
-//   async function getItem() {
-//     const item = await fetch(
-//       `http://localhost:8000/api/platforms`,
-//       {
-//         method: "GET",
-//       }
-//     );
-//     const itemJson = await item.json();
-//     setItem(itemJson.data);
-//   }
+//   useEffect(() => {
+//     async function fetchData() {
+//       const response = await Axios.get('http://localhost:8000/api/countries/');
+//       setData(response.data);
+//     }
+//     fetchData();
+//   }, []);
 
-//   async function getItems() {
-//     const items = await fetch(
-//       `http://localhost:2000/api/items?populate=image`,
-//       {
-//         method: "GET",
-//       }
-//     );
-//     const itemsJson = await items.json();
-//     setItems(itemsJson.data);
-//   }
+// //   async function getItems() {
+// //     const items = await fetch(
+// //       `http://localhost:2000/api/items?populate=image`,
+// //       {
+// //         method: "GET",
+// //       }
+// //     );
+// //     const itemsJson = await items.json();
+// //     setItems(itemsJson.data);
+// //   }
 
 //   useEffect(() => {
 //     getItem();
@@ -134,7 +131,7 @@
 //       </Box>
 
 //       {/* RELATED ITEMS */}
-//       <Box mt="50px" width="100%">
+//       {/* <Box mt="50px" width="100%">
 //         <Typography variant="h3" fontWeight="bold">
 //           Related Products
 //         </Typography>
@@ -149,9 +146,9 @@
 //             <Item key={`${item.name}-${i}`} item={item} />
 //           ))}
 //         </Box>
-//       </Box>
+//       </Box> */}
 //     </Box>
 //   );
 // };
 
-// export default PlatformDetails;
+// export default projectDetails;
