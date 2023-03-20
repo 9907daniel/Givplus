@@ -6,9 +6,10 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart } from "../state";
 import { useNavigate } from "react-router-dom";
+import image from "../images/countryImage/1.jpg";
 
 
-const Item = ({ item, width }) => {
+const Country= ({ item, width }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
@@ -17,19 +18,11 @@ const Item = ({ item, width }) => {
     palette: { neutral },
   } = useTheme();
 
-  const { category, price, name, image } = item.attributes;
-  const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
-    },
-  } = image;
+  const { name, population } = item;
+
 
   return (
-    <Box width={width}>
+    <Box width="300px">
       <Box
         position="relative"
         onMouseOver={() => setIsHovered(true)}
@@ -39,8 +32,8 @@ const Item = ({ item, width }) => {
           alt={item.name}
           width="300px"
           height="400px"
-          src={`http://localhost:2000${url}`}
-          onClick={() => navigate(`/item/${item.id}`)}
+          src={image}
+          onClick={() => navigate(`/platformdetails/${item.id}`)}
           style={{ cursor: "pointer" }}
         />
         <Box
@@ -58,15 +51,7 @@ const Item = ({ item, width }) => {
               backgroundColor={shades.neutral[100]}
               borderRadius="3px"
             >
-              <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
-                <RemoveIcon />
-              </IconButton>
-              <Typography color={shades.primary[300]}>{count}</Typography>
-              <IconButton onClick={() => setCount(count + 1)}>
-                <AddIcon />
-              </IconButton>
-            </Box>
-            <Button
+                <Button
               onClick={() => {
                 dispatch(addToCart({ item: { ...item, count } }));
               }}
@@ -74,21 +59,39 @@ const Item = ({ item, width }) => {
             >
               Add to Cart
             </Button>
+
+              {/* <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
+                <RemoveIcon />
+              </IconButton>
+              <Typography color={shades.primary[300]}>{count}</Typography>
+              <IconButton onClick={() => setCount(count + 1)}>
+                <AddIcon />
+              </IconButton> */}
+            </Box>
+            {/* <Button
+              onClick={() => {
+                dispatch(addToCart({ item: { ...item, count } }));
+              }}
+              sx={{ backgroundColor: shades.primary[300], color: "white" }}
+            >
+              Add to Cart
+            </Button> */}
           </Box>
         </Box>
       </Box>
 
       <Box mt="3px">
-        <Typography variant="subtitle2" color={neutral.dark}>
-          {category
+        <Typography variant="subtitle2" color="black">
+            category
+          {/* {category
             .replace(/([A-Z])/g, " $1")
-            .replace(/^./, (str) => str.toUpperCase())}
+            .replace(/^./, (str) => str.toUpperCase())} */}
         </Typography>
         <Typography>{name}</Typography>
-        <Typography fontWeight="bold">${price}</Typography>
+        <Typography fontWeight="bold">${population}</Typography>
       </Box>
     </Box>
   );
 };
 
-export default Item;
+export default Country;

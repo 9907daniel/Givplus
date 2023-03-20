@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 //map imports
 import { GoogleMap, InfoWindow, Marker, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
 import tempMarker from '../images/tempMarker.png';
+import CallGoogleMap from './CallGoogleMap'
 // import Parked from "../assets/images/parked.png";
 // import Incident from "../assets/images/IncidentsDrones.png";
 // import InAir from "../assets/images/IntheAirDrones.png";
@@ -66,16 +67,13 @@ function Map() {
     const [open, setOpen] = React.useState(false);
     const [dense, setDense] = React.useState(true);
     const [data, setData] = useState([]);
-    const [countries, setCountries] = useState([]);
+    //const [countries, setCountries] = useState([]);
     const center = useMemo(()=>({lat: 35.6586, lng: 139.7454}),[])
-    // const [selectedMarker, setSelectedMaker] = useState("");
+    const [selectedMarker, setSelectedMarker] = useState("");
     // const {isLoaded} = useJsApiLoader({
     //     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     //     })
 
-    const {isLoaded} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-    });
     
     useEffect(() => {
     async function fetchData() {
@@ -85,30 +83,31 @@ function Map() {
     fetchData();
   }, []);
 
-    useEffect(() => {
-    async function fetchCountries() {
-        const response = await Axios.get('http://localhost:8000/api/countries/');
-        setCountries(response.countries);
-    }
-    fetchCountries();
-  }, []);
+//     useEffect(() => {
+//     async function fetchData() {
+//         const response = await Axios.get('http://localhost:8000/api/countries/');
+//         setData(response.data);
+//     }
+//     fetchData();
+//   }, []);
 
   
 
-    if (!isLoaded) {
-        return <Typography> Loading...</Typography>
-      }
+    // if (!isLoaded) {
+    //     return <Typography> Loading...</Typography>
+    //   }
 
     
-  return (
-    
+  return ( 
     <Grid container>
         <Grid item xs={4} 
         >
         {/* <Typography variant = "h6" align="center" marginTop ="1rem">
             Ranking
         </Typography>   */}
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper}
+                style={{marginLeft: 0, maxHeight: '800px', overflowY: 'auto'}}
+                >
                     <Table aria-label="collapsible table">
                         <TableHead>
                         <TableRow>
@@ -173,6 +172,11 @@ function Map() {
                                             </TableRow>
                                             <TableRow>
                                                 <TableCell>Population{"  "}</TableCell>
+                                                <Button
+                                                    onClick={() => navigate(`/countrydetails/${item.id}`)}
+                                                >
+                                                    Details
+                                                </Button>
                                             </TableRow>
                                             {/* <TableRow>
                                                 <Button onClick={()=>navigate("/country")}>
@@ -198,29 +202,29 @@ function Map() {
                 </TableContainer>
         </Grid>
         <Grid item xs={8} style={{marginTop: "0"}}>
-            
-            <GoogleMap 
+            <CallGoogleMap />
+
+            {/* <GoogleMap 
             center ={center} 
-            zoom ={15}
+            zoom ={2}
             mapContainerStyle={{
                 width:"100%",
                 height:"100%"
             }} >
-                {/* <Marker position={{lat: 35.6586, lng: 139.7454}}/>  */}
-                {countries && countries.map((item) => {
+                {data.map((item) => {
                     return(
                         <div key = {item.id}>
                             <Marker
-                                position = {item.location}
+                                position = {{lat: 35.6586, lng: 139.7454}}
                                 icon = {tempMarker}
                                 onClick={() => {
-                                    setCountries(item);
+                                    setSelectedMarker(item);
                                   }}
                             />
                         </div>
                     )
                 })}
-                {countries && (
+                {selectedMarker&& (
                     <InfoWindow
                     //position={data.location}
                     position={{lat: 35.6586, lng: 139.7454}}
@@ -229,14 +233,14 @@ function Map() {
                     }}
                     >
                     <div>
-                        <h1>location -{countries.name}</h1>
-                        <h1>status - {countries.discription}</h1>
-                        <button onClick={() => setCountries("")}>close</button>
+                        <h1>location -{selectedMarker.country}</h1>
+                        <h1>status - {selectedMarker.currency}</h1>
+                        <button onClick={() => setSelectedMarker("")}>close</button>
                     </div>
                     </InfoWindow>
                 )}
 
-            </GoogleMap>
+            </GoogleMap> */}
         
         </Grid>
     </Grid>

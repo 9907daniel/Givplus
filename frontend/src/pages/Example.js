@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 function App() {
   const [data, setData] = useState([]);
 
-
+  console.log(data);
   // useEffect(() => {
   //   async function fetchData() {
   //     const response = await axios.get('http://localhost:8000/api/scores/');
