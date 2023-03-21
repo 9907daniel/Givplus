@@ -6,12 +6,11 @@ import userReducer from '../features/userSlice'
 import cartReducer from '../components/state'
 
 export const store = configureStore({
-  // reducer: {cart : cartReducer},
   reducer: {
+    cart : cartReducer,
     [userAuthApi.reducerPath]: userAuthApi.reducer,
     auth: authReducer,
     user: userReducer,
-    cart : cartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(userAuthApi.middleware),

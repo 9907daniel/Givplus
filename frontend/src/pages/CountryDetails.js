@@ -13,7 +13,7 @@ import countryImage from "../images/countryImage/1.jpg";
 
 
 
-const countrydetails =() =>{
+const CountryDetails =() =>{
     const dispatch = useDispatch();
     const [value, setValue] = useState("all")
     // const items = useSelector((state)=> state.cart.items)
@@ -153,4 +153,4 @@ const countrydetails =() =>{
   )
 }
 
-export default countrydetails
+export default CountryDetails

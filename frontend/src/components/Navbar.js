@@ -88,9 +88,10 @@ const Navbar = () => {
                 "& .MuiBadge-badge": {
                   right: 5,
                   top: 5,
-                  padding: "0 4px",
+                  padding: "0 2px",
                   height: "14px",
                   minWidth: "13px",
+                  marginLeft: "0.5rem",
                 }
               }}
             >
@@ -99,11 +100,12 @@ const Navbar = () => {
               sx={{ 
                 color: 'black', 
                 textTransform: 'none',
-                marginRight: "2rem" }}
+                // marginRight: "0.5rem" 
+              }}
               onClick={()=>
                 dispatch(setIsCartOpen({}))
               }>
-              Cart
+              Give Jar
             </Button>
             </Badge>
             {access_token ? 

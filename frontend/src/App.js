@@ -38,13 +38,14 @@ function App() {
         <ScrollToTop />
         <CssBaseline />
         <Navbar />
+        <CartMenu />
         <Outlet />
         <Routes>
           <Route>
               <Route index element={<Home />} />
               <Route path="contact" element={<Contact />} />
               <Route path="example" element={<Example />} />
-              <Route path="map" element={<Map />} />
+              <Route path="map" key={Math.random()} element={<Map />} />
               <Route path="countrydetails/:countryId" element={<CountryDetails />} />
               <Route path="projectdetails/:projectId" element={<ProjectDetails />} />
               <Route path="checkout" element={<Checkout />} />
@@ -56,7 +57,6 @@ function App() {
           <Route path="/dashboard" element={access_token ? <Dashboard /> : <Navigate to="/login" />} />
           <Route path="*" element={<h1>Error 404 Page not found !!</h1>} />
         </Routes>
-        <CartMenu />
       </BrowserRouter>
     </>
   );
