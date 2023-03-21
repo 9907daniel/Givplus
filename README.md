@@ -61,6 +61,8 @@ npm start
 # GCP Server
 ## Everytime there is change to frontend
 1. git pull (on server)
-2. git install
-3. git run build
+2. npm install
+3. npm run build
+5. python manage.py collecstatic
 4. sudo service nginx restart
+
