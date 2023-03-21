@@ -48,9 +48,19 @@ npm start
 1. Server : localhost:8000/
 2. Client localhost:3000
 
+
 ### Endpoints
 1. API : localhost:8000/api/
 2. Forex Scores : localhost:8000/api/scores/
 3. Forex Scores Upload: localhost:8000/api/scores/upload/
 4. Country (GET / POST): localhost:8000/api/countries/
 5. Country Delete (in development): localhost:8000/api/countries/delete/
+
+
+====
+# GCP Server
+## Everytime there is change to frontend
+1. git pull (on server)
+2. git install
+3. git run build
+4. sudo service nginx restart
