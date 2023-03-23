@@ -38,7 +38,7 @@ const CountryDetails =() =>{
     
     useEffect(() => {
         async function getData() {
-            const response = await axios.get('http://localhost:8000/api/countries/');
+            const response = await axios.get('https://givplus.duckdns.org/api/countries/');
             setData(response.data);
         }
         getData();

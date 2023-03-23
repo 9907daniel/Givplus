@@ -34,6 +34,9 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
+import { useJsApiLoader } from '@react-google-maps/api';
+
+
 function Row({item}){
     const navigate=useNavigate()
     const { id, country, currency,currency_abbreviation, final_score, ppp_log } = item;
@@ -101,14 +104,14 @@ function Map() {
     //const [countries, setCountries] = useState([]);
     const center = useMemo(()=>({lat: 35.6586, lng: 139.7454}),[])
     const [selectedMarker, setSelectedMarker] = useState("");
-    // const {isLoaded} = useJsApiLoader({
-    //     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    //     })
+    const {isLoaded} = useJsApiLoader({
+         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+         })
 
     
     useEffect(() => {
     async function fetchData() {
-      const response = await Axios.get('http://localhost:8000/api/scores/');
+      const response = await Axios.get('https://givplus.duckdns.org/api/scores/');
       setData(response.data);
     }
     fetchData();

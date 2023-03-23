@@ -77,7 +77,7 @@ function Map() {
     
     useEffect(() => {
     async function fetchData() {
-      const response = await Axios.get('http://localhost:8000/api/scores/');
+      const response = await Axios.get('https://givplus.duckdns.org/api/scores/');
       setData(response.data);
     }
     fetchData();

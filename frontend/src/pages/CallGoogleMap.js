@@ -35,7 +35,7 @@ function CallGoogleMap() {
     });
     useEffect(() => {
         async function fetchData() {
-          const response = await Axios.get('http://localhost:8000/api/countries/');
+          const response = await Axios.get('https://givplus.duckdns.org/api/countries/');
           setData(response.data);
         }
         fetchData();

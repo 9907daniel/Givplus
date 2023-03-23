@@ -4,6 +4,8 @@
 *.pyc
 .env
 /.env
+.env.local
+
 
 *.env
 /frontend/.env
