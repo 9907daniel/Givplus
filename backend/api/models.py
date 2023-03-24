@@ -87,7 +87,7 @@ class NGO(models.Model):
     country = models.ForeignKey(CountryName, on_delete=models.CASCADE, related_name='ngos')
 
 class Project(models.Model):
-    UN_GOALS_CHOICES = [
+    UN_GOALS = [
         (1, 'No Poverty'), 
         (2, 'Zero Hunger'),
         (3, 'Good Health and Well-Being'), 
@@ -109,6 +109,6 @@ class Project(models.Model):
     
     project_name = models.CharField(max_length=100)
     description = models.TextField()
-    un_goal = models.IntegerField(choices=UN_GOALS_CHOICES)
+    un_goal = models.IntegerField(choices=UN_GOALS)
     ngo = models.ForeignKey(NGO, on_delete=models.CASCADE, related_name='projects')
 
