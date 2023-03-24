@@ -22,6 +22,7 @@ import Checkout from './pages/checkout/Checkout';
 import Confirmation from './pages/checkout/Confirmation';
 import CartMenu from './components/CartMenu';
 import ProjectDetails from './pages/ProjectDetails';
+import SetPrice from './pages/SetPrice';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation;
@@ -35,9 +36,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <ScrollToTop />
         <CssBaseline />
         <Navbar />
+        <ScrollToTop />
         <CartMenu />
         <Outlet />
         <Routes>
@@ -49,6 +50,7 @@ function App() {
               <Route path="countrydetails/:countryId" element={<CountryDetails />} />
               <Route path="projectdetails/:projectId" element={<ProjectDetails />} />
               <Route path="checkout" element={<Checkout />} />
+              <Route path="setprice" element={<SetPrice />} />
               <Route path="checkout/success" element={<Confirmation />} />
               <Route path="login" element={!access_token ? <LoginReg /> : <Navigate to="/dashboard" />} />
               <Route path="sendpasswordresetemail" element={<SendPasswordResetEmail />} />

@@ -4,6 +4,7 @@
   "proxy": "http://localhost:8000",
   "private": true,
   "dependencies": {
+    "@devexpress/dx-react-chart-material-ui": "^4.0.3",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.3.1",
