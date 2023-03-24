@@ -68,3 +68,17 @@ npm start
 
 *
 sudo nano /etc/nginx/sites-available/backend
+
+===
+## Clearing Database for Specific Models using shell
+0. start at django directory (where manage.py is located)
+1. python3 manage.py shell
+2. from _appname_.models import _modelname_
+3. _modelname_.objects.filter().delete()
+
+
+
+
+
+
+
