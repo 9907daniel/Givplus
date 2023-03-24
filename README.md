@@ -1,76 +1,123 @@
-# GDSC-Solutions
+## 🙌 Givplus!
 
 
-### Techstacks used
-- Django
-- React.js
-- Numpy
-- Google Cloud Platform
-- Docker (tbd)
+## ❓ What is Givplus?   
+- **Givplus** is **<u>____</u>** .   
+-
+- 
+-  
+
+## 🙋‍♀️ Specifics!   
+1. Talk
+2. About
+3. Forex
+4. etc
+5. Here
 
 
-### Installation
-1. Create Virtual Environment (May differ depending on OS)
+## Link   
+
+- [🚗 Givplus](https://givplus.duckdns.org/)   
+
+
+## Table of Content
+1. [Techinal Stacks](#techstacks)
+2. [🛠 Installation](#installation)
+    - [Virtual Environment](#virtual-environment)   
+    - [Backend](#backend)   
+    - [Frontend](#frontend)   
+3. [Server Maintanence](#server-maintanence)
+4. [Endpoints](#endpoints )
+5. [File Structure](#file-structures)
+6. [Future Plans](#future-plans)
+7. [Contributors](#contributors)
+
+   
+## Techstacks
+- **Backend**  : Django
+- **Frontend** : React.js
+- **Database** : Postgresql
+- **Deployment** : Google Cloud Platform (Compute Engine), Nginx
+
+
+## Installation
+### 1) Virtual Environment
+
+- #### OS
 ```
 pip install virtualenv
-# if virtualenv not installed
+
+virutalenv .venv
+
+. .venv/bin/activate
+```
+
+- #### Windows
+```
+pip install virtualenv
 
 virtualenv .venv
-cd .venv
-cd script
+
+cd .venv/script
+
 activate
 ```
 
-2. Backend
+### 2) Backend
+
 ```
 pip install -r requirements.txt
+
 cd backend
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py runserver
+
+nano .env
+
+##################################################
+EMAIL_USER = _email_
+EMAIL_PASS = _password_
+EMAIL_FROM = _email_
+
+SECRET_KEY = _secretkey_
+
+DATABASE_NAME = _db_
+DATABASE_USER = _dbusername_
+DATABASE_PASSWORD = _password_
+DATABASE_HOST = localhost
+ DATABASE_PORT = 5432
+
+##################################################
+```
+```
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py runserver
 ```
 
-3. Create file .env inside backend
+### 3) Frontend
 ```
-EMAIL_USER = 'Email_here'
-EMAIL_PASS = '123456'
-EMAIL_FROM = 'Email_here'
-```
+cd ..
 
-4. Frontend
-```
 cd frontend
+
 npm install
+
 npm start
 ```
 
-### Run
-1. Server : localhost:8000/
-2. Client localhost:3000
-
-
-### Endpoints
-1. API : localhost:8000/api/
-2. Forex Scores : localhost:8000/api/scores/
-3. Forex Scores Upload: localhost:8000/api/scores/upload/
-4. Country (GET / POST): localhost:8000/api/countries/
-5. Country Delete (in development): localhost:8000/api/countries/delete/
-
-
-====
-# GCP Server
-## Everytime there is change to frontend
+## Server Maintanence
+### Change to Front/Backend
 1. git pull (on server)
 2. npm install
 3. npm run build
+4. pip install -r requirements.txt
+5. python manage.py makemigratoins
+6. python manage.py migrate
 5. python manage.py collecstatic
 4. sudo service nginx restart
 
-*
-sudo nano /etc/nginx/sites-available/backend
-
-===
-## Clearing Database for Specific Models using shell
+### Clearing Database for Specific Models using shell
 0. start at django directory (where manage.py is located)
 1. python3 manage.py shell
 2. from _appname_.models import _modelname_
@@ -79,6 +126,89 @@ sudo nano /etc/nginx/sites-available/backend
 
 
 
+
+
+## Endpoints
+### API endpoints
+- API : localhost:8000/api/
+- Forex Scores : localhost:8000/api/scores/
+- Forex Scores Upload: localhost:8000/api/scores/upload/
+- Country (GET / POST): localhost:8000/api/countries/
+- Country Detail - localhost:8000/api/countries/<int:pk>/
+- Projects (GET / POST) - 
+
+
+## File Structures
+```
+Givplus/
+├── backend/
+│   ├── manage.py
+│   ├── api/
+│   ├── files/
+│   ├── static/
+│   ├── account/
+│   ├── backend/
+│   │   ├── settings.py
+│   ├── .env
+├── frontend/
+│   ├── public/
+│   │   ├── index.html
+│   │   └── ...
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   ├── src/
+│   │   │   ├── app/
+│   │   │   ├── components/
+│   │   │   ├── pages/
+│   │   │   ├── services/
+│   │   │   ├── features/
+│   │   │   ├── images/
+│   │   │   ├── App.js
+│   │   │   ├── index.js
+│   │   ├── pages/
+│   ├── package.json
+│   ├── package-lock.json
+│   └── .env.local
+├── Forex score calculation/
+│   ├── currency_code.csv
+│   ├── forex.ipynb
+│   └── README.md
+├── .gitignore
+├── README.md
+└── requirements.txt
+
+```
+
+
+ 
+## Future Plans
+
+### Techincal wise
+1. Migrate Compute Engine DB to Google Cloud
+2. Dockerize Project
+3. Github Actions (CI/CD)
+4. Unit Test
+
+### Function wise
+1. 
+2. 
+
+
+## Contributors
+Park Kyeung Min (Leader) - 
+
+Cha Seung Jun -
+
+Heo Bor Yun - 
+
+Shin Jeong Hoo -
+
+
+
+   
+
+   
 
 
 
