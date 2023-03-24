@@ -23,4 +23,7 @@ urlpatterns = [
     path('countries/<str:name>/', views.country_detail, name='country_list'),
     path('countries/delete/<int:pk>/', views.CountryDeleteView.as_view(), name='country_delete'),
 
+    # projects api
+    path('projects/', views.project_list, name='project_list'),
+
 ]

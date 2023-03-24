@@ -75,3 +75,40 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+    
+    
+##### New API for Projects #####
+
+class CountryName(models.Model):
+    name = models.CharField(max_length=100)
+
+class NGO(models.Model):
+    ngo_name = models.CharField(max_length=100)
+    country = models.ForeignKey(CountryName, on_delete=models.CASCADE, related_name='ngos')
+
+class Project(models.Model):
+    UN_GOALS_CHOICES = [
+        (1, 'No Poverty'), 
+        (2, 'Zero Hunger'),
+        (3, 'Good Health and Well-Being'), 
+        (4, 'Quality Education'),
+        (5, 'Gender Equality'), 
+        (6, 'Clean Water and Sanitation'),
+        (7, 'Affordable and Clean Energy'), 
+        (8, 'Decent Work and Economic Growth'),
+        (9, 'Industry, Innovation and Infrastructure'),
+        (10, 'Reduced Inequalities'),
+        (11, 'Sustainable Cities and Communities'), 
+        (12, 'Responsible Consumption and Production'),
+        (13, 'Climate Change'), 
+        (14, 'Life Below Water'),
+        (15, 'Life on Land'), 
+        (16, 'Peace, Justice and Strong Institutions'),
+        (17, 'Partnerships for the Goals'),
+    ]
+    
+    project_name = models.CharField(max_length=100)
+    description = models.TextField()
+    un_goal = models.IntegerField(choices=UN_GOALS_CHOICES)
+    ngo = models.ForeignKey(NGO, on_delete=models.CASCADE, related_name='projects')
+
