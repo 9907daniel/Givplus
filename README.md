@@ -66,3 +66,5 @@ npm start
 5. python manage.py collecstatic
 4. sudo service nginx restart
 
+*
+sudo nano /etc/nginx/sites-available/backend
