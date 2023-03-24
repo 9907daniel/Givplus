@@ -31,7 +31,7 @@ function CallGoogleMap() {
     const center = useMemo(()=>({lat: 35.6586, lng: 139.7454}),[])
 
     const {isLoaded} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBICgu65nRFMQzP6qibRfwBX5c6m1IvJfc' 
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, 
     });
     useEffect(() => {
         async function fetchData() {
