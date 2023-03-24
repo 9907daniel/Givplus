@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Table, Results, Platforms, Country, Percentile
+from .models import Table, Results, Platforms, Country, Percentile, CountryName, NGO, Project
 
 class TableSerializer(serializers.ModelSerializer):
     class Meta:
@@ -66,3 +66,43 @@ class CountrySerializer(serializers.ModelSerializer):
         
     def get_description(self, obj):
         return obj.description
+    
+
+### New Serializer for Projects####
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    # un_goal = serializers.ChoiceField(choices=Project.UN_GOALS_CHOICES)
+    un_goal_display = serializers.CharField(source='get_un_goal_display', read_only=True)
+
+
+    class Meta:
+        model = Project
+        fields = ['project_name', 'description', 'un_goal','un_goal_display']
+
+class NGOSerializer(serializers.ModelSerializer):
+    projects = ProjectSerializer(many=True)
+
+    class Meta:
+        model = NGO
+        fields = ['ngo_name', 'projects']
+
+class CountryNameSerializer(serializers.ModelSerializer):
+    ngos = NGOSerializer(many=True)
+
+    class Meta:
+        model = CountryName
+        fields = ['name', 'ngos']
+        
+    def create(self, validated_data):
+        ngos_data = validated_data.pop('ngos')
+        countryName = CountryName.objects.create(**validated_data)
+        
+        for ngo_data in ngos_data:
+            projects_data = ngo_data.pop('projects')
+            ngo = NGO.objects.create(country=countryName, **ngo_data)
+            
+            for project_data in projects_data:
+                Project.objects.create(ngo=ngo, **project_data)
+
+        return countryName
