@@ -132,7 +132,6 @@ function Map() {
                         <TableBody>
                          {data.map((item) => (
                            <Row key={item.id} item={item} />
-
                          ))
                          }
                          </TableBody>

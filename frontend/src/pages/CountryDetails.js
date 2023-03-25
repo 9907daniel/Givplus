@@ -46,8 +46,8 @@ const CountryDetails =() =>{
     const projectonHealth = data.filter(
         (item) => item.need_help_in === "Health"
     )
-    const projectonPoverty = data.filter(
-        (item) =>  item.need_help_in === "Poverty"
+    const projectonHumanity = data.filter(
+        (item) =>  item.need_help_in === "Humanity"
     )
 
   return (
@@ -117,7 +117,7 @@ const CountryDetails =() =>{
                 >
                     <Tab label="ALL" value="all"/>
                     <Tab label="HEALTH" value="Health"/>
-                    <Tab label="POVERTY" value="Poverty"/>  
+                    <Tab label="HUMANITY" value="Humanity"/>  
             </Tabs>
             <Box
             margin = "0 auto"
@@ -135,7 +135,7 @@ const CountryDetails =() =>{
 
                 <Country item={item} key={`${item.name}-${item.id}`}/>
             ))}
-            {value === "Poverty" && projectonPoverty.map((item)=>(
+            {value === "Humanity" && projectonHumanity.map((item)=>(
 
                 <Country item={item} key={`${item.name}-${item.id}`}/>
             ))}

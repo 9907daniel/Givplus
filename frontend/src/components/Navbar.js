@@ -1,18 +1,18 @@
 // import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
 
-import React, {useState, useContext} from 'react'
-import {Link, useNavigate} from "react-router-dom"
+import React, {useState, useEffect} from 'react'
+import { useNavigate} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 
 import Axios from 'axios';
 
 //MUI imports
-import { Button, Typography, Grid, AppBar, Toolbar, Menu, MenuItem, Badge } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Box, ThemeProvider} from '@mui/system';
-import { createTheme } from '@mui/material/styles';
-
-
+import { Button, Typography, Grid, AppBar, Toolbar, Badge } from '@mui/material';
+import { Box} from '@mui/system';
+import LanguageIcon from '@mui/icons-material/Language';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 import { NavLink } from 'react-router-dom';
 import { getToken } from '../services/LocalStorageService';
 
@@ -27,6 +27,23 @@ const Navbar = () => {
   const { access_token } = getToken()
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart)
+
+  //dropdown menu
+  const [data, setData] = useState([]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  useEffect(() => {
+    async function fetchData() {
+      const response = await Axios.get('https://givplus.duckdns.org/api/scores/');
+      setData(response.data);
+    }
+    fetchData();
+  }, []);
 
 
   return <>
@@ -80,6 +97,40 @@ const Navbar = () => {
             </Button>
           </Box>
           <Box>
+            <IconButton
+                size="large"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="black"
+              >
+                <LanguageIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                {/* {data.map((item) => (
+                           <MenuItem onClick={handleClose} key ={item.id}>{item.currency}</MenuItem>
+                ))
+                } */}
+                <MenuItem onClick={handleClose}>Japanese Yen ¥</MenuItem>
+                <MenuItem onClick={handleClose}>Korean Won ₩</MenuItem>
+                <MenuItem onClick={handleClose}>Euro €</MenuItem>
+                <MenuItem onClick={handleClose}>US Dollar $</MenuItem>
+                <MenuItem onClick={handleClose}>Australian Dollar $</MenuItem>
+              </Menu>
             <Badge
               badgeContent = {cart.length}
               color="secondary"
