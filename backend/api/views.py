@@ -6,10 +6,14 @@ from .models import Table, Results, Country, Platforms, Percentile, CountryName
 from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, PlatformSerializer, PercentileSerializer, CountryNameSerializer
 from django.http import JsonResponse
 
+from django.conf import settings
 import csv
 import json
 import os
 from django.db import connection
+
+import glob
+
 
 # Create your views here.
 
@@ -19,12 +23,20 @@ class TableView(generics.CreateAPIView):
     serializer_class = TableSerializer
     
 @api_view(['GET'])
-def get_csv(request):
+def get_csv(request, file_index=None):
+    if file_index:
+        mydata = Results.objects.filter(file_index=file_index)
+    else:
+        mydata = Results.objects.all()
+    serializer = ResultsSerializer(mydata, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_all_csv(request):
     mydata = Results.objects.all()
     serializer = ResultsSerializer(mydata, many=True)
     return Response(serializer.data)
 
-    
 @api_view(['POST'])
 def import_csv(request):
     # Clear existing data
@@ -34,25 +46,35 @@ def import_csv(request):
     with connection.cursor() as cursor:
         cursor.execute("ALTER SEQUENCE api_results_id_seq RESTART WITH 1")
     
-    with open('./files/Score.csv', 'r') as csvfile:
-        reader = csv.DictReader(csvfile)
+    # Find all CSV files in the designated directory
+    csv_files = glob.glob(os.path.join(settings.BASE_DIR, 'files/*.csv'))
+    
+    for csv_file in csv_files:
+        # Get the filename without the extension
+        filename = os.path.splitext(os.path.basename(csv_file))[0]
 
-        for row in reader:
-            mydata = Results(country=row['Country'], currency=row['Currency'],
-                            currency_abbreviation=row['Currency abbreviation'], ppp_log=row['PPP'],
-                            forex_score=row['Forex score'], final_score=row['Final score'],                        
-                            gdp=row['GDP per capita'], gdp_ppp=row['GDP per capita PPP'],
-                            
-                            
-                            )
-            mydata.save()
+        with open(csv_file, 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
+
+            for row in reader:
+                mydata = Results(
+                    file_index=filename,
+                    country=row.get('Country', ''), 
+                    currency=row.get('Currency', ''),
+                    currency_abbreviation=row.get('Currency abbreviation', ''), 
+                    ppp_log=row.get('PPP', 0),
+                    forex_score=row.get('Forex score', 0), 
+                    final_score=row.get('Final score', 0),                        
+                    gdp=row.get('GDP per capita', 0), 
+                    gdp_ppp=row.get('GDP per capita PPP', 0),
+                )
+                mydata.save()
 
     # Return the new data as a response
     queryset = Results.objects.all()
     serializer = ResultsSerializer(queryset, many=True)
 
     return Response(serializer.data)
-    
     
 @api_view(['GET'])
 def get_percentile(request):

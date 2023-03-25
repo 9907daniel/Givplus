@@ -10,6 +10,7 @@ class Table(models.Model):
     
     
 class Results(models.Model):
+    file_index = models.CharField(("File_index"), max_length=100)
     country = models.CharField(("Country"), max_length=40)
     currency = models.CharField(("Currency"), max_length=50)
     currency_abbreviation = models.CharField(("Currency_abbreviation"), max_length=10)
@@ -21,6 +22,14 @@ class Results(models.Model):
     
     
     createdAt = models.DateTimeField(auto_now_add=True)
+    
+    
+    
+    
+    
+    
+    
+    
 
 class Percentile(models.Model):
     percentile = models.DecimalField(("Percentile"), decimal_places=2, max_digits=5) 
