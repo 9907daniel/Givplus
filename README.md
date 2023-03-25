@@ -132,6 +132,12 @@ npm start
 3. _modelname_.objects.filter().delete()
 
 
+### Chom Task
+1. grep CRON /var/log/syslog (check logs)
+2. crontab -e
+
+
+
 
 
 
