@@ -107,15 +107,23 @@ npm start
 ```
 
 ## Server Maintanence
-### Change to Front/Backend
+### Change to Frontend
 1. git pull (on server)
 2. npm install
 3. npm run build
-4. pip install -r requirements.txt
-5. python manage.py makemigratoins
-6. python manage.py migrate
-5. python manage.py collecstatic
 4. sudo service nginx restart
+
+### Change to Backend
+1. git pull (on server)
+2. pip install -r requirements.txt
+3. python manage.py makemigratoins
+4. python manage.py migrate
+5. python manage.py collecstatic
+6. pkill gunicorn
+7. gunicorn backend.wsgi:application --bind 0.0.0.0:8000 &
+8. sudo service nginx restart
+
+
 
 ### Clearing Database for Specific Models using shell
 0. start at django directory (where manage.py is located)
