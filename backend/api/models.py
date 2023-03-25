@@ -88,8 +88,6 @@ class Country(models.Model):
     
 ##### New API for Projects #####
 
-from django.db import models
-
 class Project(models.Model):
     UN_GOALS = [
         (1, 'No Poverty'), 
