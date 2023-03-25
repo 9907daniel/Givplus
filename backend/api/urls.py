@@ -10,6 +10,8 @@ urlpatterns = [
     path('scores/', views.get_csv, name='get_csv'),
     path('scores/upload/', views.import_csv, name='import_csv'),
     
+    # projects api
+    path('projects/', views.project_list, name='project_list'),
     
     # percentile api
     path('percentile/', views.get_percentile, name='get_percentile'),
@@ -23,7 +25,6 @@ urlpatterns = [
     path('countries/<str:name>/', views.country_detail, name='country_list'),
     path('countries/delete/<int:pk>/', views.CountryDeleteView.as_view(), name='country_delete'),
 
-    # projects api
-    path('projects/', views.project_list, name='project_list'),
+
 
 ]
