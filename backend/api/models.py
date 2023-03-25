@@ -88,12 +88,7 @@ class Country(models.Model):
     
 ##### New API for Projects #####
 
-class CountryName(models.Model):
-    name = models.CharField(max_length=100)
-
-class NGO(models.Model):
-    ngo_name = models.CharField(max_length=100)
-    country = models.ForeignKey(CountryName, on_delete=models.CASCADE, related_name='ngos')
+from django.db import models
 
 class Project(models.Model):
     UN_GOALS = [
@@ -119,5 +114,6 @@ class Project(models.Model):
     project_name = models.CharField(max_length=100)
     description = models.TextField()
     un_goal = models.IntegerField(choices=UN_GOALS)
-    ngo = models.ForeignKey(NGO, on_delete=models.CASCADE, related_name='projects')
+    ngo_name = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
 
