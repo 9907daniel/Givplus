@@ -13,7 +13,7 @@ def currency_val(currency, date):
     response = requests.get("https://www.xe.com/currencytables/?from={}&date={}#table-section".format(currency, date.strftime('%Y-%m-%d')))
     return pd.read_html(response.text)[0]
 
-currency_list = currency_val("KRW", today)["Currency"][:166]
+currency_list = currency_val("JPY", today)["Currency"][:166]
 
 def update_rate(currency, currency_list): 
     from concurrent.futures import ThreadPoolExecutor
@@ -48,13 +48,13 @@ def update_rate(currency, currency_list):
 def moving_average(df, days):
     return df.rolling(days).mean()
 
-KRW_data = pd.read_csv("KRW.csv")
-KRW_data.set_index(KRW_data.columns[0], inplace = True)
+JPY_data = pd.read_csv("JPY.csv")
+JPY_data.set_index(JPY_data.columns[0], inplace = True)
 
-KRW_data = pd.concat([KRW_data, update_rate("KRW", currency_list)])
-KRW_data.to_csv("KRW.csv")
+JPY_data = pd.concat([JPY_data, update_rate("JPY", currency_list)])
+JPY_data.to_csv("JPY.csv")
 
-data = KRW_data
+data = JPY_data
 weighted_ma = pd.DataFrame([])
 
 
@@ -83,7 +83,7 @@ currency_code["Final score"] = (1/currency_code["PPP"])*0.3+ (np.sqrt(currency_c
 
 final_score = currency_code.sort_values(by = ["Final score"], ascending = False)
 
-final_score.to_csv("../backend/files/krw.csv")
+final_score.to_csv("../backend/files/jpy.csv")
 
 
 
