@@ -3,6 +3,10 @@ import requests
 from datetime import *
 import numpy as np
 
+from warnings import simplefilter
+simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
+
+
 today = datetime.today() - timedelta(days=2) # since it takes some time to update actual currency data for today
 
 def currency_val(currency, date):
