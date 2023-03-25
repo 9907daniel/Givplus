@@ -20,6 +20,7 @@ import { setIsCartOpen } from './state';
 
 //Assets
 import logo from '../images/logo.png'
+import GivingJar from '../images/GivingJar.png';
 import './Navbar.css'
 
 const Navbar = () => {
@@ -74,14 +75,14 @@ const Navbar = () => {
               </Typography>
             </Button>
 
-            <Button component={NavLink} to='/' style={({ isActive }) => { 
+            <Button component={NavLink} to='/partners' style={({ isActive }) => { 
               return { backgroundColor: isActive ? 'white' : '' } }} 
               sx={{ 
                 color: 'inherit', 
                 textTransform: 'none',
                 marginRight: "4rem", }}>
               <Typography  variant= "h6" color = "black">
-                Organization
+                Partners
               </Typography>
             </Button>
 
@@ -125,40 +126,66 @@ const Navbar = () => {
                            <MenuItem onClick={handleClose} key ={item.id}>{item.currency}</MenuItem>
                 ))
                 } */}
-                <MenuItem onClick={handleClose}>Japanese Yen ¥</MenuItem>
-                <MenuItem onClick={handleClose}>Korean Won ₩</MenuItem>
-                <MenuItem onClick={handleClose}>Euro €</MenuItem>
-                <MenuItem onClick={handleClose}>US Dollar $</MenuItem>
-                <MenuItem onClick={handleClose}>Australian Dollar $</MenuItem>
+                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "jpy" }})}
+                >
+                  Japanese Yen ¥
+                </MenuItem>
+                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "krw" }})}
+                >
+                  Korean Won ₩
+                </MenuItem>
+                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "eur" }})}
+                >
+                  Euro €
+                </MenuItem>
+                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "usd"}})}
+                >
+                  US Dollar $
+                </MenuItem>
+                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "aud"}})}
+                >
+                  Australian Dollar $
+                </MenuItem>
               </Menu>
-            <Badge
-              badgeContent = {cart.length}
-              color="secondary"
-              invisible={cart.length === 0}
-              sx = {{
-                "& .MuiBadge-badge": {
-                  right: 5,
-                  top: 5,
-                  padding: "0 2px",
-                  height: "14px",
-                  minWidth: "13px",
-                  marginLeft: "0.5rem",
+            </Box>
+            <Box mr={3}>  
+              <Badge
+                badgeContent = {cart.length}
+                color="secondary"
+                invisible={cart.length === 0}
+                sx = {{
+                  "& .MuiBadge-badge": {
+                    right: 5,
+                    top: 5,
+                    padding: "0 2px",
+                    height: "14px",
+                    minWidth: "13px",
+                    marginLeft: "0.5rem",
+                  }
+                }}
+              >
+              {/* <Button component={NavLink} to='/' style={({ isActive }) => { 
+                return { backgroundColor: isActive ? 'white' : '' } }} 
+                sx={{ 
+                  color: 'black', 
+                  textTransform: 'none',
+                  // marginRight: "0.5rem" 
+                }}
+                onClick={()=>
+                  dispatch(setIsCartOpen({}))
+                }>
+                Give Jar
+              </Button> */}
+              <Button mr = {10} onClick={()=>
+                  dispatch(setIsCartOpen({}))
                 }
-              }}
-            >
-            <Button component={NavLink} to='/' style={({ isActive }) => { 
-              return { backgroundColor: isActive ? 'white' : '' } }} 
-              sx={{ 
-                color: 'black', 
-                textTransform: 'none',
-                // marginRight: "0.5rem" 
-              }}
-              onClick={()=>
-                dispatch(setIsCartOpen({}))
-              }>
-              Give Jar
-            </Button>
-            </Badge>
+                
+              > 
+                  <img width="30px" mr={7} src={GivingJar} alt = "GivingJar" className='Givingjar'/>
+              </Button>
+              </Badge>
+            </Box>
+            <Box>
             {access_token ? 
               <Button component={NavLink} to='/dashboard' 
                 style={({ isActive }) => { 

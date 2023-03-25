@@ -8,20 +8,17 @@ import { Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { setItems } from "../components/state"
-import { useLocation } from 'react-router-dom';
 
-import countryImage from "../images/countryImage/1.png";
-
+import countryImage from "../images/countryImage/1.jpg";
 
 
-const CountryDetails =(props) =>{
+
+const CountryDetails =() =>{
     const dispatch = useDispatch();
     const [value, setValue] = useState("all")
     // const items = useSelector((state)=> state.cart.items)
     const isNonMobile = useMediaQuery("(min-width: 600px)");
     const [data, setData] = useState([]);
-    const location = useLocation();
-    const CountryName = location.state.CountryName;
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -41,39 +38,16 @@ const CountryDetails =(props) =>{
     
     useEffect(() => {
         async function getData() {
-            const response = await axios.get('https://givplus.duckdns.org/api/projects/');
+            const response = await axios.get('https://givplus.duckdns.org/api/countries/');
             setData(response.data);
         }
         getData();
       }, []);
-
-    const AllProjects = data.filter(
-        (item) => item.country === CountryName
-    )
-    const projectonPoverty = data.filter(
-        (item) => item.un_goal === 1
-    ).filter(
-        (item) => item.country === CountryName
-    )
-    const projectonHunger = data.filter(
-        (item) =>  item.un_goal === 2
-    ).filter(
-        (item) => item.country === CountryName
-    )
     const projectonHealth = data.filter(
-        (item) =>  item.un_goal === 3
-    ).filter(
-        (item) => item.country === CountryName
+        (item) => item.need_help_in === "Health"
     )
-    const projectonEducation = data.filter(
-        (item) =>  item.un_goal === 4
-    ).filter(
-        (item) => item.country === CountryName
-    )
-    const projectonEquality = data.filter(
-        (item) =>  item.un_goal === 5
-    ).filter(
-        (item) => item.country === CountryName
+    const projectonHumanity = data.filter(
+        (item) =>  item.need_help_in === "Humanity"
     )
 
   return (
@@ -102,7 +76,7 @@ const CountryDetails =(props) =>{
                         color:"white",
                         fontWeight:"bolder",
                     }}>
-                    Lebanon
+                    Botswana
                 </Typography>
                 <Typography variant="h4" 
                     sx={{
@@ -113,6 +87,15 @@ const CountryDetails =(props) =>{
             </Box>
             
         </Box>
+        {/* <Box>
+        {data.map((item) => 
+        <div key = {item.id}>
+            <Typography>
+                {item.name}
+            </Typography>
+
+        </div>)}
+        </Box> */}
         </>
         <Box width = "80%" margin = "80px auto">
             <Typography variant="h3" textAlign="center">
@@ -132,12 +115,9 @@ const CountryDetails =(props) =>{
                     },
                 }}
                 >
-                    <Tab label="ALL" value={CountryName}/>
-                    <Tab label="No Poverty" value = {1} />
-                    <Tab label="Zero Hunger" value={2}/>  
-                    <Tab label="Good Health and Well Being" value={3}/>  
-                    <Tab label="Quality Education" value={4}/>  
-                    <Tab label="Gender Equality" value={5}/>  
+                    <Tab label="ALL" value="all"/>
+                    <Tab label="HEALTH" value="Health"/>
+                    <Tab label="HUMANITY" value="Humanity"/>  
             </Tabs>
             <Box
             margin = "0 auto"
@@ -148,28 +128,16 @@ const CountryDetails =(props) =>{
             rowGap="20px"
             columnGap="1.33%"
             >
-            {value === CountryName && AllProjects.map((item)=>(
-                <Country item={item} key={`${item.project_name}-${item.id}`}/>
+            {value === "all" && data.map((item)=>(
+                <Country item={item} key={`${item.name}-${item.id}`}/>
             ))}
-            {value === 1 && projectonPoverty.map((item)=>(
+            {value === "Health" && projectonHealth.map((item)=>(
 
-                <Country item={item} key={`${item.project_name}-${item.id}`}/>
+                <Country item={item} key={`${item.name}-${item.id}`}/>
             ))}
-            {value === 2 && projectonHunger.map((item)=>(
+            {value === "Humanity" && projectonHumanity.map((item)=>(
 
-                <Country item={item} key={`${item.project_name}-${item.id}`}/>
-            ))}
-            {value === 3 && projectonHealth.map((item)=>(
-
-                <Country item={item} key={`${item.project_name}-${item.id}`}/>
-            ))}
-            {value === 4 && projectonEducation.map((item)=>(
-
-                <Country item={item} key={`${item.project_name}-${item.id}`}/>
-            ))}
-            {value === 5 && projectonEquality.map((item)=>(
-
-                <Country item={item} key={`${item.project_name}-${item.id}`}/>
+                <Country item={item} key={`${item.name}-${item.id}`}/>
             ))}
 
             {/* {value === "Health" && projectonHealth.map((item)=>(

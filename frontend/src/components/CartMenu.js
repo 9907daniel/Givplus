@@ -56,7 +56,7 @@ const CartMenu = () => {
           }}>
           {/* HEADER */}
           <FlexBox mb="15px">
-            <Typography variant="h4">SHOPPING BAG ({cart.length})</Typography>
+            <Typography variant="h4">Giving Jar({cart.length})</Typography>
             <IconButton onClick={() => dispatch(setIsCartOpen({}))}>
               <CloseIcon />
             </IconButton>
@@ -124,10 +124,11 @@ const CartMenu = () => {
 
           {/* ACTIONS */}
           <Box m="20px 0">
-            <FlexBox m="20px 0">
+            {/* <FlexBox m="20px 0">
               <Typography fontWeight="bold">SUBTOTAL</Typography>
-              {/* <Typography fontWeight="bold">${totalPrice}</Typography> */}
-            </FlexBox>
+              <Typography fontWeight="bold">${totalPrice}</Typography>
+            </FlexBox>  */}
+           
             <Button
               sx={{
                 backgroundColor: shades.primary[400],

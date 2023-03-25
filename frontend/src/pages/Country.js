@@ -6,7 +6,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart } from "../components/state";
 import { useNavigate } from "react-router-dom";
-import image from "../images/countryImage/1.jpg";
+import image from "../images/countryImage/project.jpeg";
 
 
 const Country= ({ item, width }) => {
@@ -18,7 +18,7 @@ const Country= ({ item, width }) => {
     palette: { neutral },
   } = useTheme();
 
-  const { name, population } = item;
+  const { project_name, ngo_name } = item;
 
 
   return (
@@ -29,7 +29,7 @@ const Country= ({ item, width }) => {
         onMouseOut={() => setIsHovered(false)}
       >
         <img
-          alt={item.name}
+          alt={item.project_name}
           width="300px"
           height="400px"
           src={image}
@@ -87,8 +87,8 @@ const Country= ({ item, width }) => {
             .replace(/([A-Z])/g, " $1")
             .replace(/^./, (str) => str.toUpperCase())} */}
         </Typography>
-        <Typography>{name}</Typography>
-        <Typography fontWeight="bold">${population}</Typography>
+        <Typography>{project_name}</Typography>
+        <Typography fontWeight="bold">{ngo_name}</Typography>
       </Box>
     </Box>
   );

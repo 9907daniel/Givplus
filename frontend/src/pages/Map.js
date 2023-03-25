@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef, useMemo} from 'react'
 import Axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 //map imports
 import CallGoogleMap from './CallGoogleMap'
@@ -29,7 +29,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { useJsApiLoader } from '@react-google-maps/api';
-
 
 function Row({item}){
     const navigate=useNavigate()
@@ -71,7 +70,7 @@ function Row({item}){
                          <TableRow>
                              <TableCell>Population{"  "}</TableCell>
                              <Button
-                                 onClick={() => navigate(`/countrydetails/${item.id}`)}
+                                 onClick={() => navigate(`/countrydetails/${item.id}`,{state: { CountryName: item.country }})}
                              >
                                  Details
                              </Button>
@@ -87,7 +86,7 @@ function Row({item}){
      )
  }
 
-function Map() {
+function Map(props) {
 
     const navigate=useNavigate()
    
@@ -98,14 +97,17 @@ function Map() {
     //const [countries, setCountries] = useState([]);
     const center = useMemo(()=>({lat: 35.6586, lng: 139.7454}),[])
     const [selectedMarker, setSelectedMarker] = useState("");
-    const {isLoaded} = useJsApiLoader({
-         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-         })
-
-    
+    //const [CountryName, setCountryName] = useState("");
+    // const location = useLocation();
+    // const Currency = location.state.Currency;
+    const [Currency, setCurrency] = useState('krw');
+    useEffect(() => {
+        // update currency when props change
+        setCurrency(props.Currency);
+      }, [props.Currency]);
     useEffect(() => {
     async function fetchData() {
-      const response = await Axios.get('https://givplus.duckdns.org/api/scores/');
+      const response = await Axios.get(`https://givplus.duckdns.org/api/scores/${Currency}`);
       setData(response.data);
     }
     fetchData();
@@ -132,6 +134,7 @@ function Map() {
                         <TableBody>
                          {data.map((item) => (
                            <Row key={item.id} item={item} />
+                           
                          ))
                          }
                          </TableBody>

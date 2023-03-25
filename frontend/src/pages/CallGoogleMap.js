@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef, useMemo} from 'react'
 import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import CountryImage from "../images/countryImage/1.jpg";
+import CountryImage from "../images/countryImage/1.png";
 
 
 //MUI imports

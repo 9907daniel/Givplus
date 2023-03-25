@@ -23,6 +23,7 @@ import Confirmation from './pages/checkout/Confirmation';
 import CartMenu from './components/CartMenu';
 import ProjectDetails from './pages/ProjectDetails';
 import SetPrice from './pages/SetPrice';
+import Partners from './pages/Partners';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation;
@@ -46,6 +47,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="contact" element={<Contact />} />
               <Route path="example" element={<Example />} />
+              <Route path="partners" element={<Partners />} />
               <Route path="map" key={Math.random()} element={<Map />} />
               <Route path="countrydetails/:countryId" element={<CountryDetails />} />
               <Route path="projectdetails/:projectId" element={<ProjectDetails />} />
