@@ -7,8 +7,10 @@ urlpatterns = [
     path('', TableView.as_view()),
     
     # scores api
-    path('scores/', views.get_csv, name='get_csv'),
+    path('scores/', views.get_all_csv, name='get_all_csv'),
     path('scores/upload/', views.import_csv, name='import_csv'),
+    path('scores/<str:file_index>/', views.get_csv, name='get_csv'),
+
     
     # projects api
     path('projects/', views.project_list, name='project_list'),
