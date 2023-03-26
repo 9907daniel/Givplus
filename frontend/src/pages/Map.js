@@ -32,7 +32,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 function Row({item}){
     const navigate=useNavigate()
-    const { id, country, currency,currency_abbreviation, forex_score, final_score, ppp_log, gdp, gdp_ppp} = item;
+    const { id, country, currency,currency_abbreviation, today_rate, forex_score, final_score, ppp_log, gdp, gdp_ppp, file_index, coffee} = item;
      const [open, setOpen] = React.useState(false);
      return(
          <React.Fragment>
@@ -58,6 +58,7 @@ function Row({item}){
                 ) : (
                 <TableCell style={{ color: 'green' }} align="center">+{forex_score}%</TableCell>
                 )}
+            <TableCell align="center">{coffee} ☕</TableCell>
 
          </TableRow>
 
@@ -74,6 +75,11 @@ function Row({item}){
                          <TableRow>
                              <TableCell>{currency}</TableCell>
                              <TableCell>{currency_abbreviation}</TableCell>
+                         </TableRow>
+
+                         <TableRow>
+                             <TableCell>Todays Rate ({currency_abbreviation})</TableCell>
+                             <TableCell>{today_rate} {file_index}</TableCell>
                          </TableRow>
                          
                          <TableRow>
@@ -156,6 +162,7 @@ function Map() {
                             <TableCell align="center">{" "}</TableCell>
                             <TableCell align="center"> Country </TableCell>
                             <TableCell align="center"> More Giving </TableCell>
+                            <TableCell align="center"> Coffee Index </TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
