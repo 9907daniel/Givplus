@@ -13,6 +13,7 @@ import {
 
 } from "@mui/material";
 
+import graph from './ARSKRW.png'
 
 //mui imports2
 import Box from '@mui/material/Box';
@@ -32,7 +33,7 @@ import { useJsApiLoader } from '@react-google-maps/api';
 
 function Row({item}){
     const navigate=useNavigate()
-    const { id, country, currency,currency_abbreviation, final_score, ppp_log } = item;
+    const { id, country, currency,currency_abbreviation, forex_score, final_score, ppp_log, gdp, gdp_ppp} = item;
      const [open, setOpen] = React.useState(false);
      return(
          <React.Fragment>
@@ -51,29 +52,66 @@ function Row({item}){
                  {id}
              </TableCell>
              <TableCell align="center">{country}</TableCell>
-             <TableCell align="center">{final_score}</TableCell>
+             {forex_score < 0 ? (
+                <TableCell style={{ color: 'red' }} align="center">
+                    {forex_score}%
+                </TableCell>
+                ) : (
+                <TableCell style={{ color: 'green' }} align="center">+{forex_score}%</TableCell>
+                )}
+
          </TableRow>
+
+
          <TableRow>
              <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                  <Collapse in={open} timeout="auto" unmountOnExit>
                  <Box sx={{ margin: 2 }} >
-                     <Typography variant="body1" gutterBottom component="div">
+                     {/* <Typography variant="body1" gutterBottom component="div">
                      {currency}{"("}{currency_abbreviation}{")"}
-                     </Typography>
+                     </Typography> */}
                      <Table size="small" aria-label="purchases">
                      <TableBody >
+                         <TableRow>
+                             <TableCell>{currency}</TableCell>
+                             <TableCell>{currency_abbreviation}</TableCell>
+                         </TableRow>
                          
                          <TableRow>
- 
-                             <TableCell>GDP(ppp){"  "}{ppp_log}</TableCell>
+                             <TableCell>Purchasing Power Parity (PPP)</TableCell>
+                             <TableCell>{ppp_log}</TableCell>
                          </TableRow>
                          <TableRow>
-                             <TableCell>Population{"  "}</TableCell>
-                             <Button
-                                 onClick={() => navigate(`/countrydetails/${item.id}`,{state: { CountryName: item.country }})}
-                             >
-                                 Details
+                             <TableCell>GDP per Capita</TableCell>
+                             <TableCell>{gdp}</TableCell>
+                         </TableRow>
+                         <TableRow>
+                             <TableCell>GDP per Capita (PPP)</TableCell>
+                             <TableCell>{gdp_ppp}</TableCell>
+                         </TableRow>
+
+                         <TableRow>
+                             <TableCell>Forex Score</TableCell>
+                             <TableCell>{final_score}</TableCell>
+                         </TableRow>
+                         <TableRow>
+                             <TableCell>National Emergency</TableCell>
+                             <TableCell>None</TableCell>
+                         </TableRow>
+
+                         <TableRow align="center">
+                             <TableCell align="center">
+                                 <img src= {graph} width="330" height="240"/>
+                             </TableCell> 
+                         </TableRow>
+
+                         <TableRow>
+                            <TableCell> </TableCell>
+                             <TableCell>
+                             <Button onClick={() => navigate(`/countrydetails/${item.id}`,{state: { CountryName: item.country }})} style={{ border: '1px solid black' }}>
+                                 Donate
                              </Button>
+                             </TableCell>
                          </TableRow>
                      </TableBody>
                      </Table>
@@ -127,14 +165,13 @@ function Map(props) {
                             <TableCell />
                             {/* <TableCell align="center">Ranking</TableCell> */}
                             <TableCell align="center">{" "}</TableCell>
-                            <TableCell align="center">Score</TableCell>
-                            <TableCell align="center">View List</TableCell>
+                            <TableCell align="center"> Country </TableCell>
+                            <TableCell align="center"> More Giving </TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
                          {data.map((item) => (
                            <Row key={item.id} item={item} />
-                           
                          ))
                          }
                          </TableBody>
