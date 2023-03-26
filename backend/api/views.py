@@ -1,9 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
-from rest_framework import status
-from .models import Table, Results, Country, Platforms, Percentile, Project
-from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, PlatformSerializer, PercentileSerializer, ProjectSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
+from .models import Table, Results, Country, Platforms, Percentile, Project, Graph
+from .serializers import TableSerializer, ResultsSerializer, CountrySerializer, PlatformSerializer, PercentileSerializer, ProjectSerializer, GraphSerializer
 from django.http import JsonResponse
 
 from django.conf import settings
@@ -209,3 +209,21 @@ def project_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET', 'POST'])
+def graph_view(request):
+    parser_classes = (MultiPartParser, FormParser)
+    
+    if request.method == 'GET':
+        graphs = Graph.objects.all()
+        serializer = GraphSerializer(graphs, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = GraphSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

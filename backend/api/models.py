@@ -20,15 +20,7 @@ class Results(models.Model):
     gdp = models.DecimalField(("GDP_per_capita"), decimal_places=2, max_digits=30, default = 0)
     gdp_ppp = models.DecimalField(("GDP_per_capita_PPP"), decimal_places=2, max_digits=30, default = 0)
     
-    
     createdAt = models.DateTimeField(auto_now_add=True)
-    
-    
-    
-    
-    
-    
-    
     
 
 class Percentile(models.Model):
@@ -115,3 +107,8 @@ class Project(models.Model):
     ngo_name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
 
+
+class Graph(models.Model):
+    graph = models.ImageField(upload_to='graphs/')
+    country = models.CharField(max_length=75)
+    file_index = models.CharField(max_length=50)

@@ -28,5 +28,8 @@ urlpatterns = [
     path('countries/delete/<int:pk>/', views.CountryDeleteView.as_view(), name='country_delete'),
 
 
+    # Graph API
+    path('graphs/', views.graph_view, name='graph-list-create'),
+
 
 ]

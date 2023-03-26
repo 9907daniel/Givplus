@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Table, Results, Platforms, Country, Percentile, Project
+from .models import Table, Results, Platforms, Country, Percentile, Project, Graph
 
 class TableSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,7 +28,6 @@ class PercentileSerializer(serializers.ModelSerializer):
         return percentile
         
 
-
 class PlatformSerializer(serializers.ModelSerializer):
     class Meta:
         model = Platforms
@@ -45,7 +44,6 @@ class CountrySerializer(serializers.ModelSerializer):
         # fields = '__all__'
         fields = ['id', 'number', 'name', 'continent', 'description', 'gdp', 'currency',  'language', 'population', 'religion', 'need_help_in', 'location', ]
     
-
     def to_representation(self, instance):
         ret = super().to_representation(instance)
         ret['gdp'] = instance.gdp
@@ -55,7 +53,6 @@ class CountrySerializer(serializers.ModelSerializer):
         ret['need_help_in'] = instance.need_help_in
         ret['currency'] = instance.currency
         return ret
-
     
     def get_location(self, obj):
         return {
@@ -63,16 +60,17 @@ class CountrySerializer(serializers.ModelSerializer):
             'lng': obj.location_lng,
         }
         
-        
     def get_description(self, obj):
         return obj.description
     
-
-### New Serializer for Projects####
-
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ['id','country', 'ngo_name', 'project_name', 'un_goal', 'description']
 
+
+class GraphSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Graph
+        fields = ('graph', 'country', 'file_index')
