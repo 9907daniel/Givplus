@@ -92,7 +92,6 @@ function SetPrice() {
   const [submittedValue, setSubmittedValue] = React.useState('');
   const [price, setPrice] = React.useState("")
   const handleSubmit = (values, actions) => {
-    actions.preventDefault();
     console.log("Form submitted");
     setPrice(submittedValue);
     //actions.setSubmitting(false);
@@ -240,7 +239,7 @@ function SetPrice() {
             </Typography>
             {totalPrice > 100 && (
                 <Typography variant = "h5" color = "red">
-                    Total price cannot exceed {number}
+                    Total price exceeded{number}
                 </Typography>
             )}
             </Box>

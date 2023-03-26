@@ -6,6 +6,7 @@ const initialState = {
   cart: [],
   items: [],
   currency: [],
+  project: [],
 };
 
 export const cartSlice = createSlice({
@@ -17,6 +18,9 @@ export const cartSlice = createSlice({
     },
     setCurrency: (state, action) => {
       state.currency = action.payload;
+    },
+    setProject: (state, action) => {
+      state.project = action.payload;
     },
 
     //[currentstate of the cart, what ever item we are passing into the action we are updating the cart]
@@ -55,6 +59,7 @@ export const cartSlice = createSlice({
 export const {
   setItems,
   setCurrency,
+  setProject,
   addToCart,
   removeFromCart,
   increaseCount,

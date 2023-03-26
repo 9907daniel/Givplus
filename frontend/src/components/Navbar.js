@@ -29,6 +29,7 @@ const Navbar = () => {
   const { access_token } = getToken()
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart)
+  const currency = useSelector((state) => state.cart.currency);
   const handleCurrencyClick = (currencyValue) => {
     dispatch(setCurrency(currencyValue));
   };
@@ -101,7 +102,16 @@ const Navbar = () => {
                 </Typography>
             </Button>
           </Box>
-          <Box>
+          <Box sx={{display: 'flex', alignItems: 'center'}}>
+            <Box sx={{ ml: "auto" }}>
+              <Button onClick={()=> navigate(`/map`)}
+              sx={{
+                color : "black" 
+              }}>
+                {currency}
+              </Button>
+            </Box>
+            <Box sx={{ml:"auto"}}>
             <IconButton
                 size="large"
                 aria-controls="menu-appbar"
@@ -110,7 +120,7 @@ const Navbar = () => {
                 color="black"
               >
                 <LanguageIcon />
-              </IconButton>
+            </IconButton>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -150,6 +160,7 @@ const Navbar = () => {
                   Australian Dollar $
                 </MenuItem>
               </Menu>
+            </Box>
             </Box>
             <Box mr={3}>  
               <Badge

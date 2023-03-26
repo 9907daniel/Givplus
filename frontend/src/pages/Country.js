@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -7,7 +7,9 @@ import { shades } from "../theme";
 import { addToCart } from "../components/state";
 import { useNavigate } from "react-router-dom";
 import image from "../images/countryImage/project.jpeg";
-
+import Alert from "@mui/material/Alert"
+import Projects from "./Projects"
+import {setProject} from "../components/state"
 
 const Country= ({ item, width }) => {
   const navigate = useNavigate();
@@ -19,21 +21,43 @@ const Country= ({ item, width }) => {
   } = useTheme();
 
   const { project_name, ngo_name } = item;
+  const [showAlert, setShowAlert] = useState(false);
 
+  const project = useSelector((state) => state.cart.project);
+  const handleProjectClick = (newproject) => {
+    dispatch(setProject(newproject));
+    console.log(newproject)
+    //navigate(`/projectdetails/${item.id}`);
+  };
 
   return (
-    <Box width={width}>
+    <>
+    {<Box width={width}>
       <Box
         position="relative"
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
       >
+        <Box sx={{
+            position: "absolute",
+        }}>
+        {showAlert && (
+                <Alert onClose={() => setShowAlert(false)}>
+                You have added {item.project_name} to the cart
+                </Alert>
+        )}
+        </Box>
         <img
           alt={item.project_name}
           width="300px"
           height="400px"
           src={image}
-          onClick={() => navigate(`/projectdetails/${item.id}`)}
+          onClick={() => 
+          //handleProjectClick({item})}
+            navigate(`/projectdetails/${item.id}`)}
+        //   { state: {project_name : item.project_name, project_decription: item.project_decription, ngo_name: item.ngo_name} })
+        
+            //onClick={()=> <Projects item={item}/>}
           style={{ cursor: "pointer" }}
         />
         <Box
@@ -51,15 +75,25 @@ const Country= ({ item, width }) => {
               backgroundColor={shades.neutral[100]}
               borderRadius="3px"
             >
-                <Button
-              onClick={() => {
+
+            <Button
+            onClick={() => {
                 dispatch(addToCart({ item: { ...item, count } }));
-              }}
-              sx={{ backgroundColor: shades.primary[300], color: "white" }}
+                setShowAlert(true);
+                
+            }}
+            sx={{ backgroundColor: shades.primary[300], color: "white" }}
             >
-              Add to Cart
+            Add to Cart
+            </Button>
+            <Button
+            onClick={() => navigate(`/projectdetails/${item.id}`)}
+            sx={{ backgroundColor: shades.primary[300], color: "white" }}
+            >
+             Details
             </Button>
 
+         
               {/* <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
                 <RemoveIcon />
               </IconButton>
@@ -90,7 +124,8 @@ const Country= ({ item, width }) => {
         <Typography>{project_name}</Typography>
         <Typography fontWeight="bold">{ngo_name}</Typography>
       </Box>
-    </Box>
+    </Box>}
+    </>
   );
 };
 
