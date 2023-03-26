@@ -19,7 +19,9 @@ class Results(models.Model):
     final_score = models.DecimalField(("Final_score"), decimal_places=2, max_digits=18) 
     gdp = models.DecimalField(("GDP_per_capita"), decimal_places=2, max_digits=30, default = 0)
     gdp_ppp = models.DecimalField(("GDP_per_capita_PPP"), decimal_places=2, max_digits=30, default = 0)
-    
+    coffee = models.DecimalField(("coffee"), decimal_places=1, max_digits=10) 
+    today_rate = models.DecimalField(("today_rate"), decimal_places=2, max_digits=30, default = 0)
+    country_id = models.IntegerField(("country_id"))
     createdAt = models.DateTimeField(auto_now_add=True)
     
 

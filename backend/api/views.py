@@ -59,6 +59,10 @@ def import_csv(request):
             for row in reader:
                 mydata = Results(
                     file_index=filename,
+                    today_rate=row.get('today_rate', ''), 
+                    coffee=row.get('coffee', ''),
+                    country_id=row.get('id', ''),            
+                    
                     country=row.get('Country', ''), 
                     currency=row.get('Currency', ''),
                     currency_abbreviation=row.get('Currency abbreviation', ''), 

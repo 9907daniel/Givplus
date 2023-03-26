@@ -12,9 +12,9 @@ class TableSerializer(serializers.ModelSerializer):
 class ResultsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Results
-        fields = ('id', 'file_index','country', 'currency', 
+        fields = ('id', 'country_id', 'file_index','country', 'currency', 
                  'currency_abbreviation', 'ppp_log', 'forex_score',
-                 'final_score','createdAt', 'gdp', 'gdp_ppp', 
+                 'final_score','createdAt', 'gdp', 'gdp_ppp', 'coffee', 'today_rate'
                  )
 
 class PercentileSerializer(serializers.ModelSerializer):
