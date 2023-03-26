@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from '@mui/material/Slider';
 import { Typography, Button } from "@mui/material";
 import Grid from '@mui/system/Unstable_Grid';
 import { useNavigate } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from "yup";
+import TextField from "@mui/material/TextField";
+import { useLocation } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -69,7 +73,7 @@ function valuetext(value) {
 
 function SetPrice() {
     const navigate = useNavigate();
-
+  const cart = useSelector((state) => state.cart.cart);
     const data = [
         { argument:'Monday', value:10 },
         { argument:'Tuesday', value:40 },
@@ -77,41 +81,65 @@ function SetPrice() {
         { argument:'Thursday', value:20 },
         { argument:'Friday', value:20 },
       ];
-    const cart = useSelector((state) => state.cart.cart);
-  const [value1, setValue1] = React.useState(30);
-  const [value2, setValue2] = React.useState(30);
-  const [value3, setValue3] = React.useState(40);
-  const [price, setPrice] = React.useState(100);
+  const [value1, setValue1] = React.useState(10);
+ 
+  const [number, setNumber] = useState('');
+  const handle_Change = (event) => {
+    setNumber(event.target.value);
+  };
 
-  const handleChange1 = (event, newValue) => {
-    if (newValue === 0){
-        setValue1(value1)
-    }
-    else if ((newValue + value2 + value3) > 100){
-        setValue1(value1)
-    }
-    else {setValue1(newValue)};
-  
-    }
-  const handleChange2 = (event, newValue) => {
-    if (newValue === 0){
-        setValue2(value2)
-    }
-    else if ((newValue + value1 + value3) > 100){
-        setValue2(value2)
-    }
-    else {setValue2(newValue)};
-    }
-  const handleChange3 = (event, newValue) => {
-    if (newValue === 0){
-        setValue3(value3)
-    }
-    else if ((newValue + value1 + value2) > 100){
-        setValue3(value3)
-    }
-    else {setValue3(newValue)};
-    }
-  
+  //submit related const
+  const [submittedValue, setSubmittedValue] = React.useState('');
+  const [price, setPrice] = React.useState("")
+  const handleSubmit = (values, actions) => {
+    actions.preventDefault();
+    console.log("Form submitted");
+    setPrice(submittedValue);
+    //actions.setSubmitting(false);
+  };
+    const handleChange = (event) => {
+        console.log("handlechange")
+        setSubmittedValue(event.target.value);
+    };
+        // get the query string from the current URL
+    const queryString = window.location.search;
+
+    // create a new URLSearchParams object from the query string
+    const urlParams = new URLSearchParams(queryString);
+
+    // get the value of the "number" parameter
+    const Number = urlParams.get('number');
+    console.log(`The number is ${Number}`);
+
+    const [sliderValues, setSliderValues] = useState(
+        Array.from({ length: cart.length }, () => 10)
+      );
+      
+    const totalPrice = sliderValues.reduce((acc, val) => acc = acc + val, 0);
+
+    const handleChangeTemp = (index) => (event, newValue) => {
+        // {totalPrice > 100 && (
+        //     alert("Total Price is over 100")
+        //   )}
+        if (newValue === 0){
+            newValue = 10
+        }
+
+        setSliderValues((prevValues) => [
+          ...prevValues.slice(0, index),
+          newValue,
+          ...prevValues.slice(index + 1)
+        ]);
+      };
+
+
+    const validationSchema = 
+        Yup.object().shape({
+        number: Yup.number()
+        //.min(10000, 'Number must be greater than or equal to 1')
+        .required('required'),
+      });
+    const currency = useSelector((state) => state.cart.currency);
 
   return (
     <>
@@ -120,9 +148,67 @@ function SetPrice() {
         <Typography align= "center">
             We will get back to you with a transparent report on how your fund was actually used.
         </Typography>
+        <Typography>
+            Your chosen currency is: {currency}
+        </Typography>
     </Box>
-    <Grid container spacing ={2}>
+    <Grid container spacing ={2} align = "center" >
         <Grid xs={5}>
+        <Grid container spacing={2} alignItems="center">
+            <Grid item xs={8}>
+                <TextField
+                fullWidth
+                type="text"
+                value={number}
+                inputProps={{ inputMode: 'numeric' }}
+                onChange={handle_Change}
+                />
+            </Grid>
+            <Grid item xs={4}>
+                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                Submit
+                </Button>
+            </Grid>
+        </Grid>
+            {/* <Box>
+                <Formik
+                    initialValues={{ number: '' }}
+                    validationSchema={validationSchema}
+                    onSubmit={(values, actions) => {
+                    alert(JSON.stringify(values))
+
+                        actions.setSubmitting(false);
+                    }}
+                    >
+                    {({ values, errors, touched, handleChange, isSubmitting }) => (
+                        <form onSubmit={handleSubmit}>
+                        <Field name="number">
+                            {({ field }) => (
+                            <TextField
+                                {...field}
+                                width="80%"
+                                type="text"
+                                label="Amount"
+                                inputProps={{ inputMode: "numeric" }}
+                                error={touched.number && Boolean(errors.number)}
+                                helperText={touched.number && errors.number}
+                                onChange={handleChange}
+                            />
+                            )}
+                        </Field>
+                        <Button type="submit" //disabled={isSubmitting}
+                        >
+                            Submit
+                        </Button>
+                        </form>
+                    )}
+                    </Formik>
+                    <Box>
+                        {submittedValue}
+                        {Number}
+                        <p>Item name: {itemName}</p> 
+                    </Box>
+            </Box> */}
             <Box>
                 <Chart
                 data={data}
@@ -133,72 +219,32 @@ function SetPrice() {
             </Box>
         </Grid>
         <Grid align = "center" xs={7}>
-        <Box sx={{ width: 450 }}>
-            <Typography>
-                Project 1
-            </Typography>
-        <Slider 
-            //getAriaLabel={() => 'Minimum distance'}
-            aria-label="Always visible"
-            value={value1}
-            //defaultValue={20}
-            onChange={handleChange1}
-            valueLabelDisplay="on"
-            getAriaValueText={valuetext}
-            step={10}
-            marks={marks}
-            track = {false}
-        />
-        </Box>
-    
-    
-        
-        <Box sx={{ width: 450 }}>
-            <Typography>
-                Project 2
-            </Typography>
+            {sliderValues.map((value, index) => (
+            <Box key={index} sx={{ width: 450, p: 3}}>
+            <Typography>{cart[index].project_name}</Typography>
             <Slider
-                //getAriaLabel={() => 'Minimum distance'}
                 aria-label="Always visible"
-                value={value2}
-                //defaultValue={20}
-                onChange={handleChange2}
+                value={value}
+                onChange={handleChangeTemp(index)}
                 valueLabelDisplay="on"
-                getAriaValueText={valuetext}
                 step={10}
                 marks={marks}
-                track = {false}
+                track={false}
             />
-        </Box>
-        <Box sx={{ width: 450 }}>
-            <Typography>
-                Project 3
+            <Typography>{cart[index].project_name}: $ {number*(value/100)}</Typography>
+            </Box>
+            ))}
+            <Box align="Center">
+            <Typography variant = "h5">
+                Total price is {totalPrice/100*number}
             </Typography>
-            <Slider
-                //getAriaLabel={() => 'Minimum distance'}
-                aria-label="Always visible"
-                value={value3}
-                //defaultValue={20}
-                onChange={handleChange3}
-                valueLabelDisplay="on"
-                getAriaValueText={valuetext}
-                step={10}
-                marks={marks}
-                track = {false}
-            />
-        </Box>
-        <Box align="left" ml={30}>
-            <Typography>
-                project 1: $ {price*(value1/100)}  
-            </Typography>
-            <Typography>
-                project 2: $ {price*(value2/100)}  
-            </Typography>
-            <Typography>
-                project 3: $ {price*(value3/100)}  
-            </Typography>
-        </Box>
-        <Box align="right">
+            {totalPrice > 100 && (
+                <Typography variant = "h5" color = "red">
+                    Total price cannot exceed {number}
+                </Typography>
+            )}
+            </Box>
+        <Box align="right" sx={{mr: 7}}>
         <Button onClick={() => {
                 navigate("/checkout");
               }}>

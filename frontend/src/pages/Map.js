@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef, useMemo} from 'react'
 import Axios from "axios";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 //map imports
 import CallGoogleMap from './CallGoogleMap'
@@ -29,8 +30,6 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-import { useJsApiLoader } from '@react-google-maps/api';
-
 function Row({item}){
     const navigate=useNavigate()
     const { id, country, currency,currency_abbreviation, forex_score, final_score, ppp_log, gdp, gdp_ppp} = item;
@@ -49,7 +48,7 @@ function Row({item}){
                  </IconButton>
              </TableCell>
              <TableCell component="th" scope="row" align="center">
-                 {id}
+                 {id > 196 ? (id-196):(id)}
              </TableCell>
              <TableCell align="center">{country}</TableCell>
              {forex_score < 0 ? (
@@ -124,32 +123,22 @@ function Row({item}){
      )
  }
 
-function Map(props) {
+function Map() {
 
     const navigate=useNavigate()
-   
-    // const [allListings, setAllListings] = useState([])
-    // const [dataIsLoading, setDataIsLoading] = useState(true)
-;
+    const currency_score = useSelector((state) => state.cart.currency);
     const [data, setData] = useState([]);
-    //const [countries, setCountries] = useState([]);
     const center = useMemo(()=>({lat: 35.6586, lng: 139.7454}),[])
     const [selectedMarker, setSelectedMarker] = useState("");
-    //const [CountryName, setCountryName] = useState("");
-    // const location = useLocation();
-    // const Currency = location.state.Currency;
-    const [Currency, setCurrency] = useState('krw');
-    useEffect(() => {
-        // update currency when props change
-        setCurrency(props.Currency);
-      }, [props.Currency]);
+
+
     useEffect(() => {
     async function fetchData() {
-      const response = await Axios.get(`https://givplus.duckdns.org/api/scores/${Currency}`);
+      const response = await Axios.get(`https://givplus.duckdns.org/api/scores/${currency_score}`);
       setData(response.data);
     }
     fetchData();
-  }, []);
+  }, [currency_score]);
 
 
   return ( 

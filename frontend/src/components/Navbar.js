@@ -17,6 +17,7 @@ import { NavLink } from 'react-router-dom';
 import { getToken } from '../services/LocalStorageService';
 
 import { setIsCartOpen } from './state';
+import { setCurrency } from './state';
 
 //Assets
 import logo from '../images/logo.png'
@@ -28,6 +29,9 @@ const Navbar = () => {
   const { access_token } = getToken()
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart)
+  const handleCurrencyClick = (currencyValue) => {
+    dispatch(setCurrency(currencyValue));
+  };
 
   //dropdown menu
   const [data, setData] = useState([]);
@@ -48,14 +52,14 @@ const Navbar = () => {
 
 
   return <>
-  <AppBar position="static">
+  <AppBar className='classes.appBar' position='relative'>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" 
       sx={{
         backgroundColor: 'white',
       }}>
-        <Toolbar>
-        <Button component={NavLink} to='/'> 
+        <Toolbar style={{ width: '100%' }}>
+        <Button component={NavLink} to='/' style={{marginLeft: '0', padding: 0, border: 'none'}}> 
                 <img src={logo} alt = "logo" className='logo'/>
         </Button>
           <Box 
@@ -126,24 +130,23 @@ const Navbar = () => {
                            <MenuItem onClick={handleClose} key ={item.id}>{item.currency}</MenuItem>
                 ))
                 } */}
-                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "jpy" }})}
-                >
-                  Japanese Yen ¥
-                </MenuItem>
-                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "krw" }})}
+                {/* <MenuItem onClick={() => navigate(`/map`,  dispatch(setCurrency('krw')))}
                 >
                   Korean Won ₩
+                </MenuItem> */}
+                <MenuItem onClick={() => handleCurrencyClick("krw")}>
+                  Korean Won ₩
                 </MenuItem>
-                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "eur" }})}
-                >
+                <MenuItem onClick={() => handleCurrencyClick("jpy")}>
+                  Japanese Yen ¥
+                </MenuItem>
+                <MenuItem onClick={() => handleCurrencyClick("eur")}>
                   Euro €
                 </MenuItem>
-                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "usd"}})}
-                >
+                <MenuItem onClick={() => handleCurrencyClick("usd")}>
                   US Dollar $
                 </MenuItem>
-                <MenuItem onClick={() => navigate(`/map`,{state: { Currency: "aud"}})}
-                >
+                <MenuItem onClick={() => handleCurrencyClick("aud")}>
                   Australian Dollar $
                 </MenuItem>
               </Menu>
@@ -185,7 +188,7 @@ const Navbar = () => {
               </Button>
               </Badge>
             </Box>
-            <Box>
+            <Box sx={{marginRight : "0"}}>
             {access_token ? 
               <Button component={NavLink} to='/dashboard' 
                 style={({ isActive }) => { 
@@ -201,7 +204,6 @@ const Navbar = () => {
                   }} sx={{ color: 'black', textTransform: 'none' , borderColor : "black"}}>
                 Sign up
               </Button>}
-              
             </Box>
 
         </Toolbar>

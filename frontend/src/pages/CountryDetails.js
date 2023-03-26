@@ -16,12 +16,12 @@ import countryImage from "../images/countryImage/1.png";
 
 const CountryDetails =(props) =>{
     const dispatch = useDispatch();
-    const [value, setValue] = useState("all")
     // const items = useSelector((state)=> state.cart.items)
     const isNonMobile = useMediaQuery("(min-width: 600px)");
     const [data, setData] = useState([]);
     const location = useLocation();
     const CountryName = location.state.CountryName;
+    const [value, setValue] = useState(CountryName)
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };

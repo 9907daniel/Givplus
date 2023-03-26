@@ -5,6 +5,7 @@ const initialState = {
   isCartOpen: false,
   cart: [],
   items: [],
+  currency: [],
 };
 
 export const cartSlice = createSlice({
@@ -14,6 +15,10 @@ export const cartSlice = createSlice({
     setItems: (state, action) => {
       state.items = action.payload;
     },
+    setCurrency: (state, action) => {
+      state.currency = action.payload;
+    },
+
     //[currentstate of the cart, what ever item we are passing into the action we are updating the cart]
     addToCart: (state, action) => {
       state.cart = [...state.cart, action.payload.item];
@@ -49,6 +54,7 @@ export const cartSlice = createSlice({
 
 export const {
   setItems,
+  setCurrency,
   addToCart,
   removeFromCart,
   increaseCount,

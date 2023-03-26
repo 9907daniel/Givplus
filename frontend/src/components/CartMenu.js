@@ -14,6 +14,7 @@ import {
 } from "./state";
 import { useNavigate } from "react-router-dom";
 
+
 const FlexBox = styled(Box)`
   display: flex;
   justify-content: space-between;
@@ -65,7 +66,7 @@ const CartMenu = () => {
           {/* CART LIST */}
           <Box>
             {cart.map((item) => (
-              <Box key={`${item.name}-${item.id}`}>
+              <Box key={`${item.project_name}-${item.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     {/* <img
@@ -78,7 +79,7 @@ const CartMenu = () => {
                   <Box flex="1 1 60%">
                     <FlexBox mb="5px">
                       <Typography fontWeight="bold">
-                        {item.name}
+                        {item.project_name}
                       </Typography>
                       <IconButton
                         onClick={() =>
@@ -93,9 +94,12 @@ const CartMenu = () => {
                       <Box
                         display="flex"
                         alignItems="center"
-                        border={`1.5px solid ${shades.neutral[500]}`}
+                        // border={`1.5px solid ${shades.neutral[500]}`}
                       >
-                        <IconButton
+                          <Typography>
+                            {item.description}
+                          </Typography>
+                        {/* <IconButton
                           onClick={() =>
                             dispatch(decreaseCount({ id: item.id }))
                           }
@@ -109,7 +113,7 @@ const CartMenu = () => {
                           }
                         >
                           <AddIcon />
-                        </IconButton>
+                        </IconButton> */}
                       </Box>
                       {/* <Typography fontWeight="bold">
                         ${item.attributes.price}
