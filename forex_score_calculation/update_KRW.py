@@ -95,4 +95,3 @@ final_score.to_csv("../backend/files/krw.csv")
 
 
 
-
