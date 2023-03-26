@@ -116,44 +116,55 @@ npm start
 
 
 
-
-
-
-
 ## Server Maintanence
 ### Change to Frontend
-1. git pull (on server)
-2. npm install
-3. npm run build
-4. sudo service nginx restart
+```
+git pull (on server)
+
+npm install
+
+npm run build
+
+sudo service nginx restart
+```
 
 ### Change to Backend
-1. git pull (on server)
-2. pip install -r requirements.txt
-3. python manage.py makemigratoins
-4. python manage.py migrate
-5. python manage.py collecstatic
-6. pkill gunicorn
-7. gunicorn backend.wsgi:application --bind 0.0.0.0:8000 &
-8. sudo service nginx restart
+```
+git pull (on server)
 
+pip install -r requirements.txt
+
+python manage.py makemigratoins
+
+python manage.py migrate
+
+python manage.py collecstatic
+
+pkill gunicorn
+
+gunicorn backend.wsgi:application --bind 0.0.0.0:8000 &
+
+sudo service nginx restart
+```
 
 
 ### Clearing Database for Specific Models using shell
-0. start at django directory (where manage.py is located)
-1. python3 manage.py shell
-2. from _appname_.models import _modelname_
-3. _modelname_.objects.filter().delete()
+```
+start at django directory (where manage.py is located)
 
+python3 manage.py shell
+
+from _appname_.models import _modelname_
+
+_modelname_.objects.filter().delete()
+```
 
 ### Crontab
-1. grep CRON /var/log/syslog (check logs)
-2. crontab -e
+```
+grep CRON /var/log/syslog (check logs)
 
-
-
-
-
+crontab -e
+```
 
 
 ## Endpoints
