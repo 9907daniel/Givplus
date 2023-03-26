@@ -90,7 +90,7 @@ function Row({item}){
                          </TableRow>
 
                          <TableRow>
-                             <TableCell>Forex Score</TableCell>
+                             <TableCell>Givplus Score</TableCell>
                              <TableCell>{final_score}</TableCell>
                          </TableRow>
                          <TableRow>
