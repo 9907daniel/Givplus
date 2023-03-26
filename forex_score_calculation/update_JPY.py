@@ -74,12 +74,21 @@ forex_score = ((weighted_ma - data.drop(data.columns[0], axis = 1).iloc[-1]) / w
 forex_score = pd.DataFrame(forex_score).reset_index().dropna()
 forex_score.columns = ["Currency abbreviation", "Forex score"]
 
+today_rate = JPY_data.iloc[-1]
+
 currency_code = pd.read_csv("currency_code.csv")
 
 currency_code = currency_code.merge(forex_score, how = "inner")
+currency_code["today_rate"] = today_rate[currency_code["Currency abbreviation"]].values
 
 currency_code["PPP"] =  currency_code["GDP per capita"] / currency_code["GDP per capita PPP"]
+
+ppp = currency_code["PPP"].loc[currency_code["Currency abbreviation"] == "JPY"].values 
+
+currency_code["coffee"] = ppp / currency_code["PPP"]
+
 currency_code["Final score"] = (1/currency_code["PPP"])*0.3+ (np.sqrt(currency_code["Forex score"] + abs(min(currency_code["Forex score"]))))*0.7
+currency_code['id'] = currency_code.index
 
 final_score = currency_code.sort_values(by = ["Final score"], ascending = False)
 
