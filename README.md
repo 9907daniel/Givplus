@@ -103,8 +103,22 @@ cd frontend
 
 npm install
 
+nano .env.local
+
+##################################################
+REACT_APP_GOOGLE_MAPS_API_KEY= _yourkeyhere_
+
+REACT_APP_API_BASE_URL=http://localhost:8000/api/user/
+##################################################
+
 npm start
 ```
+
+
+
+
+
+
 
 ## Server Maintanence
 ### Change to Frontend
