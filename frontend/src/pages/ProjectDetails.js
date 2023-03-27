@@ -120,7 +120,7 @@ const ProjectDetails = () => {
               }}
               //onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
             >
-              ADD TO CART
+              ADD TO GIVING JAR
             </Button>
           </Box>
           <Box>

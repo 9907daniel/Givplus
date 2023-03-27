@@ -57,7 +57,7 @@ const CartMenu = () => {
           }}>
           {/* HEADER */}
           <FlexBox mb="15px">
-            <Typography variant="h4">Giving Jar({cart.length})</Typography>
+            <Typography variant="h4">Giving Jar ({cart.length})</Typography>
             <IconButton onClick={() => dispatch(setIsCartOpen({}))}>
               <CloseIcon />
             </IconButton>
