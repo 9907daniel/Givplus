@@ -93,6 +93,7 @@ currency_code["Final score"] = (1/currency_code["PPP"])*0.3+ (np.sqrt(currency_c
 currency_code['id'] = currency_code.index
 
 final_score = currency_code.sort_values(by = ["Final score"], ascending = False)
+final_score["rank"] = np.arange(1, len(final_score)+1)
 
 final_score.to_csv("../backend/files/egp.csv")
 
