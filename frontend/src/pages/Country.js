@@ -8,7 +8,6 @@ import { addToCart } from "../components/state";
 import { useNavigate } from "react-router-dom";
 import image from "../images/countryImage/project.jpeg";
 import Alert from "@mui/material/Alert"
-import Projects from "./Projects"
 import {setProject} from "../components/state"
 
 const Country= ({ item, width }) => {

@@ -2,6 +2,9 @@ import React, {useState, useEffect, useRef, useMemo} from 'react'
 import Axios from "axios";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { Tooltip } from '@mui/material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+
 
 //map imports
 import CallGoogleMap from './CallGoogleMap'
@@ -17,6 +20,8 @@ import {
 import graph from './ARSKRW.png'
 
 //mui imports2
+import {alpha} from '@mui/material';
+
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
@@ -78,8 +83,12 @@ function Row({item}){
                          </TableRow>
 
                          <TableRow>
-                             <TableCell>Todays Rate ({currency_abbreviation})</TableCell>
-                             <TableCell>{today_rate} {file_index}</TableCell>
+                             <TableCell>Today's Rate ({currency_abbreviation})</TableCell>
+                             <TableCell> 
+                             <span style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
+                                  {today_rate} {file_index}
+                             </span>    
+                            </TableCell>
                          </TableRow>
                          
                          <TableRow>
@@ -158,11 +167,35 @@ function Map() {
                         <TableHead>
                         <TableRow>
                             <TableCell />
-                            {/* <TableCell align="center">Ranking</TableCell> */}
-                            <TableCell align="center">{" "}</TableCell>
-                            <TableCell align="center"> Country </TableCell>
-                            <TableCell align="center"> More Giving </TableCell>
-                            <TableCell align="center"> Coffee Index </TableCell>
+
+                            <TableCell align="center"> 
+                                Givplus Ranking 
+                                <Tooltip title="This is our internal calculation based on your currency's strength and coffee index, in an order that maximizes your giving!">
+                                <Box component="span" ml={1}>
+                                    <InfoOutlinedIcon fontSize="inherit" sx={{ fontSize: '0.8rem', color: alpha('#000', 0.5) }} />
+                                </Box>
+                                </Tooltip>
+                            </TableCell>
+
+                            <TableCell align="center"> 
+                                Country 
+                            </TableCell>
+                            <TableCell align="center"> 
+                                More Giving 
+                                <Tooltip title="This is a percent difference between today's exchange rate and weighted moving averages. Positive value means your currency is going relatively strong 🔥">
+                                <Box component="span" ml={1}>
+                                    <InfoOutlinedIcon fontSize="inherit" sx={{ fontSize: '0.8rem', color: alpha('#000', 0.5) }} />
+                                </Box>
+                                </Tooltip>                                
+                            </TableCell>
+                            <TableCell align="center"> 
+                                Coffee Index 
+                                <Tooltip title="This is calculated by comparing purchasing powr parity. Coffee index tells you how many cups of coffee you can get for the price of one cup in your country.">
+                                <Box component="span" ml={1}>
+                                    <InfoOutlinedIcon fontSize="inherit" sx={{ fontSize: '0.8rem', color: alpha('#000', 0.5) }} />
+                                </Box>
+                                </Tooltip>                            
+                            </TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
