@@ -53,7 +53,7 @@ function Row({item}){
                  </IconButton>
              </TableCell>
              <TableCell component="th" scope="row" align="center">
-                 {id > 196 ? (id-196):(id)}
+                {id < 393 ? id : id - 392}
              </TableCell>
              <TableCell align="center">{country}</TableCell>
              {forex_score < 0 ? (
@@ -122,7 +122,7 @@ function Row({item}){
                          <TableRow>
                             <TableCell> </TableCell>
                              <TableCell>
-                             <Button onClick={() => navigate(`/countrydetails/${item.id}`,{state: { CountryName: item.country }})} style={{ border: '1px solid black' }}>
+                             <Button onClick={() => navigate(`/countrydetails/${item.id}`,{state: { CountryName: item.country , currency_abbreviation: item.currency_abbreviation}})} style={{ border: '1px solid black' }}>
                                  Donate
                              </Button>
                              </TableCell>
@@ -165,10 +165,16 @@ function Map() {
                 >
                     <Table aria-label="collapsible table">
                         <TableHead>
-                        <TableRow>
-                            <TableCell />
+                        <TableRow >
+                            <TableCell sx={{
+                            height: 50,
+                            width: 50
+                        }}/>
 
-                            <TableCell align="center"> 
+                            <TableCell align="center" sx={{
+                            height: 50,
+                            width: 150
+                        }}> 
                                 Givplus Ranking 
                                 <Tooltip title="This is our internal calculation based on your currency's strength and coffee index, in an order that maximizes your giving!">
                                 <Box component="span" ml={1}>
@@ -177,10 +183,16 @@ function Map() {
                                 </Tooltip>
                             </TableCell>
 
-                            <TableCell align="center"> 
+                            <TableCell align="center"sx={{
+                            height: 50,
+                            width: 150
+                        }}> 
                                 Country 
                             </TableCell>
-                            <TableCell align="center"> 
+                            <TableCell align="center" sx={{
+                            height: 50,
+                            width: 150
+                        }}> 
                                 More Giving 
                                 <Tooltip title="This is a percent difference between today's exchange rate and weighted moving averages. Positive value means your currency is going relatively strong 🔥">
                                 <Box component="span" ml={1}>
@@ -188,7 +200,10 @@ function Map() {
                                 </Box>
                                 </Tooltip>                                
                             </TableCell>
-                            <TableCell align="center"> 
+                            <TableCell align="center" sx={{
+                            height: 50,
+                            width: 150
+                        }}> 
                                 Coffee Index 
                                 <Tooltip title="This is calculated by comparing purchasing power parity. Coffee index tells you how many cups of coffee you can get for the price of one cup in your country.">
                                 <Box component="span" ml={1}>

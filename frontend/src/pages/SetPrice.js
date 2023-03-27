@@ -24,7 +24,7 @@ const marks = [
   },
   {
     value: 10,
-    label: "0%",
+    label: "10%",
   },
   {
     value: 20,

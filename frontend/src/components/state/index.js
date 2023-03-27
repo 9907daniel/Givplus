@@ -5,7 +5,7 @@ const initialState = {
   isCartOpen: false,
   cart: [],
   items: [],
-  currency: [],
+  currency: 'krw',
   project: [],
 };
 

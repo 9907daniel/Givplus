@@ -6,7 +6,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart } from "../components/state";
 import { useNavigate } from "react-router-dom";
-import image from "../images/countryImage/project.jpeg";
+import image from "../images/countryImage/ILH.jpeg";
 import Alert from "@mui/material/Alert"
 import {setProject} from "../components/state"
 

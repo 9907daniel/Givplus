@@ -9,8 +9,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { setItems } from "../components/state"
 import { useLocation } from 'react-router-dom';
-
-import countryImage from "../images/countryImage/1.png";
+import CountryDetailsTop from "./CountryDetailsTop";
 
 
 
@@ -21,23 +20,14 @@ const CountryDetails =(props) =>{
     const [data, setData] = useState([]);
     const location = useLocation();
     const CountryName = location.state.CountryName;
+    const currency_abbreviation = location.state.currency_abbreviation;
     const [value, setValue] = useState(CountryName)
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
     console.log(data)
     
-    // async function getItems() {
-    //     const items = await fetch(
-    //       "http://localhost:8000/api/countries/",
-    //       { method: "GET" }
-    //     );
-    //     const itemsJson = await items.json();
-    //     dispatch(setItems(itemsJson.data));
-    //   }
-    // useEffect(() => {
-    //     getItems();
-    // },[])// eslint-disable-line react-hooks/exhaustive-deps
+  
     
     useEffect(() => {
         async function getData() {
@@ -79,41 +69,9 @@ const CountryDetails =(props) =>{
   return (
     <div>
         <>
-        <Box 
-            sx={{
-
-            }}>
-            <Box component="img" src={countryImage} 
-            sx={{
-                width:"100%",
-                height:"70vh",
-            }}
-            />
-            <Box
-                sx={{
-                    position: "absolute",
-                    // zIndex: "100",
-                    top:"150px",
-                    left:"40px",
-                    textAlign:"left"
-                }}>
-                <Typography variant="h1" 
-                    sx={{
-                        color:"white",
-                        fontWeight:"bolder",
-                    }}>
-                    Lebanon
-                </Typography>
-                <Typography variant="h4" 
-                    sx={{
-                        color:"white",
-                    }}>
-                        Population:
-                </Typography>
-            </Box>
-            
-        </Box>
+        <CountryDetailsTop currency = {currency_abbreviation}/>
         </>
+        <>
         <Box width = "80%" margin = "80px auto">
             <Typography variant="h3" textAlign="center">
                List of Projects
@@ -181,6 +139,7 @@ const CountryDetails =(props) =>{
             ))} */}
             </Box>
         </Box>
+        </>
     </div>
   )
 }
