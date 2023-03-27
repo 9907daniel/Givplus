@@ -190,7 +190,7 @@ function Map() {
                             </TableCell>
                             <TableCell align="center"> 
                                 Coffee Index 
-                                <Tooltip title="This is calculated by comparing purchasing powr parity. Coffee index tells you how many cups of coffee you can get for the price of one cup in your country.">
+                                <Tooltip title="This is calculated by comparing purchasing power parity. Coffee index tells you how many cups of coffee you can get for the price of one cup in your country.">
                                 <Box component="span" ml={1}>
                                     <InfoOutlinedIcon fontSize="inherit" sx={{ fontSize: '0.8rem', color: alpha('#000', 0.5) }} />
                                 </Box>
