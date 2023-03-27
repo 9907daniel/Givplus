@@ -65,7 +65,7 @@ const marks = [
 ];
 
 function valuetext(value) {
-  return `${value}%`;
+  return `${Math.round(value)}%`;
 }
 
 const minDistance = 10;
@@ -98,12 +98,15 @@ function SetPrice() {
   const totalPrice = sliderValues.reduce((acc, val) => (acc = acc + val), 0);
 
   const handleChangeTemp = (index) => (event, newValue) => {
+    // Round the newValue to the nearest multiple of 10
+    newValue = Math.round(newValue / 10) * 10;
+  
     let updatedValues = [...sliderValues];
     updatedValues[index] = newValue;
     const totalUpdatedValues = updatedValues.reduce((acc, val) => acc + val, 0);
     const updatedPercentage = (newValue / totalUpdatedValues) * 100;
     updatedValues[index] = updatedPercentage;
-
+  
     if (totalUpdatedValues > 100) {
       const difference = totalUpdatedValues - 100;
       let counter = difference;
@@ -123,9 +126,10 @@ function SetPrice() {
         }
       }
     }
-
+  
     setSliderValues(updatedValues);
   };
+  
 
   const validationSchema = Yup.object().shape({
     number: Yup.number()
