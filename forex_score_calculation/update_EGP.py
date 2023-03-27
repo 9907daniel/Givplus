@@ -54,6 +54,8 @@ EGP_data.set_index(EGP_data.columns[0], inplace = True)
 EGP_data = pd.concat([EGP_data, update_rate("EGP", currency_list)])
 EGP_data.to_csv("EGP.csv")
 
+
+EGP_data = pd.read_csv("EGP.csv")
 data = EGP_data
 weighted_ma = pd.DataFrame([])
 
@@ -62,7 +64,7 @@ ma_list = [5, 20, 60, 120, 200]
 weight_list = [0.1333, 0.3333, 0.2, 0.2, 0.1334]
 
 
-for i in range(0, len(currency_list)-1):
+for i in range(0, len(currency_list)):
     currency_ma = []
     for j in range(0,len(ma_list)):
         currency_ma.append(moving_average(data.iloc[0:,i+1], ma_list[j]).tail(1).values)

@@ -15,6 +15,7 @@ import home1 from '../images/home1.jpg'
 import home2 from '../images/home2.jpg'
 import home3 from '../images/home3.jpg'
 import home4 from '../images/home4.jpg'
+import home5 from '../images/home5.jpg'
 
 const slideIn = keyframes`
   from {
@@ -104,8 +105,13 @@ function Home() {
                 }}>
                     Our Motivation
         </Typography>
-
-    <Box component="img" src={home1}
+        <Box component="img" src={home1}
+        sx={{
+            width:"100%",
+            height:"100%",
+        }}
+        />
+    <Box component="img" src={home5}
         sx={{
             width:"100%",
             height:"100%",

@@ -7,7 +7,7 @@ from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
 
-today = datetime.today() - timedelta(days=2) # since it takes some time to update actual currency data for today
+today = datetime.today() - timedelta(days=2) 
 
 def currency_val(currency, date):
     response = requests.get("https://www.xe.com/currencytables/?from={}&date={}#table-section".format(currency, date.strftime('%Y-%m-%d')))
@@ -54,6 +54,8 @@ KRW_data.set_index(KRW_data.columns[0], inplace = True)
 KRW_data = pd.concat([KRW_data, update_rate("KRW", currency_list)])
 KRW_data.to_csv("KRW.csv")
 
+KRW_data = pd.read_csv("KRW.csv")
+
 data = KRW_data
 weighted_ma = pd.DataFrame([])
 
@@ -62,7 +64,7 @@ ma_list = [5, 20, 60, 120, 200]
 weight_list = [0.1333, 0.3333, 0.2, 0.2, 0.1334]
 
 
-for i in range(0, len(currency_list)-1):
+for i in range(0, len(currency_list)):
     currency_ma = []
     for j in range(0,len(ma_list)):
         currency_ma.append(moving_average(data.iloc[0:,i+1], ma_list[j]).tail(1).values)
@@ -94,6 +96,7 @@ currency_code['id'] = currency_code.index
 final_score = currency_code.sort_values(by = ["Final score"], ascending = False)
 
 final_score.to_csv("../backend/files/krw.csv")
+
 
 
 

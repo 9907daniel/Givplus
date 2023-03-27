@@ -54,6 +54,8 @@ JPY_data.set_index(JPY_data.columns[0], inplace = True)
 JPY_data = pd.concat([JPY_data, update_rate("JPY", currency_list)])
 JPY_data.to_csv("JPY.csv")
 
+JPY_data = pd.read_csv("JPY.csv")
+
 data = JPY_data
 weighted_ma = pd.DataFrame([])
 
@@ -62,7 +64,7 @@ ma_list = [5, 20, 60, 120, 200]
 weight_list = [0.1333, 0.3333, 0.2, 0.2, 0.1334]
 
 
-for i in range(0, len(currency_list)-1):
+for i in range(0, len(currency_list)):
     currency_ma = []
     for j in range(0,len(ma_list)):
         currency_ma.append(moving_average(data.iloc[0:,i+1], ma_list[j]).tail(1).values)
