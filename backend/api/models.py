@@ -22,6 +22,7 @@ class Results(models.Model):
     coffee = models.DecimalField(("coffee"), decimal_places=1, max_digits=10) 
     today_rate = models.DecimalField(("today_rate"), decimal_places=6, max_digits=30, default = 0)
     country_id = models.IntegerField(("country_id"))
+    rank = models.IntegerField(("id"), default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
     
 

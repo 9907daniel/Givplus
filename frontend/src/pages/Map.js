@@ -37,7 +37,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 function Row({item}){
     const navigate=useNavigate()
-    const { id, country, currency,currency_abbreviation, today_rate, forex_score, final_score, ppp_log, gdp, gdp_ppp, file_index, coffee} = item;
+    const { id, country, currency,currency_abbreviation, today_rate, forex_score, final_score, ppp_log, gdp, gdp_ppp, file_index, rank, coffee} = item;
      const [open, setOpen] = React.useState(false);
      return(
          <React.Fragment>
@@ -53,7 +53,7 @@ function Row({item}){
                  </IconButton>
              </TableCell>
              <TableCell component="th" scope="row" align="center">
-                {id < 393 ? id : id - 392}
+                {rank}
              </TableCell>
              <TableCell align="center">{country}</TableCell>
              {forex_score < 0 ? (
