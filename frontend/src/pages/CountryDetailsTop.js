@@ -5,39 +5,19 @@ import countryImage from "../images/countryImage/LebanonFlag.png";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
-function CountryDetailsTop(props) {
-    const [data, setData] = useState([]);
-    const currency = props.currency
-    useEffect(() => {
-        async function getData() {
-            const response = await axios.get('https://givplus.duckdns.org/api/countries/');
-            setData(response.data);
-        }
-        getData();
-      }, []);
-
-      const AllProjects = data.filter(
-        (item) => item.currency === currency
-        
-    )
-  
-  return (
-    <div>
-    {AllProjects.map((item)=>(
-        
-              //  <Country item={item} key={`${item.project_name}-${item.id}`}/>
-           
-      <Box key={`${item.project_name}-${item.id}`}
+function CountryDescription({item}) {
+    return(
+    <Box 
             sx={{
 
             }}>
             <Box component="img" src={countryImage} 
             sx={{
                 width:"100%",
-                height:"70vh",
+                height:"90vh",
             }}
             />
             <Box
@@ -46,24 +26,90 @@ function CountryDetailsTop(props) {
                     // zIndex: "100",
                     top:"150px",
                     left:"40px",
+                    width: "80%",
                     textAlign:"left"
                 }}>
-                <Typography variant="h1" 
+                <Typography variant="h2" 
                     sx={{
                         color:"white",
                         fontWeight:"bolder",
                     }}>
-                    Lebanon
+                    {item.name}
                 </Typography>
-                <Typography variant="h4" 
+                <Typography variant="h6" 
                     sx={{
                         color:"white",
                     }}>
-                        Population:
+                        Population :{item.population}
+                </Typography>
+                <Typography variant="h6" 
+                    sx={{
+                        color:"white",
+                    }}>
+                        Need Help In : {item.need_help_in}
+                </Typography>
+                <Typography variant="h6" 
+                    sx={{
+                        color:"black",
+                    }}>
+                        Description : {item.description.Summary}:
                 </Typography>
             </Box>
-            
+            <Box sx={{
+                    position: "absolute",
+                    // zIndex: "100",
+                    top:"600px",
+                    width: "100%",
+                    align : "center",
+                }}>
+            <Grid container spacing={3} justifyContent="center"  sx={{p : 4}}>
+                <Grid item xs={4}>
+                    <Box border={1} p={2} >
+                    News 1
+                    </Box>
+                </Grid>
+                <Grid item xs={4}>
+                    <Box border={1} p={2}>
+                    News 2
+                    </Box>
+                </Grid>
+                <Grid item xs={4}>
+                    <Box border={1} p={2}>
+                    News 3
+                    </Box>
+                </Grid>
+            </Grid>
+            </Box>
         </Box>
+
+    )
+
+}
+function CountryDetailsTop(props) {
+    const [data, setData] = useState([]);
+    const currencyVal = props.currency
+    useEffect(() => {
+        async function getData() {
+            const response = await axios.get('https://givplus.duckdns.org/api/countries/');
+            setData(response.data);
+        }
+        getData();
+      }, []);
+      //console.log(data[0].currency)
+      const AllProjects = data.filter(
+        (item) => item.currency === currencyVal
+        
+    )
+    
+     console.log("Filtered data:", AllProjects);
+    // console.log(data[0].currency, currency)
+  return (
+    <div>
+    {AllProjects.map((item)=>(
+            
+              <CountryDescription item={item} key={item.id}/>
+           
+      
          ))}
     </div>
   )
