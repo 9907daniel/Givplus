@@ -10,3 +10,4 @@
 *.env
 /frontend/.env
 /.vs/
+.vs
