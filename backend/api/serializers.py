@@ -42,7 +42,7 @@ class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Country
         # fields = '__all__'
-        fields = ['id', 'Number', 'name', 'continent', 'description', 'gdp', 'currency',  'language', 'population', 'religion', 'need_help_in', 'location', ]
+        fields = ['id', 'const', 'name', 'continent', 'description', 'gdp', 'currency',  'language', 'population', 'religion', 'need_help_in', 'location', ]
     
     def to_representation(self, instance):
         ret = super().to_representation(instance)

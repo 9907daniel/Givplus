@@ -72,6 +72,8 @@ class Country(models.Model):
     # platforms = models.ManyToManyField(Platforms)
     location_lat = models.DecimalField(("Latitude"), max_digits=14, decimal_places=9, default=0.0)
     location_lng = models.DecimalField(("Longitude"), max_digits=14, decimal_places=9, default=0.0)
+    const = models.IntegerField(("const"), default=0)
+
 
     @property
     def location(self):
