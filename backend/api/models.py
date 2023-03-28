@@ -112,7 +112,7 @@ class Project(models.Model):
     ngo_name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     number = models.IntegerField(("Number"), default=0)
-    
+    order = models.IntegerField(("Order"), default=0)
 
 
 class Graph(models.Model):
