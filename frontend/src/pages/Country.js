@@ -53,7 +53,7 @@ const Country= ({ item, width }) => {
           //src="/projects/10.jpeg"
           onClick={() => 
           //handleProjectClick({item})}
-            navigate(`/projectdetails/${item.order}`)}
+            navigate(`/projects/${item.order}`)}
         //   { state: {project_name : item.project_name, project_decription: item.project_decription, ngo_name: item.ngo_name} })
         
             //onClick={()=> <Projects item={item}/>}
@@ -86,7 +86,7 @@ const Country= ({ item, width }) => {
             Add to Cart
             </Button>
             <Button
-            onClick={() => navigate(`/projectdetails/${item.id}`)}
+            onClick={() => navigate(`/projectdetails/${item.order}`)}
             sx={{ backgroundColor: shades.primary[300], color: "white" }}
             >
              Details
