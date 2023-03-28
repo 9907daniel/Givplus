@@ -19,9 +19,9 @@ const CountryDetails =(props) =>{
     const isNonMobile = useMediaQuery("(min-width: 600px)");
     const [data, setData] = useState([]);
     const location = useLocation();
-    const CountryName = location.state.CountryName;
+    const CountryId = location.state.CountryId;
     const currency_abbreviation = location.state.currency_abbreviation;
-    const [value, setValue] = useState(CountryName)
+    const [value, setValue] = useState(CountryId)
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -38,32 +38,32 @@ const CountryDetails =(props) =>{
       }, []);
 
     const AllProjects = data.filter(
-        (item) => item.country === CountryName
+        (item) => item.number === CountryId
     )
     const projectonPoverty = data.filter(
         (item) => item.un_goal === 1
     ).filter(
-        (item) => item.country === CountryName
+        (item) => item.number === CountryId
     )
     const projectonHunger = data.filter(
         (item) =>  item.un_goal === 2
     ).filter(
-        (item) => item.country === CountryName
+        (item) => item.number === CountryId
     )
     const projectonHealth = data.filter(
         (item) =>  item.un_goal === 3
     ).filter(
-        (item) => item.country === CountryName
+        (item) => item.number === CountryId
     )
     const projectonEducation = data.filter(
         (item) =>  item.un_goal === 4
     ).filter(
-        (item) => item.country === CountryName
+        (item) => item.number === CountryId
     )
     const projectonEquality = data.filter(
         (item) =>  item.un_goal === 5
     ).filter(
-        (item) => item.country === CountryName
+        (item) => item.number === CountryId
     )
 
   return (
@@ -90,7 +90,7 @@ const CountryDetails =(props) =>{
                     },
                 }}
                 >
-                    <Tab label="ALL" value={CountryName}/>
+                    <Tab label="ALL" value={CountryId}/>
                     <Tab label="No Poverty" value = {1} />
                     <Tab label="Zero Hunger" value={2}/>  
                     <Tab label="Good Health and Well Being" value={3}/>  
@@ -106,7 +106,7 @@ const CountryDetails =(props) =>{
             rowGap="20px"
             columnGap="1.33%"
             >
-            {value === CountryName && AllProjects.map((item)=>(
+            {value === CountryId && AllProjects.map((item)=>(
                 <Country item={item} key={`${item.project_name}-${item.id}`}/>
             ))}
             {value === 1 && projectonPoverty.map((item)=>(

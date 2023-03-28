@@ -37,8 +37,13 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 function Row({item}){
     const navigate=useNavigate()
-    const { id, country, currency,currency_abbreviation, today_rate, forex_score, final_score, ppp_log, gdp, gdp_ppp, file_index, rank, coffee} = item;
+    const currency_score = useSelector((state) => state.cart.currency);
+    const { country_id, country, currency,currency_abbreviation, today_rate, forex_score, final_score, ppp_log, gdp, gdp_ppp, file_index, rank, coffee} = item;
      const [open, setOpen] = React.useState(false);
+
+     //temp for Graph images
+     //const myArray = ['apple', 'banana', 'cherry'];
+
      return(
          <React.Fragment>
          <TableRow 
@@ -115,14 +120,14 @@ function Row({item}){
 
                          <TableRow align="center">
                              <TableCell align="center">
-                                 <img src= {graph} width="330" height="240"/>
+                                 <img src= {`/graphs/${currency_abbreviation}${currency_score}.png`} width="330" height="240"/>
                              </TableCell> 
                          </TableRow>
 
                          <TableRow>
                             <TableCell> </TableCell>
                              <TableCell>
-                             <Button onClick={() => navigate(`/countrydetails/${item.id}`,{state: { CountryName: item.country , currency_abbreviation: item.currency_abbreviation}})} style={{ border: '1px solid black' }}>
+                             <Button onClick={() => navigate(`/countrydetails/${item.country_id}`,{state: { CountryId: item.country_id , currency_abbreviation: item.currency_abbreviation}})} style={{ border: '1px solid black' }}>
                                  Donate
                              </Button>
                              </TableCell>

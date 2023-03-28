@@ -11,7 +11,7 @@ import { CSVFile, readString } from 'react-papaparse';
 import Papa from 'papaparse'
 import { useDispatch, useSelector } from "react-redux";
 import newsFile from "../files/Lebanon_news.csv"
-import Lira from "../images/article/Lira.webp"
+//import Lira from "../images/article/Lira.webp"
 import IMF from "../images/article/IMF.jpg"
 import daylight from "../images/article/daylight.jpg"
 
@@ -20,6 +20,7 @@ function CountryDescription({item}) {
     const[news, setNews] = useState([]);
     const navigate = useNavigate();
     const imagePath = "/images/article/";
+    const Lira = "/article/Lira.webp"
 
     useEffect(() => {
         // Load news data from CSV file
@@ -102,8 +103,7 @@ function CountryDescription({item}) {
                     <a href={article.Link} target="_blank" rel="noopener noreferrer">
                     <img style={{width: "40vh", height: "25vh"}} 
                         src={index === 0 ? Lira : (index === 1 ? IMF : daylight)}
-                    
-                    alt={article.Title}/>
+                        alt={article.Title}/>
                     </a>
                     </Box>
                     <Box border={1} p={1} 

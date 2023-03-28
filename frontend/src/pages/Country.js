@@ -6,7 +6,6 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart } from "../components/state";
 import { useNavigate } from "react-router-dom";
-import image from "../images/countryImage/ILH.jpeg";
 import Alert from "@mui/material/Alert"
 import {setProject} from "../components/state"
 
@@ -49,11 +48,12 @@ const Country= ({ item, width }) => {
         <img
           alt={item.project_name}
           width="300px"
-          height="400px"
-          src={image}
+          height="300px"
+          src={`/projects/${item.order}.jpeg`}
+          //src="/projects/10.jpeg"
           onClick={() => 
           //handleProjectClick({item})}
-            navigate(`/projectdetails/${item.id}`)}
+            navigate(`/projectdetails/${item.order}`)}
         //   { state: {project_name : item.project_name, project_decription: item.project_decription, ngo_name: item.ngo_name} })
         
             //onClick={()=> <Projects item={item}/>}
@@ -115,10 +115,11 @@ const Country= ({ item, width }) => {
 
       <Box mt="3px">
         <Typography variant="subtitle2" color="black">
-            category
-          {/* {category
-            .replace(/([A-Z])/g, " $1")
-            .replace(/^./, (str) => str.toUpperCase())} */}
+            {item.un_goal === 1 && "SDG : No Poverty"}
+            {item.un_goal === 2 && "SDG : Zero Hunger"}
+            {item.un_goal === 3 && "SDG : Good Health and Well-Being"}
+            {item.un_goal === 4 && "SDG : Quality Education"}
+            {item.un_goal === 5 && "SDG : Gender Equality"}
         </Typography>
         <Typography>{project_name}</Typography>
         <Typography fontWeight="bold">{ngo_name}</Typography>

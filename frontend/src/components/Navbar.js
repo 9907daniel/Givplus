@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { NavLink } from 'react-router-dom';
 import { getToken } from '../services/LocalStorageService';
-
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import { setIsCartOpen } from './state';
 import { setCurrency } from './state';
 
@@ -201,13 +201,13 @@ const Navbar = () => {
             </Box>
             <Box sx={{marginRight : "0"}}>
             {access_token ? 
-              <Button component={NavLink} to='/dashboard' 
+              <IconButton component={NavLink} to='/dashboard' 
                 style={({ isActive }) => { 
                   return { backgroundColor: isActive ? '#6d1b7b' : '' } 
                   }} 
                   sx={{ color: 'white', textTransform: 'none' }}>
-                Dashboard
-              </Button> 
+               <AccountCircle />
+              </IconButton> 
               : 
               <Button variant="outlined"  component={NavLink} to='/login' 
                 style={({ isActive }) => { 

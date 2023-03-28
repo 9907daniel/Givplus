@@ -2,8 +2,7 @@ import React from 'react';
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { shades } from "../theme";
 import {
@@ -69,12 +68,12 @@ const CartMenu = () => {
               <Box key={`${item.project_name}-${item.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
-                    {/* <img
+                    <img
                       alt={item?.name}
                       width="123px"
-                      height="164px"
-                      src={`http://localhost:2000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
-                    /> */}
+                      height="123px"
+                      src={`/projects/${item.order}.jpeg`}
+                    />
                   </Box>
                   <Box flex="1 1 60%">
                     <FlexBox mb="5px">

@@ -90,10 +90,10 @@ function CallGoogleMap() {
                         <img style ={{
                             width: 250,
                             height: 200
-                        }}src={CountryImage} onClick={() => navigate(`/countrydetails/${selectedMarker.id}`)}/>
+                        }}src={CountryImage} onClick={() => navigate(`/countrydetails/${selectedMarker.number}`,{state: { CountryId: selectedMarker.number , currency_abbreviation: selectedMarker.currency}})}/>
                         <Box sx={{ display: 'flex', flexDirection: 'row'}}>
                             <Button sx={{marginRight: 'auto' }}onClick={() => setSelectedMarker('')}>Close</Button>
-                            <Button sx={{marginLeft: 'auto' }}onClick={() => setSelectedMarker('')}>Donate</Button>
+                            <Button sx={{marginLeft: 'auto' }}onClick={() => navigate(`/countrydetails/${selectedMarker.number}`,{state: { CountryId: selectedMarker.number , currency_abbreviation: selectedMarker.currency}})}>Donate</Button>
                         </Box>
                     </Box>
                     </InfoWindow>

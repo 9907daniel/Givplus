@@ -5,7 +5,6 @@ import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { shades } from "../theme";
 import { addToCart } from "../components/state";
-import image from "../images/countryImage/ILH.jpeg";
 import Alert from "@mui/material/Alert"
 import { useDispatch , useSelector} from "react-redux";
 
@@ -67,16 +66,12 @@ const ProjectDetails = () => {
         <Box flex="1 1 40%" mb="40px">
             
           <img width="500px"
-          height="500px" src = {image}
+          height="500px" src = "/projects/ILH.jpeg"
           />
         </Box>
 
         {/* ACTIONS */}
         <Box flex="1 1 50%" mb="40px">
-          <Box display="flex" justifyContent="space-between">
-            <Box>Home/Item</Box>
-            <Box>Prev Next</Box>
-          </Box>
           <Box m="65px 0 25px 0">
             <Typography variant="h3">{item.project_name}</Typography>
             <Typography>NGO : {item.ngo_name}</Typography>
