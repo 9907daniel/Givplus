@@ -97,40 +97,51 @@ function SetPrice() {
 
   const totalPrice = sliderValues.reduce((acc, val) => (acc = acc + val), 0);
 
-  const handleChangeTemp = (index) => (event, newValue) => {
-    // Round the newValue to the nearest multiple of 10
-    newValue = Math.round(newValue / 10) * 10;
+//   const handleChangeTemp = (index) => (event, newValue) => {
+//     // Round the newValue to the nearest multiple of 10
+//     newValue = Math.round(newValue / 10) * 10;
   
-    let updatedValues = [...sliderValues];
-    updatedValues[index] = newValue;
-    const totalUpdatedValues = updatedValues.reduce((acc, val) => acc + val, 0);
-    const updatedPercentage = (newValue / totalUpdatedValues) * 100;
-    updatedValues[index] = updatedPercentage;
+//     let updatedValues = [...sliderValues];
+//     updatedValues[index] = newValue;
+//     const totalUpdatedValues = updatedValues.reduce((acc, val) => acc + val, 0);
+//     const updatedPercentage = (newValue / totalUpdatedValues) * 100;
+//     updatedValues[index] = updatedPercentage;
   
-    if (totalUpdatedValues > 100) {
-      const difference = totalUpdatedValues - 100;
-      let counter = difference;
-      for (let i = 0; i < updatedValues.length; i++) {
-        if (counter === 0) {
-          break;
-        }
-        if (i === index) {
-          continue;
-        }
-        if (updatedValues[i] - counter >= 10) {
-          updatedValues[i] -= counter;
-          counter = 0;
-        } else {
-          counter -= updatedValues[i] - 10;
-          updatedValues[i] = 10;
-        }
-      }
+//     if (totalUpdatedValues > 100) {
+//       const difference = totalUpdatedValues - 100;
+//       let counter = difference;
+//       for (let i = 0; i < updatedValues.length; i++) {
+//         if (counter === 0) {
+//           break;
+//         }
+//         if (i === index) {
+//           continue;
+//         }
+//         if (updatedValues[i] - counter >= 10) {
+//           updatedValues[i] -= counter;
+//           counter = 0;
+//         } else {
+//           counter -= updatedValues[i] - 10;
+//           updatedValues[i] = 10;
+//         }
+//       }
+//     }
+  
+//     setSliderValues(updatedValues);
+//   };
+const handleChangeTemp = (index) => (event, newValue) => {
+    // {totalPrice > 100 && (
+    //     alert("Total Price is over 100")
+    //   )}
+    if (newValue === 0){
+        newValue = 10
     }
-  
-    setSliderValues(updatedValues);
-  };
-  
-
+    setSliderValues((prevValues) => [
+        ...prevValues.slice(0, index),
+        newValue,
+        ...prevValues.slice(index + 1)
+      ]);
+    };
   const validationSchema = Yup.object().shape({
     number: Yup.number()
       //.min(10000, 'Number must be greater than or equal to 1')
@@ -151,28 +162,40 @@ function SetPrice() {
   return (
     <>
       <Box padding={4}>
-        <Typography variant="h3" align="center">
+        <Typography variant="h3" align="center" >
           You are effectively donating % more
         </Typography>
         <Typography align="center">
           We will get back to you with a transparent report on how your fund was
           actually used.
         </Typography>
-        <Typography>Your chosen currency is: {currency}</Typography>
+        {/* <Typography>Your chosen currency is: {currency}</Typography> */}
       </Box>
       <Grid container spacing={2} align="center">
         <Grid xs={5}>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs={8}>
+            <Grid item xs={8} 
+            sx={{
+                ml: 4
+            }}>
               <TextField
-                fullWidth
+                width = "80%"
                 type="text"
                 value={number}
                 inputProps={{ inputMode: "numeric" }}
                 onChange={handle_Change}
               />
+            
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                >
+                    Submit
+                </Button>
+  
             </Grid>
-            <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <Button
                 variant="contained"
                 color="primary"
@@ -180,7 +203,7 @@ function SetPrice() {
               >
                 Submit
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
           <Box>
             <Chart data={pieData}>
@@ -203,17 +226,17 @@ function SetPrice() {
                 track={false}
               />
               <Typography>
-                {cart[index].project_name}: $ {number * (value / 100)}
+                For this Project : $ {number * (value / 100)}
               </Typography>
             </Box>
           ))}
           <Box align="Center">
             <Typography variant="h5">
-              Total price is {(totalPrice / 100) * number}
+              Total price is {((totalPrice / 100) * number).toFixed(2)} $
             </Typography>
             {totalPrice > 100 && (
               <Typography variant="h5" color="red">
-                Total price exceeded{number}
+                Total price exceeded {number} $
               </Typography>
             )}
           </Box>
