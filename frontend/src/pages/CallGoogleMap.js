@@ -6,20 +6,13 @@ import CountryImage from "../images/countryImage/LebanonFlag.png";
 
 //MUI imports
 import {
-    Grid, 
     Box,
     Typography, 
     Button, 
-    Card, 
-    CardHeader, 
-    CardMedia, 
-    CardContent,
-    CircularProgress,
-
 } from "@mui/material";
 
 //map imports
-import { GoogleMap, InfoWindow, Marker, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
 import tempMarker from '../images/tempMarker.png';
 
 
@@ -77,7 +70,7 @@ function CallGoogleMap() {
                     position={selectedMarker.location}
                     options={{
                         pixelOffset: new window.google.maps.Size(0, -40),
-                        disableAutoPan: true
+
                     }}
                     >
                     <Box sx={{

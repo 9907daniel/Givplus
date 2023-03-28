@@ -20,13 +20,22 @@ function CountryDescription({item}) {
                 height:"90vh",
             }}
             />
-            <Box
+            {/* <Box backgroundColor="rgba(0, 0, 0, 0.4)"
+            sx={{
+                position: "absolute",
+                top: "140px",
+                left: "40px",
+                width:"95%",
+                height:"50vh",
+            }}
+            /> */}
+            <Box backgroundColor="rgba(0, 0, 0, 0.4)"
                 sx={{
                     position: "absolute",
                     // zIndex: "100",
                     top:"150px",
-                    left:"40px",
-                    width: "80%",
+                    left:"70px",
+                    width: "90%",
                     textAlign:"left"
                 }}>
                 <Typography variant="h2" 
@@ -50,7 +59,7 @@ function CountryDescription({item}) {
                 </Typography>
                 <Typography variant="h6" 
                     sx={{
-                        color:"black",
+                        color:"white",
                     }}>
                         Description : {item.description.Summary}:
                 </Typography>
@@ -97,8 +106,7 @@ function CountryDetailsTop(props) {
       }, []);
       //console.log(data[0].currency)
       const AllProjects = data.filter(
-        (item) => item.currency === currencyVal
-        
+        (item) => item.currency === currencyVal   
     )
     
      console.log("Filtered data:", AllProjects);
