@@ -6,20 +6,13 @@ import CountryImage from "../images/countryImage/LebanonFlag.png";
 
 //MUI imports
 import {
-    Grid, 
-    AppBar, 
+    Box,
     Typography, 
     Button, 
-    Card, 
-    CardHeader, 
-    CardMedia, 
-    CardContent,
-    CircularProgress,
-
 } from "@mui/material";
 
 //map imports
-import { GoogleMap, InfoWindow, Marker, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
 import tempMarker from '../images/tempMarker.png';
 
 
@@ -77,17 +70,29 @@ function CallGoogleMap() {
                     position={selectedMarker.location}
                     options={{
                         pixelOffset: new window.google.maps.Size(0, -40),
+
                     }}
                     >
-                    <div>
-                        <h1>location -{selectedMarker.name}</h1>
-                        <h1>status - {selectedMarker.continent}</h1>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'left'
+                        }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                            <Typography variant="h6" sx={{ fontSize: 20}}>{selectedMarker.name}</Typography>
+                            <Typography sx={{marginLeft: '5px', fontSize: 12}} >{selectedMarker.continent}</Typography>
+                        </Box>
+                        <Typography sx={{ marginTop: '1px', marginBottom: '6px', fontSize: 16}} >Need Help In :  {selectedMarker.need_help_in}</Typography>
                         <img style ={{
                             width: 250,
                             height: 200
                         }}src={CountryImage} onClick={() => navigate(`/countrydetails/${selectedMarker.id}`)}/>
-                        <button onClick={() => setSelectedMarker("")}>close</button>
-                    </div>
+                        <Box sx={{ display: 'flex', flexDirection: 'row'}}>
+                            <Button sx={{marginRight: 'auto' }}onClick={() => setSelectedMarker('')}>Close</Button>
+                            <Button sx={{marginLeft: 'auto' }}onClick={() => setSelectedMarker('')}>Donate</Button>
+                        </Box>
+                    </Box>
                     </InfoWindow>
                 )}
 

@@ -62,7 +62,7 @@ def import_csv(request):
                     today_rate=row.get('today_rate', ''), 
                     coffee=row.get('coffee', ''),
                     country_id=row.get('id', ''),            
-                    
+                    rank = row.get('rank', ''),
                     country=row.get('Country', ''), 
                     currency=row.get('Currency', ''),
                     currency_abbreviation=row.get('Currency abbreviation', ''), 

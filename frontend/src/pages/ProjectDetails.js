@@ -22,6 +22,8 @@ const ProjectDetails = () => {
   const [value, setValue] = useState("description");
   const [count, setCount] = useState(1);
   const [items, setItems] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -67,14 +69,22 @@ const ProjectDetails = () => {
 //   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
+    
     <Box width="80%" m="80px auto">
         {AllProjects.map((item) =>(
+    
     <div key={item.id}>
-        
-      
+        {showAlert && (
+            <Alert onClose={() => setShowAlert(false)}>
+            You have added {item.project_name} to the cart
+            </Alert>
+        )}
+    
       <Box display="flex" flexWrap="wrap" columnGap="40px">
+        
         {/* IMAGES */}
         <Box flex="1 1 40%" mb="40px">
+            
           <img width="500px"
           height="500px" src = {image}
           />
@@ -88,28 +98,13 @@ const ProjectDetails = () => {
           </Box>
           <Box m="65px 0 25px 0">
             <Typography variant="h3">{item.project_name}</Typography>
-            <Typography>${item.ngo_name}</Typography>
+            <Typography>NGO : {item.ngo_name}</Typography>
             <Typography sx={{ mt: "20px" }}>
               {item.project_description}
             </Typography>
           </Box>
 
           <Box display="flex" alignItems="center" minHeight="50px">
-            <Box
-              display="flex"
-              alignItems="center"
-              border={`1.5px solid ${shades.neutral[300]}`}
-              mr="20px"
-              p="2px 5px"
-            >
-              <IconButton onClick={() => setCount(Math.max(count - 1, 0))}>
-                <RemoveIcon />
-              </IconButton>
-              <Typography sx={{ p: "0 5px" }}>{count}</Typography>
-              <IconButton onClick={() => setCount(count + 1)}>
-                <AddIcon />
-              </IconButton>
-            </Box>
             <Button
               sx={{
                 backgroundColor: "#222222",
@@ -118,23 +113,26 @@ const ProjectDetails = () => {
                 minWidth: "150px",
                 padding: "10px 40px",
               }}
-              //onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
+              onClick={() => {
+                dispatch(addToCart({ item: { ...item, count } }));
+                setShowAlert(true);
+                
+            }}
             >
               ADD TO GIVING JAR
             </Button>
           </Box>
           <Box>
             <Box m="20px 0 5px 0" display="flex">
-              <FavoriteBorderOutlinedIcon />
-              <Typography sx={{ ml: "5px" }}>ADD TO WISHLIST</Typography>
+              <Typography variant = "h5">Description</Typography>
             </Box>
-            <Typography>CATEGORIES: {item.ngo_name}</Typography>
+            <Typography>{item.description}</Typography>
           </Box>
         </Box>
       </Box>
 
       {/* INFORMATION */}
-      <Box m="20px 0">
+      {/* <Box m="20px 0">
         <Tabs value={value} onChange={handleChange}>
           <Tab label="DESCRIPTION" value="description" />
           <Tab label="REVIEWS" value="reviews" />
@@ -145,7 +143,7 @@ const ProjectDetails = () => {
           <div>{item.project_description}</div>
         )}
         {value === "reviews" && <div>reviews</div>}
-      </Box>
+      </Box> */}
       </div>) )}
     </Box>
   );
