@@ -67,7 +67,7 @@ class CountrySerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['id','country', 'ngo_name', 'project_name', 'un_goal', 'description']
+        fields = ['id','country', 'ngo_name', 'project_name', 'un_goal', 'description', 'number']
 
 
 class GraphSerializer(serializers.ModelSerializer):
