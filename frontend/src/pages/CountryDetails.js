@@ -69,7 +69,7 @@ const CountryDetails =(props) =>{
   return (
     <div>
         <>
-        <CountryDetailsTop currency = {currency_abbreviation}/>
+        <CountryDetailsTop currency = {currency_abbreviation} />
         </>
         <>
         <Box width = "80%" margin = "80px auto">

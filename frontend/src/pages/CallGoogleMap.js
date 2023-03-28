@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef, useMemo} from 'react'
 import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import CountryImage from "../images/countryImage/LebanonFlag.png";
+
 
 
 //MUI imports
@@ -90,7 +90,7 @@ function CallGoogleMap() {
                         <img style ={{
                             width: 250,
                             height: 200
-                        }}src={CountryImage} onClick={() => navigate(`/countrydetails/${selectedMarker.number}`,{state: { CountryId: selectedMarker.number , currency_abbreviation: selectedMarker.currency}})}/>
+                        }}src={`/flags/${selectedMarker.number}.png`} onClick={() => navigate(`/countrydetails/${selectedMarker.number}`,{state: { CountryId: selectedMarker.number , currency_abbreviation: selectedMarker.currency}})}/>
                         <Box sx={{ display: 'flex', flexDirection: 'row'}}>
                             <Button sx={{marginRight: 'auto' }}onClick={() => setSelectedMarker('')}>Close</Button>
                             <Button sx={{marginLeft: 'auto' }}onClick={() => navigate(`/countrydetails/${selectedMarker.number}`,{state: { CountryId: selectedMarker.number , currency_abbreviation: selectedMarker.currency}})}>Donate</Button>

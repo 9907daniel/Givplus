@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-import countryImage from "../images/countryImage/LebanonFlag.png";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -16,12 +15,12 @@ import IMF from "../images/article/IMF.jpg"
 import daylight from "../images/article/daylight.jpg"
 
 
-function CountryDescription({item}) {
+function CountryDescription({item, countryId}) {
     const[news, setNews] = useState([]);
     const navigate = useNavigate();
     const imagePath = "/images/article/";
     const Lira = "/article/Lira.webp"
-
+    console.log(countryId)
     useEffect(() => {
         // Load news data from CSV file
         Papa.parse(newsFile, {
@@ -38,7 +37,7 @@ function CountryDescription({item}) {
     <Box sx={{ position: "relative", height: "90vh" }}>
         <Box
           component="img"
-          src={countryImage}
+          src={`/flags/${countryId}.png`}
           sx={{ width: "100%", height: "100%" }}
         />
         <Box
@@ -178,7 +177,7 @@ function CountryDetailsTop(props) {
     <div>
     {AllProjects.map((item)=>(
             
-              <CountryDescription item={item} key={item.id}/>
+              <CountryDescription item={item} countryId = {item.number} key={item.number}/>
            
       
          ))}
