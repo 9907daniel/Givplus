@@ -152,7 +152,7 @@ def country_list(request, country_id=None):
                                 description_dict[field_name] = row[key]
 
                         mydata = Country(
-                            #number=row['Number'],
+                            number=row['Number'],
                             name=row['Official Name'], 
                             continent=row['Continent'],
                             gdp=row['GDP'],
@@ -165,7 +165,6 @@ def country_list(request, country_id=None):
                             # platforms=row['Platforms'],
                             location_lat=row['Latitude'], 
                             location_lng=row['Longitude'],
-                            Number = row['Number']
 			)
                         mydata.save()
 
