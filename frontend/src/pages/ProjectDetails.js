@@ -2,13 +2,7 @@ import React from 'react';
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Box, Button, IconButton, Typography } from "@mui/material";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart } from "../components/state";
 import image from "../images/countryImage/ILH.jpeg";
@@ -23,6 +17,8 @@ const ProjectDetails = () => {
   const [count, setCount] = useState(1);
   const [items, setItems] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
+
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -44,29 +40,14 @@ const ProjectDetails = () => {
  (item) => item.id === parseInt(project_id)
     )
 
-    // const AllProjects = data.filter((item) => {
-    // console.log(item.id, project_id); // add this line to check
-    // return item.id === project_id;
-    // });
-    //console.log(AllProjects)
+    //news
+    fetch('Lebanon_news.csv')
+        .then(response => response.text())
+        .then(data1 => {
+            console.log(data1);
+        });
 
-  //const [project_description, ngo_name, project_name] = data
-
-//   async function getItems() {
-//     const items = await fetch(
-//       `http://localhost:2000/api/items?populate=image`,
-//       {
-//         method: "GET",
-//       }
-//     );
-//     const itemsJson = await items.json();
-//     setItems(itemsJson.data);
-//   }
-
-//   useEffect(() => {
-//     getItem();
-//     getItems();
-//   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
+    
 
   return (
     
