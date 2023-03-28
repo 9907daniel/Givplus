@@ -14,6 +14,8 @@ import {
 //map imports
 import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
 import tempMarker from '../images/tempMarker.png';
+import tempMarker1 from '../images/tempMarker1.png';
+
 
 
 function CallGoogleMap() {
@@ -33,6 +35,7 @@ function CallGoogleMap() {
         }
         fetchData();
       }, []);
+      console.log(data)
 
     if (!isLoaded) {
     return <Typography> Loading...</Typography>
@@ -56,7 +59,7 @@ function CallGoogleMap() {
                             height: 20
                         }}
                                 position = {item.location}
-                                icon = {tempMarker}
+                                icon={item.national_emergency === 'None' ? tempMarker : tempMarker1}
                                 onClick={() => {
                                     setSelectedMarker(item);
                                   }}
