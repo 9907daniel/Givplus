@@ -57,7 +57,7 @@ class Platforms(models.Model):
     
     
 class Country(models.Model):
-    Number = models.IntegerField(("Number"), default=0)
+    number = models.IntegerField(("Number"), default=0)
     gdp = models.DecimalField(("GDP"),  max_digits=40, decimal_places=0, default = 0)
     name = models.CharField(("Name"), max_length=200, default='')
     location = models.CharField(("Location"), max_length=200, default='')
@@ -72,7 +72,7 @@ class Country(models.Model):
     # platforms = models.ManyToManyField(Platforms)
     location_lat = models.DecimalField(("Latitude"), max_digits=14, decimal_places=9, default=0.0)
     location_lng = models.DecimalField(("Longitude"), max_digits=14, decimal_places=9, default=0.0)
-    const = models.IntegerField(("const"), default=0)
+    national_emergency = models.CharField(("National_Emergency"), max_length=100, default='None')
 
 
     @property
