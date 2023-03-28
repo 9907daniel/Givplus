@@ -235,7 +235,7 @@ Givplus/
 
 
 ## Contributors
-Park Kyeung Min (Leader) - 
+Park Kyung Min (Leader) - 
 
 Cha Seung Jun -
 
