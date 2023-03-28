@@ -111,6 +111,8 @@ class Project(models.Model):
     un_goal = models.IntegerField(choices=UN_GOALS)
     ngo_name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
+    number = models.IntegerField(("Number"), default=0)
+    
 
 
 class Graph(models.Model):
