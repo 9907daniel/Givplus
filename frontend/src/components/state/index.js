@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { set } from 'lodash';
 
 const initialState = {
     //when the app starts, the cart will not be open
-  isCartOpen: false,
-  cart: [],
+  isCartOpen: JSON.parse(localStorage.getItem('isCartOpen')) || false,
+  cart: JSON.parse(localStorage.getItem('cart') || '[]'),
   items: [],
   currency: 'krw',
   project: [],
@@ -26,10 +27,12 @@ export const cartSlice = createSlice({
     //[currentstate of the cart, what ever item we are passing into the action we are updating the cart]
     addToCart: (state, action) => {
       state.cart = [...state.cart, action.payload.item];
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     },
 
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     },
 
     increaseCount: (state, action) => {
@@ -39,6 +42,7 @@ export const cartSlice = createSlice({
         }
         return item;
       });
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     },
 
     decreaseCount: (state, action) => {
@@ -48,10 +52,12 @@ export const cartSlice = createSlice({
         }
         return item;
       });
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     },
 
     setIsCartOpen: (state) => {
       state.isCartOpen = !state.isCartOpen;
+      localStorage.setItem('isCartOpen', JSON.stringify(state.isCartOpen));
     },
   },
 });
