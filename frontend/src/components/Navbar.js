@@ -150,6 +150,9 @@ const Navbar = () => {
                 <MenuItem onClick={() => handleCurrencyClick("jpy")}>
                   Japanese Yen ¥
                 </MenuItem>
+                <MenuItem onClick={() => handleCurrencyClick("egp")}>
+                  Egyptian Pound E£
+                </MenuItem>
                 <MenuItem onClick={() => handleCurrencyClick("eur")}>
                   Euro €
                 </MenuItem>
