@@ -72,7 +72,7 @@ function CountryDescription({item}) {
                     sx={{
                         color:"white",
                     }}>
-                        Population :{item.population}
+                        Population : {item.population}
                 </Typography>
                 <Typography variant="h6" 
                     sx={{

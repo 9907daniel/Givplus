@@ -158,7 +158,7 @@ function Map() {
 
   return ( 
     <Grid container>
-        <Grid item xs={4} 
+        <Grid item xs={4.6} 
         >
                 <TableContainer component={Paper}
                 style={{marginLeft: 0, maxHeight: '800px', overflowY: 'auto'}}
@@ -222,7 +222,7 @@ function Map() {
                     </Table>
                 </TableContainer>
         </Grid>
-        <Grid item xs={8} style={{marginTop: "0"}}>
+        <Grid item xs={7.4} style={{marginTop: "0"}}>
             <CallGoogleMap />
         </Grid>
     </Grid>
