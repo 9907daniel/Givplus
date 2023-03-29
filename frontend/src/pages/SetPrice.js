@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { Typography, Button } from "@mui/material";
@@ -70,12 +71,15 @@ function SetPrice() {
 
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.cart);
-  const [value1, setValue1] = React.useState(10);
   const [number, setNumber] = useState("");
+  const currency_score = useSelector((state) => state.cart.currency);
   const handle_Change = (event) => {
     setNumber(event.target.value);
   };
-  const valuesArray = [];
+  //percent
+  const [valuesArray, setValuesArray] = useState([]);
+  const [percentArray, setPercentArray] = useState([]);
+  const [forexScores, setForexScores] = useState([]);
   //submit related const
   const [submittedValue, setSubmittedValue] = React.useState("");
   const [price, setPrice] = React.useState("");
@@ -127,7 +131,7 @@ function SetPrice() {
   
 //     setSliderValues(updatedValues);
 //   };
-const handleChangeTemp = (index) => (event, newValue) => {
+const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
     // {totalPrice > 100 && (
     //     alert("Total Price is over 100")
     //   )}
@@ -139,7 +143,14 @@ const handleChangeTemp = (index) => (event, newValue) => {
         newValue,
         ...prevValues.slice(index + 1)
       ]);
-      valuesArray.push(cart[index].number)
+      const updatedValuesArray = [...valuesArray];
+      updatedValuesArray[index] = CountryNumber;
+      setValuesArray(updatedValuesArray);
+      const updatedPercentArray = [...percentArray];
+      updatedPercentArray[index] = value;
+      setPercentArray(updatedPercentArray);
+      console.log(valuesArray)
+      console.log(percentArray)
 
     };
   const validationSchema = Yup.object().shape({
@@ -150,6 +161,7 @@ const handleChangeTemp = (index) => (event, newValue) => {
   const currency = useSelector((state) => state.cart.currency);
 
   const [pieData, setPieData] = useState([]);
+  const [data, setData] = useState([])
 
   useEffect(() => {
     const data = cart.map((item, index) => ({
@@ -158,21 +170,48 @@ const handleChangeTemp = (index) => (event, newValue) => {
     }));
     setPieData(data);
   }, [cart, sliderValues]);
-  const printArray = valuesArray.map((value,index)=>(
-    <Typography key={index}>{value} 12</Typography>
-  ))
-  console.log(valuesArray)
+  
+
+  useEffect(() => {
+    async function fetchData() {
+        const response = await Axios.get(`https://givplus.duckdns.org/api/scores/${currency_score}`);
+        const filteredData = response.data.filter(item => valuesArray.includes(item.country_id));
+        setData(filteredData);
+
+        const forexScores = filteredData.map(item => item.forex_score);
+        setForexScores(forexScores);
+    }
+    fetchData();
+  }, [sliderValues]);
+
+  console.log(data)
+  console.log(forexScores)
+  //percentage calculation
+    let result = 0;
+    
+
+  if (data){
+  for (let i = 0; i < percentArray.length; i++){
+    result += ((parseFloat(forexScores[i])+1) * number * (percentArray[i]/100)) ;
+  }}
+  result -= number
+
+  console.log((parseFloat(forexScores[0])+1)* number * (percentArray[0]/100))
+  console.log((parseFloat(forexScores[1])+1)* number * (percentArray[1]/100))
+  console.log(result)
+  
 
   return (
     <>
       <Box padding={4}>
         <Typography variant="h3" align="center" >
-          You are effectively donating % more
+          You are effectively donating <span style={{color: 'green'}}>{isNaN((result/number*100).toFixed(0)) ? '' : (result/number*100).toFixed(0)}%</span> more
         </Typography>
         <Typography align="center">
           We will get back to you with a transparent report on how your fund was
           actually used.
         </Typography>
+        
         {/* <Typography>Your chosen currency is: {currency}</Typography> */}
       </Box>
       <Grid container spacing={2} align="center">
@@ -223,7 +262,7 @@ const handleChangeTemp = (index) => (event, newValue) => {
               <Slider
                 aria-label="Always visible"
                 value={value}
-                onChange={handleChangeTemp(index)}
+                onChange={handleChangeTemp(index, value, cart[index].number)}
                 valueLabelDisplay="on"
                 step={10}
                 marks={marks}
