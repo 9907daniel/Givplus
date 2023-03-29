@@ -36,24 +36,16 @@ const ProjectDetails = () => {
 
     console.log(data)
   const AllProjects = data.filter(
- (item) => item.id === parseInt(project_id)
+ (item) => item.order === parseInt(project_id)
     )
 
-    //news
-    fetch('Lebanon_news.csv')
-        .then(response => response.text())
-        .then(data1 => {
-            console.log(data1);
-        });
-
-    
 
   return (
     
     <Box width="80%" m="80px auto">
         {AllProjects.map((item) =>(
     
-    <div key={item.id}>
+    <div key={item.order}>
         {showAlert && (
             <Alert onClose={() => setShowAlert(false)}>
             You have added {item.project_name} to the cart
@@ -66,7 +58,7 @@ const ProjectDetails = () => {
         <Box flex="1 1 40%" mb="40px">
             
           <img width="500px"
-          height="500px" src = "/projects/ILH.jpeg"
+          height="500px" src = {`/projects/${project_id}.jpeg`}
           />
         </Box>
 

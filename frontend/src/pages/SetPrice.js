@@ -4,10 +4,8 @@ import Slider from "@mui/material/Slider";
 import { Typography, Button } from "@mui/material";
 import Grid from "@mui/system/Unstable_Grid";
 import { useNavigate } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
-import { useLocation } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,7 +13,6 @@ import {
   PieSeries,
   Title,
 } from "@devexpress/dx-react-chart-material-ui";
-import { setItems } from "../components/state";
 
 const marks = [
   {
@@ -70,6 +67,7 @@ function valuetext(value) {
 
 const minDistance = 10;
 function SetPrice() {
+
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.cart);
   const [value1, setValue1] = React.useState(10);
@@ -77,7 +75,7 @@ function SetPrice() {
   const handle_Change = (event) => {
     setNumber(event.target.value);
   };
-
+  const valuesArray = [];
   //submit related const
   const [submittedValue, setSubmittedValue] = React.useState("");
   const [price, setPrice] = React.useState("");
@@ -141,6 +139,8 @@ const handleChangeTemp = (index) => (event, newValue) => {
         newValue,
         ...prevValues.slice(index + 1)
       ]);
+      valuesArray.push(cart[index].number)
+
     };
   const validationSchema = Yup.object().shape({
     number: Yup.number()
@@ -158,6 +158,10 @@ const handleChangeTemp = (index) => (event, newValue) => {
     }));
     setPieData(data);
   }, [cart, sliderValues]);
+  const printArray = valuesArray.map((value,index)=>(
+    <Typography key={index}>{value} 12</Typography>
+  ))
+  console.log(valuesArray)
 
   return (
     <>
@@ -228,6 +232,7 @@ const handleChangeTemp = (index) => (event, newValue) => {
               <Typography>
                 For this Project : $ {number * (value / 100)}
               </Typography>
+
             </Box>
           ))}
           <Box align="Center">

@@ -53,7 +53,7 @@ const Country= ({ item, width }) => {
           //src="/projects/10.jpeg"
           onClick={() => 
           //handleProjectClick({item})}
-            navigate(`/projects/${item.order}`)}
+            navigate(`/projectdetails/${item.order}`)}
         //   { state: {project_name : item.project_name, project_decription: item.project_decription, ngo_name: item.ngo_name} })
         
             //onClick={()=> <Projects item={item}/>}
