@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
+//read file
 import { Typography, Grid } from "@mui/material";
-import { CSVFile, readString } from 'react-papaparse';
 import Papa from 'papaparse'
-import { useDispatch, useSelector } from "react-redux";
-import newsFile from "../files/Lebanon_news.csv"
-//import Lira from "../images/article/Lira.webp"
+import newsFileL from "../files/Lebanon_news.csv"
+import newsFileT from "../files/Turkey_news.csv"
+import * as XLSX from 'xlsx';
+//mui
+import Box from "@mui/material/Box";
 import IMF from "../images/article/IMF.jpg"
 import daylight from "../images/article/daylight.jpg"
 import Paper from '@mui/material/Paper';
@@ -22,12 +21,17 @@ import CardMedia from '@mui/material/CardMedia';
 function CountryDescription({item, countryId}) {
     const[news, setNews] = useState([]);
     const navigate = useNavigate();
-    const imagePath = "/images/article/";
     const Lira = "/article/Lira.webp"
+    const Election = "/article/Election.jpg"
+    const Drone = "/article/Drone.jpg"
+    const Compensation = "/article/Compensation.jpg"
+    const newsFile = countryId === 186 ? newsFileT : newsFileL
     console.log(countryId)
+
     useEffect(() => {
+        if (countryId === 134){
         // Load news data from CSV file
-        Papa.parse(newsFile, {
+        Papa.parse(newsFileL, {
           download: true,
           header: true,
           complete: function (results) {
@@ -36,106 +40,22 @@ function CountryDescription({item, countryId}) {
             setNews(records);
           },
         });
-      }, []);
+      }}, []);
+    useEffect(() => {
+        if (countryId === 186){
+        // Load news data from CSV file
+        Papa.parse(newsFileT, {
+          download: true,
+          header: true,
+          complete: function (results) {
+            const records = results.data;
+            console.log(records);
+            setNews(records);
+          },
+        });
+      }}, []);
     return(
     <>
-    {/* <Box sx={{ position: "relative", height: "90vh" }}>
-        <Box
-          component="img"
-          src={`/flags/${countryId}.png`}
-          sx={{ width: "100%", height: "100%" }}
-        />
-        <Box
-          sx={{
-            position: "absolute",
-            top: "0",
-            left: "0",
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-          }}
-        />
-            <Box 
-                sx={{
-                    position: "absolute",
-                    // zIndex: "100",
-                    top:"70px",
-                    left:"70px",
-                    width: "90%",
-                    textAlign:"left",
-
-                }}>
-                <Typography variant="h2" 
-                    sx={{
-                        color:"white",
-                        fontWeight:"bolder",
-                        mb: 2
-                    }}>
-                    {item.name}
-                </Typography>
-                <Typography variant="h6" 
-                    sx={{
-                        color:"white",
-                    }}>
-                        Population : {item.population}
-                </Typography>
-                <Typography variant="h6" 
-                    sx={{
-                        color:"white",
-                    }}>
-                        Need Help In : {item.need_help_in}
-                </Typography>
-                <Typography variant="h6" 
-                    sx={{
-                        color:"white",
-                    }}>
-                        Description : {item.description.Summary}:
-                </Typography>
-            </Box>
-            <Box sx={{
-                    position: "absolute",
-                    // zIndex: "100",
-                    top:"10px",
-                    width: "100%",
-                    align : "center",
-                    pt: 4,
-                }}>
-            <Grid container spacing={3} justifyContent="center"  sx={{p : 4}}>
-            {news.slice(0, 3).map((article, index) => (
-                <Grid key ={article.Title} item xs={4} >
-                    <Box sx={{ width: "100%", height: "100%", position: "absolute", top: "380px" }}>
-                    <a href={article.Link} target="_blank" rel="noopener noreferrer">
-                    <img style={{width: "40vh", height: "25vh"}} 
-                        src={index === 0 ? Lira : (index === 1 ? IMF : daylight)}
-                        alt={article.Title}/>
-                    </a>
-                    </Box>
-                    <Box border={1} p={1} 
-                    sx={{
-                        position: "absolute",
-                        top:"580px",
-                        width: "40vh",
-                        borderColor: "white",
-                    }}>
-                    <Typography  
-                    sx={{
-                        color:"white",
-                    }}>
-                        {article.Title}
-                    </Typography>
-                    <Typography  
-                    sx={{
-                        color:"white", fontSize: "10px", textAlign: "right" 
-                    }}>
-                        {article.Published}
-                    </Typography>
-                    </Box>
-                </Grid>
-            ))}
-               
-            </Grid>
-            </Box>
-        </Box> */}
         <Paper
             sx={{
                 position: 'relative',
@@ -261,8 +181,22 @@ function CountryDescription({item, countryId}) {
                     <CardMedia
                         component="img"
                         sx={{ height: 250, display: { xs: 'none', sm: 'block' } }}
-                        image= {index === 0 ? Lira : (index === 1 ? IMF : daylight)}
-                        alt={article.Title}
+                        image = {
+                            countryId === 186
+                              ? index === 0
+                                ? Election
+                                : index === 1
+                                  ? Drone
+                                  : index === 2
+                                    ? Compensation
+                                    : null // handle the case where the index is not 0, 1, or 2
+                              : index === 0
+                                ? Lira
+                                : index === 1
+                                  ? IMF
+                                  : daylight
+                          }                      
+                          alt={article.Title}
                     />
                     <CardContent sx={{ flex: 1 }}>
                         <Typography component="h2" variant="h6">
