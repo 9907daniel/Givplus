@@ -120,7 +120,7 @@ function Row({item}){
 
                          <TableRow align="center">
                              <TableCell align="center">
-                                 <img src= {`/graphs/${currency_abbreviation}${currency_score}.png`} width="330" height="240"/>
+                                 <img src= {`/graphs/${currency_abbreviation}.png`} width="330" height="240"/>
                              </TableCell> 
                          </TableRow>
 
