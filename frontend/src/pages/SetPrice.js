@@ -189,15 +189,17 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
 
   if (data){
   for (let i = 0; i < percentArray.length; i++){
-    result += ((parseFloat(forexScores[i])) *  (percentArray[i]/100)) ;
+    result += ( (percentArray[i])/(parseFloat(forexScores[i])+100)) ;
   }}
 
 
-  console.log((parseFloat(forexScores[0])) *  (percentArray[0]/100))
-  console.log((parseFloat(forexScores[1])) *  (percentArray[1]/100))
+  console.log( (percentArray[0])/(parseFloat(forexScores[0])+100))
+  console.log( (percentArray[1])/(parseFloat(forexScores[1])+100))
+  console.log( (percentArray[2])/(parseFloat(forexScores[2])+100))
   console.log(result)
+  console.log((1/result-1)*100)
   
-  const finalPercentage = (result*100).toFixed(0);
+  const finalPercentage = ((1/result-1)*100).toFixed(0);
 
   return (
     <>
