@@ -273,18 +273,18 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
                 track={false}
               />
               <Typography>
-                For this Project : $ {number * (value / 100)}
+                For this Project : {currency === 'jpy' ? '¥' : currency === 'usd' ? '$' : currency === 'egp' ? 'E£' : currency === 'krw' ? '₩' : ''} {number * (value / 100)}
               </Typography>
 
             </Box>
           ))}
           <Box align="Center">
             <Typography variant="h5">
-              Total price is {((totalPrice / 100) * number).toFixed(2)} $
+              Total price is {((totalPrice / 100) * number).toFixed(2)} {currency === 'jpy' ? '¥' : currency === 'usd' ? '$' : currency === 'egp' ? 'E£' : currency === 'krw' ? '₩' : ''}
             </Typography>
             {totalPrice > 100 && (
               <Typography variant="h5" color="red">
-                Total price exceeded {number} $
+                Total price exceeded {number} {currency === 'jpy' ? '¥' : currency === 'usd' ? '$' : currency === 'egp' ? 'E£' : currency === 'krw' ? '₩' : ''}
               </Typography>
             )}
           </Box>
