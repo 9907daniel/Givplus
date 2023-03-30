@@ -132,9 +132,6 @@ function SetPrice() {
 //     setSliderValues(updatedValues);
 //   };
 const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
-    // {totalPrice > 100 && (
-    //     alert("Total Price is over 100")
-    //   )}
     if (newValue === 0){
         newValue = 10
     }
@@ -146,8 +143,9 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
       const updatedValuesArray = [...valuesArray];
       updatedValuesArray[index] = CountryNumber;
       setValuesArray(updatedValuesArray);
+
       const updatedPercentArray = [...percentArray];
-      updatedPercentArray[index] = value;
+      updatedPercentArray[index] = newValue;
       setPercentArray(updatedPercentArray);
       console.log(valuesArray)
       console.log(percentArray)
@@ -171,7 +169,6 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
     setPieData(data);
   }, [cart, sliderValues]);
   
-
   useEffect(() => {
     async function fetchData() {
         const response = await Axios.get(`https://givplus.duckdns.org/api/scores/${currency_score}`);
@@ -192,20 +189,21 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
 
   if (data){
   for (let i = 0; i < percentArray.length; i++){
-    result += ((parseFloat(forexScores[i])+1) * number * (percentArray[i]/100)) ;
+    result += ((parseFloat(forexScores[i])) *  (percentArray[i]/100)) ;
   }}
-  result -= number
 
-  console.log((parseFloat(forexScores[0])+1)* number * (percentArray[0]/100))
-  console.log((parseFloat(forexScores[1])+1)* number * (percentArray[1]/100))
+
+  console.log((parseFloat(forexScores[0])) *  (percentArray[0]/100))
+  console.log((parseFloat(forexScores[1])) *  (percentArray[1]/100))
   console.log(result)
   
+  const finalPercentage = (result*100).toFixed(0);
 
   return (
     <>
       <Box padding={4}>
         <Typography variant="h3" align="center" >
-          You are effectively donating <span style={{color: 'green'}}>{isNaN((result/number*100).toFixed(0)) ? '' : (result/number*100).toFixed(0)}%</span> more
+          You are effectively donating <span style={{color: 'green'}}>{ finalPercentage < 0|| isNaN(finalPercentage) ? '' : finalPercentage}%</span> more
         </Typography> 
         <br />
 
