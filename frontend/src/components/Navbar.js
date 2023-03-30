@@ -145,22 +145,22 @@ const Navbar = () => {
                   Korean Won ₩
                 </MenuItem> */}
                 <MenuItem onClick={() => handleCurrencyClick("krw")}>
-                  Korean Won ₩
+                  Korean Won         ₩
                 </MenuItem>
                 <MenuItem onClick={() => handleCurrencyClick("jpy")}>
-                  Japanese Yen ¥
+                  Japanese Yen       ¥
                 </MenuItem>
                 <MenuItem onClick={() => handleCurrencyClick("egp")}>
-                  Egyptian Pound E£
+                  Egyptian Pound     E£
                 </MenuItem>
                 <MenuItem onClick={() => handleCurrencyClick("eur")}>
-                  Euro €
+                  Euro               €
                 </MenuItem>
                 <MenuItem onClick={() => handleCurrencyClick("usd")}>
-                  US Dollar $
+                  US Dollar          $
                 </MenuItem>
                 <MenuItem onClick={() => handleCurrencyClick("aud")}>
-                  Australian Dollar $
+                  Australian Dollar  $
                 </MenuItem>
               </Menu>
             </Box>
@@ -208,7 +208,7 @@ const Navbar = () => {
                 style={({ isActive }) => { 
                   return { backgroundColor: isActive ? '#6d1b7b' : '' } 
                   }} 
-                  sx={{ color: 'white', textTransform: 'none' }}>
+                  sx={{ color: 'black', textTransform: 'none', borderColor: "black"}}>
                <AccountCircle />
               </IconButton> 
               : 
