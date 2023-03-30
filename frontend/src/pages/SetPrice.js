@@ -204,9 +204,17 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
   return (
     <>
       <Box padding={4}>
-        <Typography variant="h3" align="center" >
-          You are effectively donating <span style={{color: 'green'}}>{ !isFinite(finalPercentage) || finalPercentage < 0 || isNaN(finalPercentage) ? ' ' : finalPercentage}%</span> more
-        </Typography> 
+      {percentArray.reduce((a, b) => a + b, 0) === 100 ? 
+      <Typography variant="h3" align="center" >
+      You are effectively donating <span style={{color: 'green'}}>{ !isFinite(finalPercentage) || finalPercentage < 0 || isNaN(finalPercentage) ? ' ' : finalPercentage}%</span> more
+      </Typography> 
+      : 
+      <Typography variant="h3" align="center" 
+      >
+        Please make sure the proportions add up to 100%!
+        </Typography> }
+     
+
         <br />
 
         <Typography align="center">
