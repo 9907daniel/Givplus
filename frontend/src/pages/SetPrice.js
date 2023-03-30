@@ -197,15 +197,15 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
   console.log( (percentArray[1])/(parseFloat(forexScores[1])+100))
   console.log( (percentArray[2])/(parseFloat(forexScores[2])+100))
   console.log(result)
-  console.log((1/result-1)*100)
+  console.log(((1/result-1)*100).toFixed(0))
   
-  const finalPercentage = ((1/result-1)*100).toFixed(0);
+  const finalPercentage = (((1/result-1)*100).toFixed(0));
 
   return (
     <>
       <Box padding={4}>
         <Typography variant="h3" align="center" >
-          You are effectively donating <span style={{color: 'green'}}>{ finalPercentage < 0|| isNaN(finalPercentage) ? '' : finalPercentage}%</span> more
+          You are effectively donating <span style={{color: 'green'}}>{ !isFinite(finalPercentage) || finalPercentage < 0 || isNaN(finalPercentage) ? ' ' : finalPercentage}%</span> more
         </Typography> 
         <br />
 
