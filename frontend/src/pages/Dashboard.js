@@ -47,13 +47,13 @@ const Dashboard = () => {
   return <>
     <CssBaseline />
     <Grid container>
-      <Grid item sm={4} sx={{ backgroundColor: 'gray', p: 5, color: 'white' }}>
-        <h1>Dashboard</h1>
+      <Grid item sm={6} sx={{ backgroundColor: 'gray', p: 5, color: 'white' }}>
+        <h1>User Information</h1>
         <Typography variant='h5'>Email: {userData.email}</Typography>
         <Typography variant='h6'>Name: {userData.name}</Typography>
         <Button variant='contained' color='warning' size='large' onClick={handleLogout} sx={{ mt: 8 }}>Logout</Button>
       </Grid>
-      <Grid item sm={8}>
+      <Grid item sm={6}>
         <ChangePassword />
       </Grid>
     </Grid>

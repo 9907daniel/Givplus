@@ -206,7 +206,9 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
       <Box padding={4}>
         <Typography variant="h3" align="center" >
           You are effectively donating <span style={{color: 'green'}}>{isNaN((result/number*100).toFixed(0)) ? '' : (result/number*100).toFixed(0)}%</span> more
-        </Typography>
+        </Typography> 
+        <br />
+
         <Typography align="center">
           We will get back to you with a transparent report on how your fund was
           actually used.
@@ -215,7 +217,7 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
         {/* <Typography>Your chosen currency is: {currency}</Typography> */}
       </Box>
       <Grid container spacing={2} align="center">
-        <Grid xs={5}>
+        <Grid xs={6} sx={{borderRight: "1px solid gray"}}>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={8} 
             sx={{
@@ -227,12 +229,14 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
                 value={number}
                 inputProps={{ inputMode: "numeric" }}
                 onChange={handle_Change}
-              />
+                sx = {{height : "100%"}}
+             />
             
                 <Button
                     variant="contained"
                     color="primary"
                     onClick={handleSubmit}
+                    sx ={{height: "100%"}}
                 >
                     Submit
                 </Button>
@@ -255,7 +259,7 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
             </Chart>
           </Box>
         </Grid>
-        <Grid align="center" xs={7}>
+        <Grid align="center" xs={6}>
           {sliderValues.map((value, index) => (
             <Box key={index} sx={{ width: 450, p: 3 }}>
               <Typography>{cart[index].project_name}</Typography>
