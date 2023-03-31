@@ -2,7 +2,7 @@
 
 
 ## ❓ What is Givplus?   
-- **Givplus** is **<u>____</u>** .   
+- **Givplus** is a web-based donation platform that utilizes economic tools. Our goal is to make every penny worth its utmost value.  
 -
 - 
 -  
