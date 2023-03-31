@@ -5,7 +5,7 @@
 - **Givplus** is a web-based donation platform that utilizes economic tools. Our goal is to make every penny worth its utmost value.  
 - **Givplus** targets first-timers with no strong opinions on who to help out exactly, doubtful individuals who require a little incentive to take actions, willing-to-donate people who lack awareness of current global issues and want to find out their effects on the economy, and charity organizations that would like to reach out to a larger audience. 
 - **Givplus** uses Purchasing Power Parity for price level of each nations and currency exchange rate as our main economic models. 
--  Give more, Givplus
+-  Give more, **Givplus**
 
 ## 🙋‍♀️ Specifics!   
 1. Talk
