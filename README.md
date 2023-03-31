@@ -235,13 +235,13 @@ Givplus/
 
 
 ## Contributors
-Park Kyung Min (Leader) - 
+Park Kyung Min (Leader) - GDSC Waseda
 
-Cha Seung Jun -
+Cha Seung Jun - Nanyang Technological University (participating as a member of GDSC Waseda)
 
-Heo Bor Yun - 
+Heo Bor Yun - GDSC Waseda
 
-Shin Jeong Hoo -
+Shin Jeong Hoo - GDSC Waseda
 
 
 
