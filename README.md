@@ -2,22 +2,64 @@
 
 
 ## ❓ What is Givplus?   
-- **Givplus** is a web-based donation platform that utilizes economic tools. Our goal is to make every penny worth its utmost value.  
-- **Givplus** targets first-timers with no strong opinions on who to help out exactly, doubtful individuals who require a little incentive to take actions, willing-to-donate people who lack awareness of current global issues and want to find out their effects on the economy, and charity organizations that would like to reach out to a larger audience. 
-- **Givplus** uses Purchasing Power Parity for price level of each nations and currency exchange rate as our main economic models. 
+- **Givplus** is a web-based donation platform that utilizes economic theories in maximizing the value of your giving. 
+- We devised our own economic model, which takes into account the Purchasing Power Parity (PPP) of each nations and changing exchange rates. Our goal is to make every penny worth its value because your dollar is always worth more somewhere.   
+- **Givplus** is specially targeted towards: ignorant individuals who think that small money wouldn’t make much of a difference, those who are willing but require strong motivation and incentives to take real action, and charity organizations that would like to reach out to more people who are motivated to make a change.  
 -  Give more, **Givplus**
 
-## 🙋‍♀️ Specifics!   
-1. Talk
-2. About
-3. Forex
-4. etc
-5. Here
+## 🙋‍♀️ Specifics!  
+### Economic model
+1. `Weighted Moving Averages` 
 
+Strength of one currency against another changes all the time. To quantify how much the rate has changed, we need some standard to compare with: for example, we can compare today's rate to the rate one month ago. However, this will not accurately reflect the long-term trends of exchange rate, which is also meaningful to us. Therefore, we devised a metric called weighted moving averages for fair evaluation of how well your currency is doing. 
+
+$$ WMA = \sum_{i}^{}w_i\cdot (SMA(i) - SMA(1))$$
+
+* SMA means simple moving average, which means an average value over the past *i* days. 
+* SMA(1) denotes today's rate. <br>
+* *i* is from the list of chosen values, [5, 20, 60, 120, 200], to equally represent both short-term and long-term trend in exchange rates.<br>
+* *w* is a weight given to each differential $SMA(i) - SMA(1)$. Currently, $w_i$ = [0.1333, 0.3333, 0.2, 0.2, 0.1334], where the sum of $w_i$ equals 1.
+
+<br>
+
+2. `Forex score`
+
+Forex score indicates the percent difference between WMA and today's rate, with the unit of %. 
+
+$$ forex \ score = \frac{WMA - SMA(1)}{WMA}\cdot 100$$
+<br>
+
+3. `PPP`
+
+Purchasing Power Parity (PPP) is a commonly used economic indicator for price levels in each country. PPP is effectively the ratio of the price of a basket of goods at one location divided by the price of the basket of goods at a different location. PPP itself is never reported officialy by the government but via indirect way such as GDP per capita (PPP). Since GDP per capita and GDP per capita (PPP) are readily available online, we hereby indirectly calculate PPP as follows:
+
+$$ PPP = \frac{GDP \ per \ capita}{GDP \ per \ capita \ (PPP)}$$
+<br>
+
+4. `Givplus score`
+
+Givplus score is computed from `Forex score` and `PPP`, with an arbitrary weight multiplied to each parameter. Currently, our model is as follows:
+
+$$ Givplus \ Score = \ w_p \cdot \frac{1}{PPP} + w_f\sqrt{forex \ score + min(forex \ score)} $$
+
+$min(forex \ score)$ denotes the minimum Forex score in the list. This effectively adjusts the entire list of Forex scores such that the minimum value becomes 0.
+Currently, $w_p$ = 0.3, $w_f$ = 0.7, such that $w_p + w_f = 1$. 
+
+5. `Coffee index`
+
+Coffee index obtained by a simple ratio between PPP at your country A and PPP at another country B.
+
+$$ Coffee \ Index = \frac{PPP_A}{PPP_B}$$
+
+<br>
+
+Detailed Python codes can be found [here](https://github.com/9907daniel/Givplus/blob/main/forex_score_calculation/forex.ipynb).
 
 ## Link   
 
 - [🚗 Givplus](https://givplus.duckdns.org/)   
+- [▶️ Demo video](https://www.youtube.com/watch?v=gSqkXHkcUj8)
+- [📈 Historical currency rates tables](https://www.xe.com/currencytables/)
 
 
 ## Table of Content
@@ -230,18 +272,19 @@ Givplus/
 4. Unit Test
 
 ### Function wise
-1. 
-2. 
+1. Adoption of TensorFLow for personalized recommendation of projects and categorizing scraped data
+2. Implementation of blockchain in keeping transaction records and issuing receipts (can be further used for government tax credits)
+3. Improvement of current economic models
 
 
 ## Contributors
 Park Kyung Min (Leader) - GDSC Waseda
 
-Cha Seung Jun - Nanyang Technological University (participating as a member of GDSC Waseda)
+Cha Seung Jun (Project manager) - Nanyang Technological University, Singapore (participating as a member of GDSC Waseda)
 
-Heo Bor Yun - GDSC Waseda
+Heo Bor Yun (Frontend developer) - GDSC Waseda
 
-Shin Jeong Hoo - GDSC Waseda
+Shin Jeong Hoo (Backend developer)- GDSC Waseda
 
 
 
