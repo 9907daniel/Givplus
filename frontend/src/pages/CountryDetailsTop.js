@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
 
 //read file
 import { Typography, Grid } from "@mui/material";
 import Papa from 'papaparse'
 import newsFileL from "../files/Lebanon_news.csv"
 import newsFileT from "../files/Turkey_news.csv"
-import * as XLSX from 'xlsx';
 //mui
 import Box from "@mui/material/Box";
-import IMF from "../images/article/IMF.jpg"
-import daylight from "../images/article/daylight.jpg"
 import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -20,8 +16,9 @@ import CardMedia from '@mui/material/CardMedia';
 
 function CountryDescription({item, countryId}) {
     const[news, setNews] = useState([]);
-    const navigate = useNavigate();
     const Lira = "/article/Lira.webp"
+    const IMF = "/article/IMF.jpg"
+    const daylight = "/article/daylight.jpg"
     const Election = "/article/Election.jpg"
     const Drone = "/article/Drone.jpg"
     const Compensation = "/article/Compensation.jpg"
