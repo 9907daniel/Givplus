@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
 import { addToCart } from "../components/state";
 import { useNavigate } from "react-router-dom";
@@ -22,11 +20,6 @@ const Country= ({ item, width }) => {
   const [showAlert, setShowAlert] = useState(false);
 
   const project = useSelector((state) => state.cart.project);
-  const handleProjectClick = (newproject) => {
-    dispatch(setProject(newproject));
-    console.log(newproject)
-    //navigate(`/projectdetails/${item.id}`);
-  };
 
   return (
     <>
@@ -50,13 +43,8 @@ const Country= ({ item, width }) => {
           width="300px"
           height="300px"
           src={`/projects/${item.order}.jpeg`}
-          //src="/projects/10.jpeg"
           onClick={() => 
-          //handleProjectClick({item})}
             navigate(`/projectdetails/${item.order}`)}
-        //   { state: {project_name : item.project_name, project_decription: item.project_decription, ngo_name: item.ngo_name} })
-        
-            //onClick={()=> <Projects item={item}/>}
           style={{ cursor: "pointer" }}
         />
         <Box
@@ -91,24 +79,7 @@ const Country= ({ item, width }) => {
             >
              Details
             </Button>
-
-         
-              {/* <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
-                <RemoveIcon />
-              </IconButton>
-              <Typography color={shades.primary[300]}>{count}</Typography>
-              <IconButton onClick={() => setCount(count + 1)}>
-                <AddIcon />
-              </IconButton> */}
             </Box>
-            {/* <Button
-              onClick={() => {
-                dispatch(addToCart({ item: { ...item, count } }));
-              }}
-              sx={{ backgroundColor: shades.primary[300], color: "white" }}
-            >
-              Add to Cart
-            </Button> */}
           </Box>
         </Box>
       </Box>

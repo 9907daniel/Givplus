@@ -222,7 +222,6 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
           actually used.
         </Typography>
         
-        {/* <Typography>Your chosen currency is: {currency}</Typography> */}
       </Box>
       <Grid container spacing={2} align="center">
         <Grid xs={6} sx={{borderRight: "1px solid gray"}}>
@@ -250,15 +249,6 @@ const handleChangeTemp = (index, value, CountryNumber) => (event, newValue) => {
                 </Button>
   
             </Grid>
-            {/* <Grid item xs={4}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-              >
-                Submit
-              </Button>
-            </Grid> */}
           </Grid>
           <Box>
             <Chart data={pieData}>

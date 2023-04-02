@@ -2,12 +2,9 @@ import React from 'react';
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
-import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { shades } from "../theme";
 import {
-  decreaseCount,
-  increaseCount,
   removeFromCart,
   setIsCartOpen,
 } from "./state";
@@ -25,10 +22,6 @@ const CartMenu = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
-
-  // const totalPrice = cart.reduce((total, item) => {
-  //   return total + item.count * item.attributes.price;
-  // }, 0);
 
   return (
     <Box
@@ -98,25 +91,7 @@ const CartMenu = () => {
                           <Typography>
                             {item.description}
                           </Typography>
-                        {/* <IconButton
-                          onClick={() =>
-                            dispatch(decreaseCount({ id: item.id }))
-                          }
-                        >
-                          <RemoveIcon />
-                        </IconButton>
-                        <Typography>{item.count}</Typography>
-                        <IconButton
-                          onClick={() =>
-                            dispatch(increaseCount({ id: item.id }))
-                          }
-                        >
-                          <AddIcon />
-                        </IconButton> */}
                       </Box>
-                      {/* <Typography fontWeight="bold">
-                        ${item.attributes.price}
-                      </Typography> */}
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -126,12 +101,7 @@ const CartMenu = () => {
           </Box>
 
           {/* ACTIONS */}
-          <Box m="20px 0">
-            {/* <FlexBox m="20px 0">
-              <Typography fontWeight="bold">SUBTOTAL</Typography>
-              <Typography fontWeight="bold">${totalPrice}</Typography>
-            </FlexBox>  */}
-           
+          <Box m="20px 0">         
             <Button
               sx={{
                 backgroundColor: shades.primary[400],

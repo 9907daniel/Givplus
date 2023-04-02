@@ -1,13 +1,9 @@
-import React, {useState} from 'react'
-import {Link, useNavigate} from "react-router-dom"
+import React from 'react'
 
 //MUI imports
-import { Button, Typography, Grid, AppBar, Toolbar } from '@mui/material';
-import { Box, ThemeProvider} from '@mui/system';
-import { createTheme } from '@mui/material/styles';
+import { Typography} from '@mui/material';
+import { Box} from '@mui/system';
 import { keyframes } from '@emotion/react';
-//Components
-//import Header from './Header';
 
 //Assets
 import home from '../images/home.jpg'
@@ -30,8 +26,6 @@ const slideIn = keyframes`
 `;
 
 function Home() {
-    const navigate = useNavigate();
-
   return (
     <>
       <Box 
@@ -73,21 +67,6 @@ function Home() {
                 <br/> Empower your currency to help more in need.
                 </span>
             </Typography>
-            {/* <Button variant='contained' 
-                sx={{
-                    fontSize:"1rem",
-                    borderRadius:"10px",
-                    backgroundColor:"#76b5c5",
-                    marginTop:"4rem",
-                    '&:hover': {
-                        backgroundColor: '#1e81b0',
-                        color: 'white',
-                    }
-                }}
-                onClick={()=>navigate('/listings')}
-                >
-                LOOK FOR COUNTRIES
-            </Button> */}
         </Box>
       </Box>
 

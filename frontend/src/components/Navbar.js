@@ -136,14 +136,6 @@ const Navbar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                {/* {data.map((item) => (
-                           <MenuItem onClick={handleClose} key ={item.id}>{item.currency}</MenuItem>
-                ))
-                } */}
-                {/* <MenuItem onClick={() => navigate(`/map`,  dispatch(setCurrency('krw')))}
-                >
-                  Korean Won ₩
-                </MenuItem> */}
                 <MenuItem onClick={() => handleCurrencyClick("krw")}>
                   Korean Won         ₩
                 </MenuItem>
@@ -181,18 +173,6 @@ const Navbar = () => {
                   }
                 }}
               >
-              {/* <Button component={NavLink} to='/' style={({ isActive }) => { 
-                return { backgroundColor: isActive ? 'white' : '' } }} 
-                sx={{ 
-                  color: 'black', 
-                  textTransform: 'none',
-                  // marginRight: "0.5rem" 
-                }}
-                onClick={()=>
-                  dispatch(setIsCartOpen({}))
-                }>
-                Give Jar
-              </Button> */}
               <Button mr = {10} onClick={()=>
                   dispatch(setIsCartOpen({}))
                 }

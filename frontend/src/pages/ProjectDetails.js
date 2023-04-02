@@ -3,7 +3,6 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { shades } from "../theme";
 import { addToCart } from "../components/state";
 import Alert from "@mui/material/Alert"
 import { useDispatch , useSelector} from "react-redux";
@@ -14,7 +13,6 @@ const ProjectDetails = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("description");
   const [count, setCount] = useState(1);
-  const [items, setItems] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
 
 
@@ -98,20 +96,6 @@ const ProjectDetails = () => {
           </Box>
         </Box>
       </Box>
-
-      {/* INFORMATION */}
-      {/* <Box m="20px 0">
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="DESCRIPTION" value="description" />
-          <Tab label="REVIEWS" value="reviews" />
-        </Tabs>
-      </Box>
-      <Box display="flex" flexWrap="wrap" gap="15px">
-        {value === "description" && (
-          <div>{item.project_description}</div>
-        )}
-        {value === "reviews" && <div>reviews</div>}
-      </Box> */}
       </div>) )}
     </Box>
   );

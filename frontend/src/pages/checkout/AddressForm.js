@@ -14,11 +14,8 @@ const AddressForm = ({
 }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  // these functions allow for better code readability
   const formattedName = (field) => `${type}.${field}`;
 
-  //check if the touched field is ex) billingadress.name true or false
-  //getin = needed to access touched fields
   const formattedError = (field) =>
     Boolean(
       getIn(touched, formattedName(field)) &&

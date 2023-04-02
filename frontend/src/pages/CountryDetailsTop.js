@@ -111,10 +111,6 @@ function CountryDescription({item, countryId}) {
                 >
                 {item.description.Economy_and_Politics}
                 </Typography>
-                
-                {/* <Link variant="subtitle1" href="#">
-                {item.linkText}
-                </Link> */}
             </Box>
             </Grid>
             <Grid item md={4}>
@@ -169,13 +165,10 @@ function CountryDescription({item, countryId}) {
     </Paper>
     <Grid container spacing={4}>
         {news.slice(0, 3).map((article, index) => (
-            //<FeaturedPost key={post.title} post={post} />
             <Grid key={article.Title} item xs={12} md={4}>
                 <CardActionArea component="a" href={article.Link}>
                     <Card 
                     sx={{ 
-                        //display: 'flex',
-
                      }}
                     >
                     <CardMedia

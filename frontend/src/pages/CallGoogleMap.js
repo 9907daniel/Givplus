@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useMemo} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
@@ -50,7 +50,6 @@ function CallGoogleMap() {
                 width:"100%",
                 height:"100%"
             }} >
-                {/* <Marker position={{lat: 35.6586, lng: 139.7454}}/>  */}
                 {data && data.map((item) => {
                     return(
                         <div key = {item.id}>

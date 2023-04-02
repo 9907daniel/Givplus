@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useMemo} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import Axios from "axios";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
@@ -41,9 +41,6 @@ function Row({item}){
     const { country_id, country, currency,currency_abbreviation, today_rate, forex_score, final_score, ppp_log, gdp, gdp_ppp, file_index, rank, coffee} = item;
      const [open, setOpen] = React.useState(false);
 
-     //temp for Graph images
-     //const myArray = ['apple', 'banana', 'cherry'];
-
      return(
          <React.Fragment>
          <TableRow 
@@ -77,9 +74,6 @@ function Row({item}){
              <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                  <Collapse in={open} timeout="auto" unmountOnExit>
                  <Box sx={{ margin: 2 }} >
-                     {/* <Typography variant="body1" gutterBottom component="div">
-                     {currency}{"("}{currency_abbreviation}{")"}
-                     </Typography> */}
                      <Table size="small" aria-label="purchases">
                      <TableBody >
                          <TableRow>

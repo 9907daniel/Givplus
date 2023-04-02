@@ -129,14 +129,6 @@ const CountryDetails =(props) =>{
 
                 <Country item={item} key={`${item.project_name}-${item.order}`}/>
             ))}
-
-            {/* {value === "Health" && projectonHealth.map((item)=>(
-                <Country item={item} key={`${item.name}-${item.id}`}/>
-            ))}
-            
-            {value === "Poverty" && projectonPoverty.map((item)=>(
-                <Country item={item} key={`${item.name}-${item.id}`}/>
-            ))} */}
             </Box>
         </Box>
         </>
