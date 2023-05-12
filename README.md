@@ -284,7 +284,7 @@ Cha Seung Jun (Project manager) - Nanyang Technological University (participatin
 
 Heo Bor Yun (Frontend developer) - GDSC Waseda
 
-Shin Jeong Hoo (Backend developer)- GDSC Waseda
+Shin Jeong Hoo (Backend developer & Technical Lead)- GDSC Waseda
 
 
 
