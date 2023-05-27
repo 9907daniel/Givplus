@@ -1,11 +1,14 @@
 ## 🙌 Givplus!
-
-
 ## ❓ What is Givplus?   
 - **Givplus** is a web-based donation platform that utilizes economic theories in maximizing the value of your giving. 
 - We devised our own economic model, which takes into account the Purchasing Power Parity (PPP) of each nations and changing exchange rates. Our goal is to make every penny worth its value because your dollar is always worth more somewhere.   
 - **Givplus** is specially targeted towards: individuals who think that small money wouldn’t make much of a difference, those who are willing but require strong motivation and incentives to take real action, and charity organizations that would like to reach out to more people who are motivated to make a change.  
 -  Give more, **Givplus**!
+
+
+<div style="text-align: center;">
+  <img src="https://i.ibb.co/pvQ70bt/Screenshot-2023-05-27-at-10-39-54.png" alt="Givplus" />
+</div>
 
 ## 🙋‍♀️ Specifics!  
 ### Economic model
@@ -282,9 +285,10 @@ Park Kyung Min (Leader) - GDSC Waseda
 
 Cha Seung Jun (Project manager) - Nanyang Technological University (participating as a member of GDSC Waseda)
 
+Shin Jeong Hoo (Backend developer & Technical Lead)- GDSC Waseda
+
 Heo Bor Yun (Frontend developer) - GDSC Waseda
 
-Shin Jeong Hoo (Backend developer & Technical Lead)- GDSC Waseda
 
 
 
