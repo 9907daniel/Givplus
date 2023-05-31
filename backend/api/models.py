@@ -68,8 +68,6 @@ class Country(models.Model):
     need_help_in = models.CharField(("Need_help_in"), max_length= 100, default ='')
     description = models.JSONField(null=True, blank=True)
     currency = models.CharField(("Currency"), max_length=20, default='')
-    # image = models.ImageField(upload_to='countries')
-    # platforms = models.ManyToManyField(Platforms)
     location_lat = models.DecimalField(("Latitude"), max_digits=14, decimal_places=9, default=0.0)
     location_lng = models.DecimalField(("Longitude"), max_digits=14, decimal_places=9, default=0.0)
     national_emergency = models.CharField(("National_Emergency"), max_length=100, default='None')
