@@ -269,10 +269,7 @@ Givplus/
 ## Future Plans
 
 ### Techincal wise
-1. Migrate Compute Engine DB to Google Cloud
-2. Dockerize Project
-3. Github Actions (CI/CD)
-4. Unit Test
+1. Unit Test
 
 ### Function wise
 1. Adoption of TensorFLow for personalized recommendation of projects and categorizing scraped data
