@@ -163,7 +163,6 @@ def country_list(request, country_id=None):
                             need_help_in=row['NEED HELP in'],
                             national_emergency=row['National_Emergency'],
                             description=description_dict, 
-                            # platforms=row['Platforms'],
                             location_lat=row['Latitude'], 
                             location_lng=row['Longitude'],
 			)

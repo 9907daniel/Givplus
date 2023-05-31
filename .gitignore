@@ -1,13 +1,15 @@
 
+# all venvs
 /venv/
 /.venv/
-*.pyc
 .env
 /.env
 .env.local
-
-
 *.env
 /frontend/.env
+
 /.vs/
 .vs
+*.pyc
+
+.github

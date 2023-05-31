@@ -6,7 +6,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from account.utils import Util
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-  # We are writing this becoz we need confirm password field in our Registratin Request
+  # confirm password field in Registratin Request
   password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
   class Meta:
     model = User
@@ -93,15 +93,15 @@ class UserPasswordResetSerializer(serializers.Serializer):
       uid = self.context.get('uid')
       token = self.context.get('token')
       if password != password2:
-        raise serializers.ValidationError("Password and Confirm Password doesn't match")
+        raise serializers.ValidationError("Password and Confirm Password does not match")
       id = smart_str(urlsafe_base64_decode(uid))
       user = User.objects.get(id=id)
       if not PasswordResetTokenGenerator().check_token(user, token):
-        raise serializers.ValidationError('Token is not Valid or Expired')
+        raise serializers.ValidationError('Token is not Valid')
       user.set_password(password)
       user.save()
       return attrs
     except DjangoUnicodeDecodeError as identifier:
       PasswordResetTokenGenerator().check_token(user, token)
-      raise serializers.ValidationError('Token is not Valid or Expired')
+      raise serializers.ValidationError('Token is not Valid')
   
